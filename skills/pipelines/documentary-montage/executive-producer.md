@@ -20,6 +20,10 @@ This is the right pipeline when the brief includes phrases like:
 - "Adam Curtis", "Errol Morris", "Chris Marker",
 - "no narration, just images".
 
+**Narrated historical Shorts** (user supplies topic + script + narration MP3,
+authentic historical visuals only) use this pipeline with the
+`historical-short.md` profile in this folder — read it first.
+
 If the user asks for an explainer, a trailer with generated clips, or
 a talking-head video, pick a different pipeline.
 

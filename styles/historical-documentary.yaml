@@ -1,0 +1,65 @@
+identity:
+  name: "Historical Documentary"
+  category: cinematic
+  mood: grave, cinematic, authoritative
+  pace: moderate
+  best_for: "Narrated vertical history Shorts built from authentic archaeological photos, museum objects, historical artworks and original maps/diagrams (documentary-montage historical-short profile)"
+
+visual_language:
+  color_palette:
+    primary: ["#D9B25F", "#A7843C"]
+    accent: ["#C8372D", "#8FB3C7"]
+    background: "#0B0D10"
+    text: "#F1E6CC"
+    muted: "#9C8657"
+  composition: "vertical 9:16; subject in the upper-middle band; source label top-left; captions in the lower-middle band above the Shorts UI"
+  texture: "authentic photographic grain only; dark vignette; no synthetic grain or fake film damage"
+
+typography:
+  headings:
+    font: "Playfair Display"
+    weight: 700
+  body:
+    font: "Space Grotesk"
+    weight: 500
+    line_height: 1.3
+  weight_matrix:
+    title: 700
+    heading: 700
+    body: 500
+    caption: 700
+
+motion:
+  transitions: [dissolve, fade]
+  animation_style: "slow camera-only push-ins and pans on stills (scale 1.00-1.16); eased map flights; schematic units move only on narrated beats"
+  pacing_rules:
+    min_scene_hold_seconds: 2.0
+    max_scene_hold_seconds: 18
+    transition_duration_seconds: 0.35
+  entrance: "label slides in 18px with fade, 0.25s after the cut"
+  exit: "dissolve into next scene"
+
+audio:
+  voice_style: "user-supplied narration MP3 only — never generate or replace the voice"
+  music_mood: "none by default; optional very subtle synthesised wind/room tone (make_ambience.py)"
+  music_volume: 0.08
+  sfx_style: "none"
+
+asset_generation:
+  image_prompt_prefix: "N/A — image generation is forbidden in this style; use authentic sources via fetch_commons.py"
+  image_negative_prompt: "AI-generated imagery, reenactments, movie stills, unrelated stock footage"
+  diagram_style: "original SVG schematics: square pips for infantry, diamonds for cavalry, crimson = Rome, gold = Carthage; always labelled 'schematic · not to scale'"
+  consistency_anchors:
+    - "Every still carries an on-screen label stating what it is (site photo, museum artifact, painting + year, sculpture + year)"
+    - "Artworks are always tagged ARTISTIC INTERPRETATION and shown uncropped (contain-blur)"
+    - "Maps state 'ORIGINAL MAP' and 'modern coastlines: Natural Earth (public domain)'"
+    - "Only licences that allow commercial reuse (PD, CC0, CC BY, CC BY-SA)"
+
+quality_rules:
+  - "No AI-generated images, video or voice"
+  - "No reenactments, actors, film clips or unrelated stock footage"
+  - "Never present a painting, sculpture or modern illustration as a photograph or footage"
+  - "Caption text must equal the approved script word for word"
+  - "Video duration equals the narration MP3 duration (±0.1 s)"
+  - "Captions and labels stay clear of the Shorts UI: nothing important below y=1450 or in the right 130 px"
+  - "CREDITS.txt lists every CC BY / CC BY-SA author and licence for the video description"

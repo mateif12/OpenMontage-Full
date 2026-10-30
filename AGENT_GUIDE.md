@@ -14,6 +14,10 @@ This skill teaches you to run discovery, classify the user's setup, present capa
 
 **Skip onboarding** when the user arrives with a specific, actionable request (e.g., "Make a 60-second explainer about black holes"). Go directly to Rule Zero.
 
+## Historical Shorts Entry Point
+
+When the user attaches a narration MP3 and names a historical topic (or asks for a "historical Short"), read **`HISTORICAL_SHORTS.md`** and **`skills/pipelines/documentary-montage/historical-short.md`** first. That profile carries the user's standing rules (authentic or clearly-labelled original visuals only, free tools only, work autonomously, never commit/push without permission) and the full command sequence.
+
 ## Reference Video Entry Point
 
 When the user provides a **video URL or local video file as inspiration** — for example:
