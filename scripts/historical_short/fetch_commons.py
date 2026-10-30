@@ -22,6 +22,22 @@ Usage:
     # download one file into the episode's image folder + provenance JSON
     python scripts/historical_short/fetch_commons.py fetch "File:Example.jpg" \
         --id s02_bust --out projects/<episode>/assets/images
+
+    # download many files in one go (metadata: library -> cache -> ONE API call)
+    python scripts/historical_short/fetch_commons.py fetch-list --pack napoleonic \
+        --ids wellington_lawrence,sadler_waterloo --out projects/<episode>/assets/images
+    python scripts/historical_short/fetch_commons.py fetch-list --list ids.txt --out ...
+        # ids.txt lines: "<asset_id>|File:<title>"
+
+    # save verified metadata of titles you used into the repo library (text only)
+    python scripts/historical_short/fetch_commons.py library-add "File:A.jpg" "File:B.jpg"
+
+Speed notes (measured 2026-10-30): from shared cloud IPs Wikimedia answered
+python-requests downloads with HTTP 429 while curl fetched the same URL with
+the same User-Agent at once, so downloads go through curl when available and
+fail fast (≈40 s) instead of looping for 10 minutes. Metadata is looked up in
+the repo library (scripts/historical_short/library/commons) and the local
+cache before the rate-limited API is called.
 """
 
 from __future__ import annotations
@@ -30,6 +46,8 @@ import argparse
 import html
 import json
 import re
+import shutil
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -104,6 +122,22 @@ def licence_verdict(meta: dict) -> tuple[bool, str]:
 
 
 CACHE = Path.home() / ".cache" / "openmontage" / "commons"
+# Repo-tracked, text-only library of verified Commons metadata (one JSON per
+# file, exactly as returned by the imageinfo API) + curated packs per period.
+LIBRARY = Path(__file__).resolve().parent / "library"
+LIBRARY_COMMONS = LIBRARY / "commons"
+
+
+def library_slug(title: str) -> str:
+    name = title.split(":", 1)[-1]
+    return re.sub(r"[^A-Za-z0-9._-]+", "_", name).strip("_")[:150] + ".json"
+
+
+def _library_lookup(title: str) -> dict | None:
+    lp = LIBRARY_COMMONS / library_slug(title)
+    if lp.exists():
+        return json.loads(lp.read_text())
+    return None
 
 
 def _cache_path(title: str) -> Path:
@@ -119,7 +153,10 @@ def _imageinfo(session: requests.Session, titles: list[str], use_cache: bool = T
     pages, missing = [], []
     for t in titles:
         cp = _cache_path(t)
-        if use_cache and cp.exists():
+        lib = _library_lookup(t) if use_cache else None
+        if lib is not None:
+            pages.append(lib)
+        elif use_cache and cp.exists():
             pages.append(json.loads(cp.read_text()))
         else:
             missing.append(t)
@@ -226,17 +263,72 @@ def cmd_prefetch(args: argparse.Namespace) -> int:
     return 0
 
 
+def _download_curl(url: str) -> bytes | None:
+    """curl with the same User-Agent; returns None on HTTP error/429."""
+    r = subprocess.run(["curl", "-sS", "-f", "-L", "--max-time", "120", "-A", USER_AGENT, url],
+                       capture_output=True)
+    return r.stdout if r.returncode == 0 and r.stdout else None
+
+
 def _download(session: requests.Session, url: str) -> bytes:
-    for attempt in range(7):
-        r = session.get(url, timeout=180)
-        if r.status_code == 429:
-            wait = min(90, 6 * 2 ** attempt)
+    # Fail fast: ~40 s worst case, then the caller can move on (or the agent
+    # replaces the scene) instead of a 10-minute retry loop.
+    waits = [0, 5, 10, 20]
+    for attempt, wait in enumerate(waits):
+        if wait:
             print(f"  (upload rate limit, retrying in {wait}s)", file=sys.stderr)
             time.sleep(wait)
+        if shutil.which("curl"):
+            data = _download_curl(url)
+            if data:
+                return data
+        r = session.get(url, timeout=180)
+        if r.status_code == 429:
             continue
         r.raise_for_status()
         return r.content
     raise RuntimeError(f"download kept returning 429: {url}")
+
+
+def _fetch_one(s: requests.Session, page: dict, asset_id: str, out_dir: Path,
+               allow_manual_review: bool = False, extra: dict | None = None) -> int:
+    title = page.get("title")
+    if not page or page.get("missing"):
+        print(f"not found: {title}", file=sys.stderr)
+        return 2
+    pv = provenance(page)
+    if not pv["commercial_ok"] and not allow_manual_review:
+        print(f"REFUSED {title}: {pv['licence_verdict']}", file=sys.stderr)
+        return 3
+    global MAX_WIDTH
+    url, _w = thumb_url(pv["original_url"], pv["width"])
+    ext = Path(url).suffix.lower() or ".jpg"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    dest = out_dir / f"{asset_id}{ext}"
+    try:
+        data = _download(s, url)
+    except RuntimeError:
+        # Some thumbnail widths of a file are throttled harder (not yet cached
+        # at the edge); retry once at each smaller standard width.
+        data, saved = None, MAX_WIDTH
+        for w in [x for x in STANDARD_WIDTHS if x < (_w or 0)]:
+            MAX_WIDTH = w
+            url, _ = thumb_url(pv["original_url"], pv["width"])
+            print(f"  (retrying at {w}px)", file=sys.stderr)
+            data = _download_curl(url)
+            if data:
+                break
+        MAX_WIDTH = saved
+        if not data:
+            raise
+    dest.write_bytes(data)
+    pv.update({"asset_id": asset_id, "local_path": str(dest), "downloaded_url": url,
+               "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
+    if extra:
+        pv["library_entry"] = extra
+    (out_dir / f"{asset_id}.provenance.json").write_text(json.dumps(pv, indent=2, ensure_ascii=False))
+    print(f"saved {dest}  [{pv['licence']}]  {pv['author'][:60]}", flush=True)
+    return 0
 
 
 def cmd_fetch(args: argparse.Namespace) -> int:
@@ -244,23 +336,82 @@ def cmd_fetch(args: argparse.Namespace) -> int:
     MAX_WIDTH = args.max_width
     s = _session()
     pages = _imageinfo(s, [args.title])
-    if not pages or pages[0].get("missing"):
+    if not pages:
         print(f"not found: {args.title}", file=sys.stderr)
         return 2
-    pv = provenance(pages[0])
-    if not pv["commercial_ok"] and not args.allow_manual_review:
-        print(f"REFUSED {args.title}: {pv['licence_verdict']}", file=sys.stderr)
-        return 3
-    url, _w = thumb_url(pv["original_url"], pv["width"])
-    ext = Path(url).suffix.lower() or ".jpg"
+    return _fetch_one(s, pages[0], args.id, Path(args.out), args.allow_manual_review)
+
+
+def load_pack(name: str) -> dict:
+    """Curated, pre-verified asset pack: scripts/historical_short/library/packs/<name>.yaml"""
+    import yaml
+    path = LIBRARY / "packs" / f"{name}.yaml"
+    if not path.exists():
+        raise SystemExit(f"no asset pack {path}")
+    return yaml.safe_load(path.read_text())
+
+
+def cmd_fetch_list(args: argparse.Namespace) -> int:
+    """Batch fetch: one metadata pass (library/cache, then a single API call for
+    the rest), then sequential curl downloads a few seconds apart. Files already
+    present (provenance exists) are skipped, so re-running is cheap."""
+    global MAX_WIDTH
+    MAX_WIDTH = args.max_width
+    jobs: list[tuple[str, str, dict | None]] = []
+    if args.pack:
+        pack = load_pack(args.pack)
+        wanted = set(filter(None, (args.ids or "").split(","))) or None
+        for e in pack["assets"]:
+            if wanted is None or e["id"] in wanted:
+                jobs.append((e["id"], e["title"], e))
+        if wanted:
+            missing = wanted - {j[0] for j in jobs}
+            if missing:
+                raise SystemExit(f"ids not in pack {args.pack}: {sorted(missing)}")
+    if args.list:
+        for ln in Path(args.list).read_text().splitlines():
+            if ln.strip() and not ln.lstrip().startswith("#"):
+                aid, title = ln.split("|", 1)
+                jobs.append((aid.strip(), title.strip(), None))
     out_dir = Path(args.out)
-    out_dir.mkdir(parents=True, exist_ok=True)
-    dest = out_dir / f"{args.id}{ext}"
-    dest.write_bytes(_download(s, url))
-    pv.update({"asset_id": args.id, "local_path": str(dest), "downloaded_url": url,
-               "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
-    (out_dir / f"{args.id}.provenance.json").write_text(json.dumps(pv, indent=2, ensure_ascii=False))
-    print(f"saved {dest}  [{pv['licence']}]  {pv['author'][:60]}")
+    jobs = [j for j in jobs if not (out_dir / f"{j[0]}.provenance.json").exists()]
+    if not jobs:
+        print("nothing to fetch (all present)")
+        return 0
+    s = _session()
+    pages = {p.get("title"): p for p in _imageinfo(s, [t for _, t, _ in jobs])}
+    failed = []
+    for i, (aid, title, entry) in enumerate(jobs):
+        page = pages.get(title) or next((p for p in pages.values()
+                                          if (p.get("title") or "").replace("_", " ") == title.replace("_", " ")), None)
+        try:
+            rc = _fetch_one(s, page or {"title": title, "missing": True}, aid, out_dir, False, entry)
+        except Exception as exc:  # keep going; report at the end
+            print(f"FAILED {aid}: {exc}", file=sys.stderr)
+            rc = 1
+        if rc:
+            failed.append(aid)
+        if i < len(jobs) - 1:
+            time.sleep(args.gap)
+    print(f"done: {len(jobs) - len(failed)} fetched, {len(failed)} failed {failed if failed else ''}")
+    return 1 if failed else 0
+
+
+def cmd_library_add(args: argparse.Namespace) -> int:
+    """Copy verified metadata for titles into the repo library (text only)."""
+    LIBRARY_COMMONS.mkdir(parents=True, exist_ok=True)
+    pages = _imageinfo(_session(), list(args.titles))
+    for pg in pages:
+        if not pg.get("imageinfo"):
+            print(f"skip (no metadata): {pg.get('title')}")
+            continue
+        pv = provenance(pg)
+        if not pv["commercial_ok"]:
+            print(f"skip (licence {pv['licence_verdict']}): {pg.get('title')}")
+            continue
+        dest = LIBRARY_COMMONS / library_slug(pg["title"])
+        dest.write_text(json.dumps(pg, indent=1, ensure_ascii=False) + "\n")
+        print(f"library: {dest.name}  [{pv['licence']}]")
     return 0
 
 
@@ -275,8 +426,14 @@ def main() -> int:
     p.add_argument("--max-width", type=int, default=1920, choices=[960, 1280, 1920, 3840])
     p.add_argument("--allow-manual-review", action="store_true",
                    help="download a file whose licence is not auto-approved (record why in the episode file)")
+    p = sub.add_parser("fetch-list"); p.add_argument("--pack"); p.add_argument("--ids")
+    p.add_argument("--list"); p.add_argument("--out", required=True)
+    p.add_argument("--gap", type=float, default=4.0, help="seconds between downloads")
+    p.add_argument("--max-width", type=int, default=1920, choices=[960, 1280, 1920, 3840])
+    p = sub.add_parser("library-add"); p.add_argument("titles", nargs="+")
     args = ap.parse_args()
-    return {"search": cmd_search, "info": cmd_info, "prefetch": cmd_prefetch, "fetch": cmd_fetch}[args.cmd](args)
+    return {"search": cmd_search, "info": cmd_info, "prefetch": cmd_prefetch, "fetch": cmd_fetch,
+            "fetch-list": cmd_fetch_list, "library-add": cmd_library_add}[args.cmd](args)
 
 
 if __name__ == "__main__":

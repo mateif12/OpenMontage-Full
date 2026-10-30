@@ -1,0 +1,28 @@
+id: eighteenth-century
+name: Eighteenth century (linear warfare)
+years: "1700-1791"
+notes: >-
+  Tricorne hats, long-skirted coats with turnbacks, flintlock muskets and
+  bayonets, grenadier mitre caps, smoothbore artillery. Generic figures.
+palette: {sky_top: "#5e6b78", sky_bottom: "#ddcca8", light: "#f2dcae", haze: "#bdb6a2", ground_far: "#6f7652",
+          ground_near: "#4a4a2c", smoke: "#d6d0c0", shadow: "#2a2620"}
+environment: {terrain: rolling, vegetation: [hedges, oaks], buildings: [farmhouse, church]}
+artillery: {type: smoothbore, barrel: "#8c6d3f", carriage: "#4e4636", crew: british-redcoat}
+templates: [line-advance, volley, cavalry-charge, artillery, assault, aftermath, armies-facing]
+factions:
+  british-redcoat: {label: British infantry, role: infantry, coat: "#b3261e", facings: "#1f3a7a", trousers: "#e6e0cf",
+                    coat_style: tails, headgear: tricorne, headgear_color: "#161616", plume: "", belts: cross, weapon: musket,
+                    flag: ["#1f3a7a", "#f1ece0", "#b3261e"], flag_orientation: union}
+  continental: {label: Continental Army, role: infantry, coat: "#1f2f5a", facings: "#d8c9a0", trousers: "#e6e0cf",
+                coat_style: tails, headgear: tricorne, headgear_color: "#161616", plume: "", belts: cross, weapon: musket,
+                flag: ["#b3261e", "#f1ece0"], flag_orientation: horizontal}
+  french-royal: {label: French royal infantry, role: infantry, coat: "#ece7da", facings: "#1f3a7a", trousers: "#ece7da",
+                 coat_style: tails, headgear: tricorne, headgear_color: "#161616", plume: "", belts: cross, weapon: musket,
+                 flag: ["#f1ece0"], flag_orientation: horizontal}
+  prussian-fusilier: {label: Prussian infantry, role: infantry, coat: "#1c2541", facings: "#b3261e", trousers: "#e8d9a0",
+                      coat_style: tails, headgear: mitre, headgear_color: "#c9a24a", plume: "", belts: cross, weapon: musket,
+                      flag: ["#141414", "#f1ece0"], flag_orientation: horizontal}
+ai:
+  style: "18th-century battle painting, oil on canvas, painterly, muted palette"
+  positive: "tricorne hats, long coats with turnbacks, flintlock muskets with bayonets, regimental colours, white powder smoke"
+  negative: "modern rifles, steel helmets, khaki, camouflage, shakos, tanks, aircraft, text, watermark, deformed hands, extra limbs"

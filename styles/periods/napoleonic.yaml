@@ -1,0 +1,43 @@
+id: napoleonic
+name: Napoleonic Wars
+years: "1792-1830"
+notes: >-
+  Linear infantry with flintlock muskets and bayonets, shakos/bicornes/bearskins,
+  smoothbore field artillery, heavy and light cavalry. Colours simplified
+  (e.g. French line: dark blue coat, white breeches; British line: red coat, grey trousers).
+palette: {sky_top: "#5d6a78", sky_bottom: "#d8c9a8", light: "#f2dcae", haze: "#b9b2a0", ground_far: "#6f7652",
+          ground_near: "#4a4a2c", smoke: "#d6d0c0", shadow: "#2a2620"}
+environment: {terrain: rolling, vegetation: [hedges, poplars, wheat], buildings: [farmhouse, church]}
+artillery: {type: smoothbore, barrel: "#8c6d3f", carriage: "#4e5a3a", crew: french-artillery}
+templates: [line-advance, volley, cavalry-charge, artillery, assault, aftermath, armies-facing]
+factions:
+  french-line: {label: French line infantry, role: infantry, coat: "#1f3a7a", facings: "#c8372d", trousers: "#e6e0cf",
+                coat_style: tails, headgear: shako, headgear_color: "#161616", plume: "#c8372d", belts: cross,
+                weapon: musket, flag: ["#1f3a7a", "#f1ece0", "#c8372d"], flag_orientation: vertical}
+  french-guard: {label: French Imperial Guard grenadiers, role: infantry, coat: "#1b3070", facings: "#c8372d",
+                 trousers: "#ece6d6", coat_style: tails, headgear: bearskin, headgear_color: "#141210", plume: "#c8372d",
+                 belts: cross, weapon: musket, flag: ["#1f3a7a", "#f1ece0", "#c8372d"], flag_orientation: vertical}
+  french-cuirassier: {label: French cuirassiers, role: cavalry, coat: "#1f3a7a", facings: "#c8372d", trousers: "#e6e0cf",
+                      coat_style: breastplate, headgear: dragoon-helmet, headgear_color: "#b9b9b4", plume: "#c8372d",
+                      belts: single, weapon: sabre, horse: "#3b2a1e"}
+  french-artillery: {label: French foot artillery, role: crew, coat: "#1f3a7a", facings: "#c8372d", trousers: "#1f3a7a",
+                     coat_style: tails, headgear: shako, headgear_color: "#161616", plume: "#c8372d", belts: single, weapon: none}
+  british-line: {label: British line infantry, role: infantry, coat: "#b3261e", facings: "#e8d9a0", trousers: "#6f7378",
+                 coat_style: tails, headgear: shako, headgear_color: "#161616", plume: "#efe9dc", belts: cross,
+                 weapon: musket, flag: ["#1f3a7a", "#f1ece0", "#b3261e"], flag_orientation: union}
+  british-cavalry: {label: British heavy cavalry, role: cavalry, coat: "#b3261e", facings: "#1f3a7a", trousers: "#e6e0cf",
+                    coat_style: jacket, headgear: dragoon-helmet, headgear_color: "#2b2b2b", plume: "#161616", belts: single,
+                    weapon: sabre, horse: "#d9d4c8"}
+  prussian-line: {label: Prussian line infantry, role: infantry, coat: "#1c2541", facings: "#c8372d", trousers: "#5d6066",
+                  coat_style: tails, headgear: shako, headgear_color: "#141414", plume: "#141414", belts: cross,
+                  weapon: musket, flag: ["#141414", "#f1ece0", "#141414"], flag_orientation: horizontal}
+  austrian-line: {label: Austrian line infantry, role: infantry, coat: "#ece7da", facings: "#7a1f2a", trousers: "#ece7da",
+                  coat_style: tails, headgear: shako, headgear_color: "#141414", plume: "#141414", belts: cross,
+                  weapon: musket, flag: ["#e8c64a", "#141414"], flag_orientation: horizontal}
+  russian-line: {label: Russian line infantry, role: infantry, coat: "#1f3b2a", facings: "#c8372d", trousers: "#ece7da",
+                 coat_style: tails, headgear: shako, headgear_color: "#141414", plume: "#141414", belts: cross,
+                 weapon: musket, flag: ["#ece7da", "#1f3a7a", "#c8372d"], flag_orientation: horizontal}
+ai:
+  style: "19th-century academic oil battle painting, Napoleonic era, painterly brushwork, muted earth tones"
+  positive: "flintlock muskets with bayonets, shakos, tailcoats with white crossbelts, smoothbore cannons on wooden carriages, white gunpowder smoke, rolling farmland"
+  negative: "modern rifles, steel helmets, camouflage, khaki, machine guns, tanks, cars, aircraft, plate armour, shields, spears, swords drawn by infantry, text, watermark, signature, modern buildings, power lines, deformed hands, extra limbs"

@@ -15,6 +15,8 @@ What it does, in order (all local and free):
      if one is supplied with --script)
   6. generates the optional original ambience bed
   7. writes artifacts/episode_brief.json — the facts the agent needs next
+  8. writes the scene-plan skeleton projects/<id>/episode.yaml (plan_scenes.py:
+     cuts in the pauses, detected period, combat tags, asset-pack candidates)
      (duration, sentence timings, transcript text) for research + scene planning
 
 Usage:
@@ -159,13 +161,16 @@ def main() -> int:
             "Read transcript.txt; fix obvious recogniser errors in proper nouns ONLY if certain "
             "(edit artifacts/script.txt and re-run align_captions.py with --script).",
             "Fact-check every claim (historical-short.md §3).",
-            "Write scripts/historical_short/episodes/<id>.yaml from episode.template.yaml, "
-            "cutting scenes in the gaps between the sentence times above.",
-            "Fetch assets, build_props.py, render.py.",
+            "Complete the scene-plan skeleton projects/<id>/episode.yaml (written by plan_scenes.py: "
+            "cuts, period, combat tags, pack candidates); see historical-short.md §3.",
+            "fetch_commons.py fetch-list (pack ids first), build_props.py, render.py --preview, "
+            "then ONE final render.py.",
         ],
     }
     (arts / "episode_brief.json").write_text(json.dumps(brief, indent=1, ensure_ascii=False))
     print(f"[6/6] wrote {arts / 'episode_brief.json'}")
+    print(run([sys.executable, str(HERE / "plan_scenes.py"), "--project", str(project),
+               "--topic", args.topic]).stdout.strip())
     print("\nSENTENCES:")
     for s in brief["sentences"]:
         print(f"  {s['start']:6.2f}-{s['end']:6.2f}  {s['text']}")

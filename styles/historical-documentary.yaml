@@ -3,7 +3,7 @@ identity:
   category: cinematic
   mood: grave, cinematic, authoritative
   pace: moderate
-  best_for: "Narrated vertical history Shorts built from authentic archaeological photos, museum objects, historical artworks and original maps/diagrams (documentary-montage historical-short profile)"
+  best_for: "Narrated vertical history Shorts built from authentic artworks, photos and objects animated cinematically, period-aware original battle illustrations and supporting maps (documentary-montage historical-short profile)"
 
 visual_language:
   color_palette:
@@ -13,7 +13,7 @@ visual_language:
     text: "#F1E6CC"
     muted: "#9C8657"
   composition: "vertical 9:16; subject in the upper-middle band; source label top-left; captions in the lower-middle band above the Shorts UI"
-  texture: "authentic photographic grain only; dark vignette; no synthetic grain or fake film damage"
+  texture: "subtle film grain (0.5) and dark vignette; atmospheric powder smoke, dust, embers only as overlays — never fake film damage"
 
 typography:
   headings:
@@ -30,8 +30,8 @@ typography:
     caption: 700
 
 motion:
-  transitions: [dissolve, fade]
-  animation_style: "slow camera-only push-ins and pans on stills (scale 1.00-1.16); eased map flights; schematic units move only on narrated beats"
+  transitions: [dissolve, cut, dip-to-black, flash (gunfire), smoke (into battle), whip-pan]
+  animation_style: "cinematic camera paths over paintings (detail shots, pans along the canvas, full reveal), depth-layer parallax, muzzle flashes and smoke on narrated words; code-drawn battle scenes with dolly camera and depth planes; maps fly and units move only on narrated beats"
   pacing_rules:
     min_scene_hold_seconds: 2.0
     max_scene_hold_seconds: 18
@@ -46,17 +46,19 @@ audio:
   sfx_style: "none"
 
 asset_generation:
-  image_prompt_prefix: "N/A — image generation is forbidden in this style; use authentic sources via fetch_commons.py"
-  image_negative_prompt: "AI-generated imagery, reenactments, movie stills, unrelated stock footage"
-  diagram_style: "original SVG schematics: square pips for infantry, diamonds for cavalry, crimson = Rome, gold = Carthage; always labelled 'schematic · not to scale'"
+  image_prompt_prefix: "from the period kit (styles/periods/<id>.yaml: ai.style + ai.positive); local AI only, image-to-image over a code-drawn period plate"
+  image_negative_prompt: "from the period kit (ai.negative: anachronisms) + text, watermark, deformed hands, extra limbs"
+  diagram_style: "original SVG maps/diagrams: NATO-style unit blocks (infantry ⨯, cavalry ⁄, artillery ●) in episode side colours, arrowed routes, dashed retreats, optional modern terrain relief; always labelled 'schematic · not to scale'"
   consistency_anchors:
     - "Every still carries an on-screen label stating what it is (site photo, museum artifact, painting + year, sculpture + year)"
-    - "Artworks are always tagged ARTISTIC INTERPRETATION and shown uncropped (contain-blur)"
+    - "Artworks are always tagged ARTISTIC INTERPRETATION, never distorted; crops are labelled DETAIL and each artwork is shown whole at least once"
+    - "Original battle illustrations are labelled ORIGINAL ILLUSTRATION; AI-assisted ones AI-ASSISTED ILLUSTRATION, and only after an approved accuracy review"
     - "Maps state 'ORIGINAL MAP' and 'modern coastlines: Natural Earth (public domain)'"
     - "Only licences that allow commercial reuse (PD, CC0, CC BY, CC BY-SA)"
 
 quality_rules:
-  - "No AI-generated images, video or voice"
+  - "No AI video or AI voice; AI images only as locally generated, reviewed, clearly labelled artistic interpretations"
+  - "Battle beats show soldiers/cavalry/artillery/smoke, not maps; maps ≤ 25 % of runtime, ≤ 7 s each, never back-to-back"
   - "No reenactments, actors, film clips or unrelated stock footage"
   - "Never present a painting, sculpture or modern illustration as a photograph or footage"
   - "Caption text must equal the approved script word for word"

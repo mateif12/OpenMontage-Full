@@ -1,0 +1,88 @@
+{
+ "pageid": 9394349,
+ "ns": 6,
+ "title": "File:Crofts-Napoleon's last grand attack at Waterloo.jpg",
+ "imagerepository": "local",
+ "imageinfo": [
+  {
+   "size": 460024,
+   "width": 1026,
+   "height": 640,
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/22/Crofts-Napoleon%27s_last_grand_attack_at_Waterloo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "descriptionurl": "https://commons.wikimedia.org/wiki/File:Crofts-Napoleon%27s_last_grand_attack_at_Waterloo.jpg",
+   "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=9394349",
+   "extmetadata": {
+    "DateTime": {
+     "value": "2010-02-04 17:45:04",
+     "source": "mediawiki-metadata",
+     "hidden": ""
+    },
+    "ObjectName": {
+     "value": "Crofts-Napoleon's last grand attack at Waterloo",
+     "source": "mediawiki-metadata"
+    },
+    "CommonsMetadataExtension": {
+     "value": 1.2,
+     "source": "extension",
+     "hidden": ""
+    },
+    "Categories": {
+     "value": "Ernest Crofts|French army of the Cent-Jours|PD-old-100-expired|PD-Art (PD-old-auto-expired)|CC-PD-Mark|Battle of Waterloo in art|Paintings of Napoleon I on the battlefield|French Imperial Guard in art|Grenadiers in art|French Imperial Guard foot grenadiers",
+     "source": "commons-categories",
+     "hidden": ""
+    },
+    "Assessments": {
+     "value": "",
+     "source": "commons-categories",
+     "hidden": ""
+    },
+    "ImageDescription": {
+     "value": "<i>Napoleon's last grand attack at Waterloo</i>: Napoleon addresses the Old Guard as it prepares to attack the Anglo-Allied center at Waterloo.",
+     "source": "commons-desc-page"
+    },
+    "DateTimeOriginal": {
+     "value": "1895",
+     "source": "commons-desc-page"
+    },
+    "Credit": {
+     "value": "<i>Life of Napoleon Bonaparte</i> by William M. Sloane, New York: Century, vol. 4",
+     "source": "commons-desc-page"
+    },
+    "Artist": {
+     "value": "<bdi><a href=\"https://en.wikipedia.org/wiki/en:Ernest_Crofts\" class=\"extiw\" title=\"w:en:Ernest Crofts\"><span title=\"British artist (1847-1911)\">Ernest Crofts</span></a></bdi>",
+     "source": "commons-desc-page"
+    },
+    "LicenseShortName": {
+     "value": "Public domain",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "UsageTerms": {
+     "value": "Public domain",
+     "source": "commons-desc-page"
+    },
+    "AttributionRequired": {
+     "value": "false",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "Copyrighted": {
+     "value": "False",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "Restrictions": {
+     "value": "",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "License": {
+     "value": "pd",
+     "source": "commons-templates",
+     "hidden": ""
+    }
+   },
+   "mime": "image/jpeg"
+  }
+ ]
+}

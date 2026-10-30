@@ -1,0 +1,26 @@
+id: medieval
+name: Medieval Europe
+years: "500-1449"
+notes: >-
+  Mail and later plate-reinforced armour, kite and heater shields, lances,
+  swords, spears and polearms, longbows and crossbows; heraldic surcoats.
+  No firearms until the very late period. Generic figures.
+palette: {sky_top: "#5a6676", sky_bottom: "#d9ccb0", light: "#efd9ac", haze: "#b8b3a2", ground_far: "#66704a",
+          ground_near: "#44462a", smoke: "#cfc8b8", shadow: "#26231d"}
+environment: {terrain: rolling, vegetation: [oaks, hedges], buildings: [castle, church]}
+artillery: {type: none}
+templates: [line-advance, cavalry-charge, assault, aftermath, armies-facing]
+factions:
+  knight: {label: Mounted knights, role: cavalry, coat: "#8d8f93", facings: "#1f3a7a", trousers: "#8d8f93",
+           coat_style: long, headgear: great-helm, headgear_color: "#a7a9ad", plume: "#c8372d", belts: none,
+           weapon: lance, shield: kite, shield_color: "#1f3a7a", horse: "#5b4632"}
+  man-at-arms: {label: Men-at-arms, role: infantry, coat: "#8d8f93", facings: "#b3261e", trousers: "#8d8f93",
+                coat_style: long, headgear: nasal-helmet, headgear_color: "#a7a9ad", plume: "", belts: none,
+                weapon: spear, shield: kite, shield_color: "#b3261e"}
+  archer: {label: Longbowmen, role: archer, coat: "#7a6a4a", facings: "#4a5a3a", trousers: "#5a4a32",
+           coat_style: long, headgear: kettle-hat, headgear_color: "#8d8f93", plume: "", belts: single,
+           weapon: bow, shield: none}
+ai:
+  style: "medieval battle scene, oil painting in the manner of 19th-century history painters, painterly, muted colours"
+  positive: "chainmail hauberks, heraldic surcoats, kite shields, lances, longbows, war horses with caparisons, banners"
+  negative: "firearms, muskets, cannons, modern clothing, fantasy armour, dragons, magic, anime, text, watermark, deformed hands, extra limbs"

@@ -1,0 +1,23 @@
+id: first-world-war
+name: First World War
+years: "1900-1919"
+notes: >-
+  Bolt-action rifles, steel helmets from 1915-16 (British Brodie, French
+  Adrian, German Stahlhelm), field-grey / khaki / horizon-blue uniforms,
+  trenches, barbed wire, shell craters, quick-firing field guns. Generic figures.
+palette: {sky_top: "#58606a", sky_bottom: "#c9c2ad", light: "#e3d6b4", haze: "#a9a596", ground_far: "#6a6450",
+          ground_near: "#463f30", smoke: "#c4bfb1", shadow: "#24221d"}
+environment: {terrain: trenches, vegetation: [shattered-trees], buildings: [ruined-church]}
+artillery: {type: modern, barrel: "#4a4d44", carriage: "#4a4d44", crew: british-tommy}
+templates: [line-advance, artillery, assault, aftermath, armies-facing]
+factions:
+  british-tommy: {label: British infantry, role: infantry, coat: "#7a6a46", facings: "#7a6a46", trousers: "#7a6a46",
+                  coat_style: jacket, headgear: brodie, headgear_color: "#5d5a44", plume: "", belts: single, weapon: rifle}
+  french-poilu: {label: French infantry, role: infantry, coat: "#6d86a0", facings: "#6d86a0", trousers: "#6d86a0",
+                 coat_style: greatcoat, headgear: adrian, headgear_color: "#5f7590", plume: "", belts: single, weapon: rifle}
+  german-1916: {label: German infantry, role: infantry, coat: "#5d6253", facings: "#5d6253", trousers: "#5d6253",
+                coat_style: jacket, headgear: stahlhelm, headgear_color: "#4c5146", plume: "", belts: single, weapon: rifle}
+ai:
+  style: "First World War scene, painterly, muted documentary illustration, oil on canvas"
+  positive: "steel helmets, bolt-action rifles, trenches, barbed wire, mud, shell craters, shattered trees"
+  negative: "modern assault rifles, camouflage patterns, modern vehicles, helicopters, Napoleonic uniforms, shakos, swords, armour plates, text, watermark, deformed hands, extra limbs"

@@ -1,0 +1,84 @@
+{
+ "pageid": 8838040,
+ "ns": 6,
+ "title": "File:Knotel - The storming of La Haye Sainte.jpg",
+ "imagerepository": "local",
+ "imageinfo": [
+  {
+   "size": 394291,
+   "width": 1000,
+   "height": 666,
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Knotel_-_The_storming_of_La_Haye_Sainte.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "descriptionurl": "https://commons.wikimedia.org/wiki/File:Knotel_-_The_storming_of_La_Haye_Sainte.jpg",
+   "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=8838040",
+   "extmetadata": {
+    "DateTime": {
+     "value": "2015-01-19 23:02:35",
+     "source": "mediawiki-metadata",
+     "hidden": ""
+    },
+    "ObjectName": {
+     "value": "Knotel - The storming of La Haye Sainte",
+     "source": "mediawiki-metadata"
+    },
+    "CommonsMetadataExtension": {
+     "value": 1.2,
+     "source": "extension",
+     "hidden": ""
+    },
+    "Categories": {
+     "value": "Ferme de la Haie Sainte|French army of the Cent-Jours|PD Old|CC-PD-Mark|Battle of Waterloo in art|PD-old missing SDC copyright status|Works by Richard Knötel",
+     "source": "commons-categories",
+     "hidden": ""
+    },
+    "Assessments": {
+     "value": "",
+     "source": "commons-categories",
+     "hidden": ""
+    },
+    "ImageDescription": {
+     "value": "The storming of La Haye Sainte, the crucial position at the centre of Wellington's position at the battle of Waterloo.",
+     "source": "commons-desc-page"
+    },
+    "Credit": {
+     "value": "<a rel=\"nofollow\" class=\"external free\" href=\"http://www.armchairgeneral.com/forums/showthread.php?t=55906\">http://www.armchairgeneral.com/forums/showthread.php?t=55906</a>",
+     "source": "commons-desc-page"
+    },
+    "Artist": {
+     "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=Richard_Kn%C3%B6tel&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Richard Knötel (page does not exist)\">Richard Knötel</a>",
+     "source": "commons-desc-page"
+    },
+    "LicenseShortName": {
+     "value": "Public domain",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "UsageTerms": {
+     "value": "Public domain",
+     "source": "commons-desc-page"
+    },
+    "AttributionRequired": {
+     "value": "false",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "Copyrighted": {
+     "value": "False",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "Restrictions": {
+     "value": "",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "License": {
+     "value": "pd",
+     "source": "commons-templates",
+     "hidden": ""
+    }
+   },
+   "mime": "image/jpeg"
+  }
+ ]
+}

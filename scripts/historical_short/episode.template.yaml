@@ -1,11 +1,16 @@
-# Historical Short episode template — copy to scripts/historical_short/episodes/<id>.yaml
+# Historical Short episode template (v2). new_episode.py writes a filled-in skeleton to
+# projects/<id>/episode.yaml (gitignored); this file documents every scene kind.
 # Workflow: skills/pipelines/documentary-montage/historical-short.md
-# All times are absolute seconds in the narration MP3 (the master clock).
+# All times are absolute seconds in audio/narration_master.wav (the master clock).
 # Paths are relative to projects/<id>/assets (the Remotion public dir).
 
 id: <kebab-case-id>
 title: "<Title (date)>"
-narration: audio/narration.mp3          # user's MP3 — the ONLY voice
+rules_version: 2                        # storytelling/layout rules are errors (see episode_rules.py)
+period: <period-id>                     # styles/periods/<id>.yaml (auto-filled by plan_scenes.py)
+sides: {french: "#4f7fd6", allied: "#c8372d"}   # map unit/route colours by side
+grain: 0.5                              # film grain 0..1
+narration: audio/narration_master.wav   # master made by new_episode.py from the user's MP3 — the ONLY voice
 ambience: { src: audio/ambience.wav, volume: 0.08 }   # optional; delete for silence
 images_dir: images
 caption_style: { fontSize: 60, wordsPerPage: 5, bottomOffset: 470 }
@@ -53,5 +58,56 @@ scenes:
       title: "<what it is>"
       detail: "<date · place · museum>"
       # credit: auto-filled from provenance (author · licence · Wikimedia Commons)
+
+  # Cinematic camera over a painting (preferred over fit/zoomFrom/zoomTo):
+  # x,y = image point at the frame focus; zoom: fit (whole) | cover (fills 9:16) | "cover*1.3" | number
+  - id: s03_painting_detail
+    kind: image
+    start: 9.0
+    end: 13.0
+    asset: s03_painting
+    transition: smoke            # crossfade | cut | dip | flash | smoke | whip
+    depth_layers: 3              # 2.5D parallax (make_layers.py, cached)
+    camera:
+      - {t: 9.0, x: 0.30, y: 0.60, zoom: "cover*1.1"}
+      - {t: 13.0, x: 0.50, y: 0.55, zoom: fit}   # end on the whole painting
+    fx: {smoke: 0.4, flashes: [{t: 10.2, x: 0.3, y: 0.45}], embers: 0, dust: 0.2}
+    label:
+      tag: "PAINTING, <year> · DETAIL · ARTISTIC INTERPRETATION"
+      title: "<what it shows>"
+      detail: "<painter · museum>"
+
+  # Code-drawn, period-aware battle illustration (no external image needed)
+  - id: s04_battle
+    kind: battle
+    start: 13.0
+    end: 17.0
+    template: volley             # line-advance | volley | cavalry-charge | artillery | assault | aftermath | armies-facing
+    left: {faction: french-line, count: 20}      # presets from styles/periods/<period>.yaml
+    right: {faction: british-line}
+    fireAt: [14.1, 15.6]         # narrated words that fire the volley
+    camera: {from: 0, to: 140, zoom: 1.06}
+    transition: flash
+    fx: {smoke: 0.4}
+    # label auto: ORIGINAL ILLUSTRATION · ARTISTIC INTERPRETATION
+
+  # Battlefield map (supporting, <= 7 s): terrain relief, moving units, arrows
+  - id: s05_tactical
+    kind: map
+    start: 17.0
+    end: 22.0
+    terrain: maps/terrain.json   # build_terrain.py --bbox ... (no basemap needed)
+    tilt: 20
+    note: "ORIGINAL MAP · schematic · modern terrain (Copernicus DEM) · not to scale"
+    camera:
+      - {t: 17.0, lon: 4.44, lat: 50.675, span: 0.16}
+      - {t: 22.0, lon: 4.42, lat: 50.674, span: 0.12}
+    units:
+      - {label: "<unit>", side: french, kind: infantry, keys: [{t: 17.5, lon: 4.418, lat: 50.664}, {t: 21, lon: 4.416, lat: 50.676}]}
+    routes:
+      - {side: prussian, from: 18, to: 21, arrow: true, points: [[4.53, 50.70], [4.45, 50.668]]}
+      - {side: french, from: 20, to: 21.8, style: retreat, arrow: true, points: [[4.413, 50.665], [4.42, 50.64]]}
+    markers:
+      - {lon: 4.4121, lat: 50.6779, label: "<place>", at: 17.2, style: fort, labelSide: right}
 
   # Last scene must end at the MP3 duration (build_props.py checks it)

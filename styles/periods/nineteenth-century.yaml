@@ -1,0 +1,29 @@
+id: nineteenth-century
+name: Mid/late 19th century (rifle-musket era)
+years: "1831-1899"
+notes: >-
+  Rifle-muskets and early breech-loaders, kepis and forage caps, frock coats
+  and sack coats, rifled and smoothbore field guns. Covers e.g. the American
+  Civil War, Crimean and Franco-Prussian wars. Generic figures.
+palette: {sky_top: "#5f6a74", sky_bottom: "#d6c8a8", light: "#efd9ae", haze: "#b8b29f", ground_far: "#6c7350",
+          ground_near: "#48482c", smoke: "#d4cebe", shadow: "#29251f"}
+environment: {terrain: rolling, vegetation: [fences, oaks, wheat], buildings: [farmhouse, church]}
+artillery: {type: rifled, barrel: "#3c3f42", carriage: "#4e5a3a", crew: union-infantry}
+templates: [line-advance, volley, cavalry-charge, artillery, assault, aftermath, armies-facing]
+factions:
+  union-infantry: {label: Union infantry, role: infantry, coat: "#1f2a44", facings: "#1f2a44", trousers: "#7a98b8",
+                   coat_style: jacket, headgear: kepi, headgear_color: "#1f2a44", plume: "", belts: single, weapon: rifle,
+                   flag: ["#b3261e", "#f1ece0", "#b3261e", "#f1ece0"], flag_orientation: horizontal}
+  confederate-infantry: {label: Confederate infantry, role: infantry, coat: "#7d7f7a", facings: "#7d7f7a", trousers: "#8a7a5a",
+                         coat_style: jacket, headgear: kepi, headgear_color: "#7d7f7a", plume: "", belts: single, weapon: rifle,
+                         flag: ["#b3261e"], flag_orientation: horizontal}
+  prussian-1870: {label: Prussian infantry (1870), role: infantry, coat: "#1c2541", facings: "#b3261e", trousers: "#2a2a2e",
+                  coat_style: jacket, headgear: pickelhaube, headgear_color: "#161616", plume: "", belts: single, weapon: rifle}
+  french-1870: {label: French infantry (1870), role: infantry, coat: "#1f2a50", facings: "#b3261e", trousers: "#b3261e",
+                coat_style: greatcoat, headgear: kepi, headgear_color: "#b3261e", plume: "", belts: single, weapon: rifle}
+  cavalry-1860: {label: Cavalry, role: cavalry, coat: "#1f2a44", facings: "#e8c64a", trousers: "#7a98b8", coat_style: jacket,
+                 headgear: kepi, headgear_color: "#1f2a44", plume: "", belts: single, weapon: sabre, horse: "#4a3322"}
+ai:
+  style: "19th-century battle painting, oil, painterly, muted palette"
+  positive: "kepis, frock coats, rifle-muskets with bayonets, field cannons, rail fences, white powder smoke"
+  negative: "steel helmets, khaki, camouflage, machine guns, tanks, aircraft, shakos, tricorne, plate armour, text, watermark, deformed hands, extra limbs"

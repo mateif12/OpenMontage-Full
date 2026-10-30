@@ -1,0 +1,84 @@
+{
+ "pageid": 39344220,
+ "ns": 6,
+ "title": "File:Castle of Hougoumont during the Battle of Waterloo.jpg",
+ "imagerepository": "local",
+ "imageinfo": [
+  {
+   "size": 7287118,
+   "width": 3735,
+   "height": 2770,
+   "url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Castle_of_Hougoumont_during_the_Battle_of_Waterloo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "descriptionurl": "https://commons.wikimedia.org/wiki/File:Castle_of_Hougoumont_during_the_Battle_of_Waterloo.jpg",
+   "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=39344220",
+   "extmetadata": {
+    "DateTime": {
+     "value": "2017-06-24 23:40:28",
+     "source": "mediawiki-metadata",
+     "hidden": ""
+    },
+    "ObjectName": {
+     "value": "Defence of the Chateau de Hougoumont by the flank Company, Coldstream Guards, 1815.",
+     "source": "commons-desc-page"
+    },
+    "CommonsMetadataExtension": {
+     "value": 1.2,
+     "source": "extension",
+     "hidden": ""
+    },
+    "Categories": {
+     "value": "Taken with Samsung EX2F|Hougoumont|Coldstream Guards|Author died more than 70 years ago public domain images|Household Division of the United Kingdom|Artworks without Wikidata item|French army of the Cent-Jours|Arrazola de Oñate|PD-1996|Artworks with known accession number|CC-PD-Mark|Battle of Waterloo in art",
+     "source": "commons-categories",
+     "hidden": ""
+    },
+    "Assessments": {
+     "value": "",
+     "source": "commons-categories",
+     "hidden": ""
+    },
+    "Artist": {
+     "value": "<bdi><a href=\"https://en.wikipedia.org/wiki/en:Denis_Dighton\" class=\"extiw\" title=\"w:en:Denis Dighton\"><span title=\"English painter (1792-1827)\">Denis Dighton</span></a></bdi>",
+     "source": "commons-desc-page"
+    },
+    "DateTimeOriginal": {
+     "value": "1815<div style=\"display: none;\">date QS:P571,+1815-00-00T00:00:00Z/9</div>",
+     "source": "commons-desc-page"
+    },
+    "Credit": {
+     "value": "<a href=\"//commons.wikimedia.org/wiki/User:Zen3500\" title=\"User:Zen3500\">Zen3500</a> 2015-04-01",
+     "source": "commons-desc-page"
+    },
+    "LicenseShortName": {
+     "value": "Public domain",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "UsageTerms": {
+     "value": "Public domain",
+     "source": "commons-desc-page"
+    },
+    "AttributionRequired": {
+     "value": "false",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "Copyrighted": {
+     "value": "False",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "Restrictions": {
+     "value": "",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "License": {
+     "value": "pd",
+     "source": "commons-templates",
+     "hidden": ""
+    }
+   },
+   "mime": "image/jpeg"
+  }
+ ]
+}

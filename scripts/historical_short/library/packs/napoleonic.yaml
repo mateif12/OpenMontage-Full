@@ -1,0 +1,151 @@
+# Curated asset pack — Napoleonic Wars (1799-1815). Text only: titles, what each
+# image shows and default on-screen labels. Licence/author metadata lives in
+# ../commons/<file>.json (verified via the Commons API, commercial-safe).
+# Fetch:  python scripts/historical_short/fetch_commons.py fetch-list --pack napoleonic \
+#           --ids <id,id,...> --out projects/<ep>/assets/images
+# reviewed: true  = an agent looked at the image and checked it against the label.
+# reviewed: false = licence verified, picture NOT yet checked — Read it before use.
+period: napoleonic
+assets:
+- id: napoleon_david_1812
+  title: "File:Jacques-Louis David - The Emperor Napoleon in His Study at the Tuileries - Google Art Project.jpg"
+  kind: portrait
+  subjects: [napoleon]
+  orientation: portrait
+  reviewed: true
+  label: {tag: "PAINTING, 1812 · PORTRAIT", title: "Napoleon Bonaparte", detail: "Jacques-Louis David · National Gallery of Art, Washington"}
+  detail_hints: {face: [0.47, 0.14]}
+- id: wellington_lawrence
+  title: "File:Sir Arthur Wellesley, 1st Duke of Wellington.jpg"
+  kind: portrait
+  subjects: [wellington]
+  orientation: portrait
+  reviewed: true
+  label: {tag: "PORTRAIT, c. 1815-16", title: "Arthur Wellesley, Duke of Wellington", detail: "Sir Thomas Lawrence"}
+- id: blucher_dawe
+  title: "File:Field Marshal Prince von Blucher.jpg"
+  kind: portrait
+  subjects: [blucher, prussia]
+  orientation: portrait
+  reviewed: true
+  label: {tag: "PORTRAIT, 1818", title: "Field Marshal Gebhard Leberecht von Blücher", detail: "George Dawe"}
+- id: elba_beaume
+  title: "File:Beaume - Napoléon Ier quittant l'île d'Elbe - 1836.jpg"
+  kind: event-painting
+  subjects: [napoleon, elba, hundred-days]
+  orientation: landscape
+  reviewed: true
+  label: {tag: "PAINTING, 1836 · ARTISTIC INTERPRETATION", title: "Napoleon leaves Elba, 26 February 1815", detail: "Joseph Beaume"}
+- id: waterloo_sadler
+  title: "File:Battle of Waterloo 1815.PNG"
+  kind: battle-painting
+  subjects: [waterloo, battle, cavalry, infantry]
+  orientation: landscape
+  reviewed: true
+  label: {tag: "PAINTING, c. 1815 · ARTISTIC INTERPRETATION", title: "The Battle of Waterloo", detail: "William Sadler II"}
+- id: hougoumont_dighton
+  title: "File:Castle of Hougoumont during the Battle of Waterloo.jpg"
+  kind: battle-painting
+  subjects: [waterloo, hougoumont, infantry, british-guards]
+  orientation: landscape
+  reviewed: true
+  label: {tag: "PAINTING, 1815 · ARTISTIC INTERPRETATION", title: "The defence of Hougoumont", detail: "Denis Dighton"}
+- id: lahayesainte_knotel
+  title: "File:Knotel - The storming of La Haye Sainte.jpg"
+  kind: battle-painting
+  subjects: [waterloo, la-haye-sainte, infantry, kgl]
+  orientation: landscape
+  reviewed: true
+  label: {tag: "PAINTING · ARTISTIC INTERPRETATION", title: "The storming of La Haye Sainte", detail: "Richard Knötel"}
+- id: squares_philippoteaux
+  title: "File:Charge of the French Cuirassiers at Waterloo.jpg"
+  kind: battle-painting
+  subjects: [waterloo, cavalry, cuirassiers, infantry-square]
+  orientation: landscape
+  reviewed: true
+  label: {tag: "PAINTING, 1874 · ARTISTIC INTERPRETATION", title: "A British square resists French cuirassiers", detail: "Félix Philippoteaux"}
+- id: plancenoit_northen
+  title: "File:Prussian Attack Plancenoit by Adolf Northern.jpg"
+  kind: battle-painting
+  subjects: [waterloo, plancenoit, prussia, imperial-guard]
+  orientation: landscape
+  reviewed: true
+  label: {tag: "PAINTING, 1864 · ARTISTIC INTERPRETATION", title: "The Prussian attack on Plancenoit", detail: "Adolph Northen"}
+- id: guard_crofts
+  title: "File:Crofts-Napoleon's last grand attack at Waterloo.jpg"
+  kind: battle-painting
+  subjects: [waterloo, napoleon, imperial-guard]
+  orientation: landscape
+  reviewed: true
+  label: {tag: "PAINTING, 1895 · ARTISTIC INTERPRETATION", title: "Napoleon addresses the Imperial Guard before its final attack", detail: "Ernest Crofts"}
+- id: lastsquare_hillingford
+  title: "File:Dernier carre de la Garde - gen Hill.png"
+  kind: battle-painting
+  subjects: [waterloo, imperial-guard, surrender]
+  orientation: landscape
+  reviewed: true
+  label: {tag: "PAINTING · ARTISTIC INTERPRETATION", title: "The last remnants of the Imperial Guard are called on to surrender", detail: "Robert Alexander Hillingford"}
+- id: fieldofwaterloo_turner
+  title: "File:Joseph Mallord William Turner (1775-1851) - The Field of Waterloo - NG500 - Tate.jpg"
+  kind: aftermath-painting
+  subjects: [waterloo, aftermath]
+  orientation: landscape
+  reviewed: true
+  label: {tag: "PAINTING, 1818 · ARTISTIC INTERPRETATION", title: "The Field of Waterloo", detail: "J. M. W. Turner · Tate, London"}
+- id: waterloo_andrieux
+  title: "File:Andrieux - La bataille de Waterloo.jpg"
+  kind: battle-painting
+  subjects: [waterloo, imperial-guard]
+  orientation: landscape
+  reviewed: true
+  label: {tag: "PAINTING, 1852 · ARTISTIC INTERPRETATION", title: "The Battle of Waterloo", detail: "Clément-Auguste Andrieux"}
+  notes: "chaotic melee of cavalry and infantry in smoke, windmill on the skyline"
+- id: scotsgreys_butler
+  title: "File:Scotland Forever!.jpg"
+  kind: battle-painting
+  subjects: [waterloo, cavalry, scots-greys, british]
+  orientation: landscape
+  reviewed: true
+  label: {tag: "PAINTING, 1881 · ARTISTIC INTERPRETATION", title: "The charge of the Scots Greys", detail: "Elizabeth Thompson, Lady Butler"}
+- id: plancenoit_elsholtz
+  title: "File:Ludwig Elsholtz Erstürmung von Planchenois.jpg"
+  kind: battle-painting
+  subjects: [waterloo, plancenoit, prussia]
+  orientation: landscape
+  reviewed: false
+  label: {tag: "PAINTING · ARTISTIC INTERPRETATION", title: "The storming of Plancenoit", detail: "Ludwig Elsholtz"}
+- id: waterloo_pieneman
+  title: "File:De Slag bij Waterloo Rijksmuseum SK-A-1115.jpeg"
+  kind: battle-painting
+  subjects: [waterloo, wellington, prince-of-orange]
+  orientation: landscape
+  reviewed: false
+  label: {tag: "PAINTING, 1824 · ARTISTIC INTERPRETATION", title: "The Battle of Waterloo", detail: "Jan Willem Pieneman · Rijksmuseum"}
+- id: morningafter_clark
+  title: "File:The morning after the Battle of Waterloo on June 19, 1815, by John Heaviside Clark (Deutsches Historisches Museum, Berlin).jpg"
+  kind: aftermath-painting
+  subjects: [waterloo, aftermath]
+  orientation: landscape
+  reviewed: false
+  label: {tag: "PAINTING, 1816 · ARTISTIC INTERPRETATION", title: "The morning after the Battle of Waterloo", detail: "John Heaviside Clark"}
+- id: lahayesainte_photo
+  title: "File:Ferme de la Haie Sainte 01.JPG"
+  kind: site-photo
+  subjects: [waterloo, la-haye-sainte]
+  orientation: landscape
+  reviewed: false
+  label: {tag: "SITE PHOTO", title: "La Haye Sainte farm today"}
+- id: hougoumont_photo
+  title: "File:HougoumontExterior.jpg"
+  kind: site-photo
+  subjects: [waterloo, hougoumont]
+  orientation: landscape
+  reviewed: false
+  label: {tag: "SITE PHOTO", title: "Hougoumont farm today"}
+- id: lionsmound_photo
+  title: "File:Domaine du champ de bataille de Waterloo 13 02.jpg"
+  kind: site-photo
+  subjects: [waterloo, lions-mound]
+  orientation: landscape
+  reviewed: false
+  label: {tag: "SITE PHOTO", title: "The Lion's Mound (built 1823-26) on the battlefield"}

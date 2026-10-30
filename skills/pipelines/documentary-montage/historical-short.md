@@ -5,9 +5,11 @@ A reusable, mostly automated profile of the `documentary-montage` pipeline for
 narration and a topic**; you deliver **a finished 1080x1920 MP4**. Everything
 needed is in this repository — do not rely on any earlier conversation.
 
-First episode built with it: *The Battle of Cannae (216 BC)*, 2026-10-30
-(`scripts/historical_short/episodes/battle-of-cannae.yaml` — use it as the
-worked example).
+Worked examples: *The Battle of Cannae (216 BC)*
+(`scripts/historical_short/episodes/battle-of-cannae.yaml`, legacy v1 episode)
+and *The Battle of Waterloo (1815)*, which drove the v2 upgrade (cinematic
+painting camera, period-aware battle illustrations, rules that keep maps in a
+supporting role). Target: **≈20-30 min per episode** on a 4-vCPU cloud box.
 
 ## The User's Standing Instructions (binding for every episode)
 
@@ -21,188 +23,212 @@ worked example).
   stages — log it as `decision_log` `category: "approval_policy"`.
 - **Never commit, push, merge or publish** without the user's explicit
   permission in the current session. Leave changes uncommitted and list them.
-- **Free tools only.** No paid APIs, credit-consuming generators or
+  Episode files, media and renders live in gitignored `projects/<id>/`.
+- **Free, local tools only.** No paid APIs, credit-consuming generators or
   subscriptions.
 - **Deliver** `projects/<id>/renders/final.mp4` with `SendUserFile`
   (`display: "attach"`), plus the credits text for the YouTube description.
 
-### Visual rules
+### Visual standard
 
 | Rule | How the workflow enforces it |
 |------|------------------------------|
-| Cinematic documentary, not a slideshow | maps fly, diagrams animate on narrated beats, stills get slow camera moves, dissolves, vignette, consistent palette |
-| Hierarchy: authentic material first | `fetch_commons.py` (Wikimedia Commons: museum objects, sites, artworks, documents) |
-| Original visuals where no authentic material exists | `map`, `tactics`, `illustration` scenes in the HistoricalShort composition |
-| Never misrepresent | every scene carries a label: `SITE PHOTO`, `MUSEUM ARTIFACT`, `PAINTING, <year> · ARTISTIC INTERPRETATION`, `ORIGINAL MAP`, `ORIGINAL DIAGRAM`, `ORIGINAL ILLUSTRATION` |
-| No invented specifics | illustrations use generic silhouettes (round shield + spear); diagrams say "schematic · not to scale"; disputed identifications say "traditionally identified as" |
-| No AI images/video/voice, no reenactments, film clips or unrelated stock | image/video/TTS selectors are never called; no Pexels/Pixabay footage |
-| Commercial-use licences verified | licence gate (PD, CC0, CC BY, CC BY-SA only) + provenance JSON per file + `CREDITS.txt` |
-| Every scene supports the narration | scenes are cut in the pauses between narrated sentences and chosen per sentence |
+| Battle beats show **people fighting** — period soldiers, cavalry, artillery, smoke, action — not lines on a map | `episode_rules.py`: a sentence about combat may not be carried mainly by a map/diagram (error in v2 episodes); `plan_scenes.py` tags combat beats |
+| Maps/diagrams **support** the story | ≤ 25 % of runtime, ≤ 7 s per map, never two in a row (errors in v2) |
+| Cinematic, never a slideshow | painting **camera paths** (detail shots, pans, full reveal), **depth-layer parallax**, **fx** (powder smoke, muzzle flashes on narrated words, embers, dust, flicker), transitions (crossfade, cut, dip, flash, smoke, whip), film grain |
+| Authentic material first | curated **asset packs** + **library** of verified Commons records (`scripts/historical_short/library/`), then `fetch_commons.py search` |
+| Original visuals where no authentic image fits | `battle` scenes: code-drawn, **period-aware** figures and templates from **period kits** (`styles/periods/*.yaml`); optional local **AI-assisted** painting pass over those plates |
+| Never misrepresent | every scene carries a label: `PAINTING, <year> · ARTISTIC INTERPRETATION`, `… · DETAIL` for crops, `SITE PHOTO`, `ORIGINAL MAP`, `ORIGINAL ILLUSTRATION · ARTISTIC INTERPRETATION`, `AI-ASSISTED ILLUSTRATION · ARTISTIC INTERPRETATION` |
+| Artworks are never distorted | uniform scale only; crops must say DETAIL and each artwork should be seen whole once (warnings) |
+| AI images are accurate or not used | `generate_illustration.py` writes `review.status: pending`; `build_props.py` refuses AI images without an **approved review with notes**; label must say AI-assisted |
+| No reenactments, film clips, unrelated stock, AI video or AI voice | never call video/TTS generators; narration is the user's MP3 |
+| Commercial-use licences verified | licence gate (PD, CC0, CC BY, CC BY-SA) + provenance JSON per file + `CREDITS.txt` |
 
 ### Technical defaults
 
-9:16 · 1080x1920 · 30 fps · H.264 MP4 · narration normalised to -16 LUFS /
--1.5 dBTP (two-pass EBU R128) with a 0.5 s lead-in and 1.2 s tail for the
-opening/closing fades · captions word-by-word from the narration, large
-Space Grotesk on a dark plate, kept above the Shorts UI · no music; optional
-very quiet original ambience (synthesised locally) · no logos/watermarks.
+9:16 · 1080x1920 · 30 fps · H.264 MP4 (crf 16) · narration normalised to
+-16 LUFS / -1.5 dBTP with a 0.5 s lead-in and 1.2 s tail · captions
+word-by-word, Space Grotesk on a dark plate, bottom edge ≈1365 px (above the
+Shorts UI) · no music; optional quiet original ambience · film grain 0.5 in v2
+episodes · no logos/watermarks.
 
 ### Approved deviations from documentary-montage defaults
 
-Narration ON (user MP3); music none (ambience optional, ~27 dB under voice);
-end tag opted out; stills + original animation instead of stock clips; render
-via `video_compose` with `render_runtime: "remotion"` and its custom-composition
-route (`composition_mode: "atelier"`, entry
-`remotion-composer/src/historical-short/entry.tsx`). HyperFrames is not
-supported on documentary-montage, so Remotion is the runtime.
+Narration ON (user MP3); music none (ambience optional); end tag opted out;
+stills + original animation instead of stock clips; local AI image generation
+allowed **only** as labelled, reviewed artistic interpretation (user decision,
+2026-10-30); render via `video_compose` with `render_runtime: "remotion"`
+(custom composition `remotion-composer/src/historical-short/entry.tsx`).
+HyperFrames is not supported on documentary-montage.
 
 ## Files
 
 | Path (tracked) | Role |
 |---|---|
-| `HISTORICAL_SHORTS.md` | one-page quick start for a new session |
+| `HISTORICAL_SHORTS.md` | one-page quick start |
 | `skills/pipelines/documentary-montage/historical-short.md` | this guide |
 | `styles/historical-documentary.yaml` | style playbook |
-| `scripts/historical_short/new_episode.py` | **entry point**: project, audio master, transcription, captions, ambience, brief |
-| `scripts/historical_short/fetch_commons.py` | Commons search / info / fetch with licence gate + provenance |
-| `scripts/historical_short/align_captions.py` | word captions + SRT (text from script or transcript, timings from Whisper) |
-| `scripts/historical_short/build_basemap.py` | Natural Earth coastlines → SVG path JSON |
-| `scripts/historical_short/make_ambience.py` | optional original wind/room-tone bed |
-| `scripts/historical_short/build_props.py` | episode.yaml → Remotion props + `CREDITS.txt` (validates timing, labels, licences) |
-| `scripts/historical_short/render.py` | render via `video_compose`, then QC + contact sheet |
-| `scripts/historical_short/episode.template.yaml` | template for a new episode |
-| `scripts/historical_short/episodes/<id>.yaml` | per-episode timeline, labels, fact-check |
-| `remotion-composer/src/historical-short/` | `HistoricalShort` composition: `image`, `map`, `tactics`, `illustration` scenes, labels, captions |
-| `remotion-composer/remotion.config.ts` | uses a local Chromium when `REMOTION_BROWSER_EXECUTABLE` is set |
+| `styles/periods/*.yaml` | **period kits** (8 eras: uniforms, headgear, weapons, artillery, terrain, buildings, palette, AI vocabulary + anachronism negatives) |
+| `scripts/historical_short/new_episode.py` | **entry point**: project, audio master, transcription, captions, ambience, brief, scene-plan skeleton |
+| `scripts/historical_short/plan_scenes.py` | scene skeleton: cuts in pauses, period, combat/place/person tags, pack candidates |
+| `scripts/historical_short/periods.py` | period detection (topic year) + kit loading |
+| `scripts/historical_short/fetch_commons.py` | Commons search / `fetch-list` batch (library → cache → one API call; curl transport; fail-fast) / `library-add` |
+| `scripts/historical_short/library/` | text-only: `commons/*.json` verified metadata, `packs/<period>.yaml` curated assets with label defaults |
+| `scripts/historical_short/episode_rules.py` | pre-render storytelling + layout checks (run by build_props) |
+| `scripts/historical_short/make_layers.py` | depth layers for parallax (Depth-Anything-V2-Small ONNX, Apache-2.0, CPU) |
+| `scripts/historical_short/generate_illustration.py` | local AI painting pass over a battle plate + review gate |
+| `scripts/historical_short/build_basemap.py` | Natural Earth coastlines (continental maps) |
+| `scripts/historical_short/build_terrain.py` | shaded relief from Copernicus GLO-30 (battlefield maps) |
+| `scripts/historical_short/align_captions.py`, `make_ambience.py` | captions, ambience |
+| `scripts/historical_short/build_props.py` | episode → props + `CREDITS.txt`; resolves kits/sides/layers/backdrops; validation |
+| `scripts/historical_short/render.py` (+ `preview_stills.mjs`) | `--preview` stills (one bundle) / single final render + QC |
+| `scripts/historical_short/regression_render.py` | visual regression (Cannae, legacy scenes) |
+| `scripts/historical_short/episode.template.yaml` | v2 template with every scene kind |
+| `scripts/historical_short/requirements.txt` | extra Python deps for this profile |
+| `remotion-composer/src/historical-short/` | composition: `ImageSceneView` (camera/parallax), `BattleSceneView` + `figures.tsx`, `MapSceneView`, `FxLayer`, legacy `TacticsSceneView`/`IllustrationSceneView` |
+| `tests/historical_short/` | network-free unit + regression tests |
 
-Generated (gitignored): `projects/<id>/` — audio, images, maps, artifacts, renders.
+Generated (gitignored): `projects/<id>/` — episode.yaml, audio, images, layers,
+maps, artifacts, renders. Model/data caches: `~/.cache/huggingface`,
+`~/.cache/openmontage/{commons,dem}`.
 
 ## Environment Setup (fresh cloud container — do it yourself, silently)
 
 ```bash
-pip install -r requirements.txt
-pip install faster-whisper pyshp "av>=14,<16"   # faster-whisper 1.2.x breaks on PyAV >= 16
+pip install -r requirements.txt -r scripts/historical_short/requirements.txt
 cd remotion-composer && npm install && cd ..
 ```
 
-- Whisper models download from Hugging Face; `new_episode.py` sets
-  `HF_HUB_DISABLE_XET=1` (the Xet CDN is often blocked).
-- Network hosts used: `commons.wikimedia.org`, `upload.wikimedia.org`,
-  `en.wikipedia.org`, `huggingface.co`, `naturalearth.s3.amazonaws.com`.
-  If one is denied by the environment's network policy, tell the user which
-  host and that they can add it under the environment's Network access
-  settings; continue with everything else.
-- Wikimedia rate-limits shared cloud IPs (HTTP 429). `fetch_commons.py`
-  backs off automatically and requests standard thumbnail widths (originals
-  are throttled hardest; `thumb.wikimedia.org` URLs are rewritten to
-  `upload.wikimedia.org`). Run downloads **in the background, most important
-  first**, ≥ 10 s apart, and build the other scenes meanwhile. If an image
-  never arrives, replace the scene with an original map / diagram /
-  illustration rather than block delivery.
-- Remotion uses the preinstalled Chromium (`render.py` sets
-  `REMOTION_BROWSER_EXECUTABLE=/opt/pw-browsers/chromium`).
+- Downloads on first use (cached afterwards): Whisper small (~0.5 GB),
+  Depth-Anything-V2-Small (~0.1 GB), LCM-Dreamshaper-v7 OpenVINO int8
+  (~2.3 GB, only if AI illustrations are used), Copernicus DEM tiles (~32 MB
+  each), Natural Earth (~10 MB).
+- Hugging Face downloads need `HF_HUB_DISABLE_XET=1` (the Xet CDN is often
+  blocked); the scripts set it. `download.pytorch.org` is blocked in some
+  sandboxes — nothing here needs PyTorch.
+- Hosts: `commons.wikimedia.org`, `upload.wikimedia.org`, `en.wikipedia.org`,
+  `huggingface.co`, `naturalearth.s3.amazonaws.com`,
+  `copernicus-dem-30m.s3.amazonaws.com`. If one is denied, tell the user which
+  host and that they can allow it in the environment's network settings.
+- Wikimedia throttles shared IPs. Measured: python-requests downloads got HTTP
+  429 while curl fetched the same URLs instantly, so `fetch_commons.py`
+  downloads with curl and fails fast (≈40 s), retrying smaller standard widths.
+  The **metadata API** is the scarce resource: use packs/library first, then
+  ONE batched `prefetch`/`fetch-list` call for new titles.
 
-## Process
+## Process (target 20-30 min)
 
-### 1. Set up the episode (≈ 1 min)
-
-Find the attached MP3 (session uploads, e.g. `/root/.claude/uploads/...`), then:
+### 1. Set up the episode (≈2 min)
 
 ```bash
-python scripts/historical_short/new_episode.py --mp3 <path.mp3> --topic "<Topic>" --id <kebab-id>
+python scripts/historical_short/new_episode.py --mp3 <path.mp3> --topic "<Topic (year)>" --id <kebab-id>
 ```
 
-It prints the sentence list with times (on the padded master clock) and writes
-`projects/<id>/artifacts/episode_brief.json`, `transcript.txt`,
-`captions.json`, `captions.srt`. Read the transcript. If the recogniser
-misspelled a proper noun and you are certain of the correct spelling, write
-the corrected text to `artifacts/script.txt` and re-run `align_captions.py`
-with `--script` (it refuses if the text drifts from the audio). If
-transcription fails entirely, ask the user for the script.
+Transcribes, aligns captions, and writes `projects/<id>/episode.yaml` — a
+skeleton with cut points in the pauses, the detected `period`, per-beat
+`tags` (combat / place / person / aftermath), a `suggest` hint and
+`pack_candidates` (assets from the period pack with label defaults).
+Fix recogniser errors in proper nouns only if certain (write
+`artifacts/script.txt`, re-run `align_captions.py --script`).
 
-### 2. Research and fact-check
+### 2. Research and fact-check (≈5 min, in parallel with step 4 downloads)
 
-List every factual claim in the narration. For each, find the primary
-(ancient) source and a reliable modern reference (Wikipedia via the API is
-acceptable as a pointer, not as the final authority). Record them in the
-episode file's `fact_check:` block with any disputes. Rules:
-- Do not add facts the narration doesn't state unless sourced, and keep
-  on-screen text to identifications (what/where/when), not new claims.
-- If the narration itself contains an error, tell the user in the delivery
-  summary (don't silently "fix" their voice-over).
-- Soften labels where scholarship is uncertain ("traditionally identified as",
-  "approximate route", "schematic").
+List every factual claim; record sources and disputes in `fact_check:`.
+Don't add facts the narration doesn't state; keep on-screen text to
+identifications. If the narration contains an error or simplification, tell the
+user in the delivery summary (don't "fix" their voice-over). Soften labels
+where scholarship is uncertain.
 
-### 3. Plan scenes (from the narration)
+### 3. Fill the scene plan (≈5-8 min)
 
-Copy `episode.template.yaml` to `episodes/<id>.yaml`. One scene per sentence
-or narrative beat; cut in the gaps between sentence times; 2–6 s per still,
-longer for maps/diagrams. First scene starts at 0, last ends at the master
-duration (`build_props.py` checks both). Choose, per beat:
+Replace every `kind: TODO`. Choose per beat, in this order:
 
-1. authentic material that shows what is being said (site, object, document,
-   period artwork), else
-2. an original `map` (where/when/movement), `tactics` diagram (how), or
-   `illustration` (what it looked like, generically).
+1. **Authentic artwork/photo that shows the beat**, animated:
+   `camera:` keys `{t, x, y, zoom}` — `x,y` = image point (0..1) at the frame
+   focus; `zoom: fit` = whole image, `zoom: cover` = fills 9:16, `"cover*1.3"`
+   closer. Add `depth_layers: 3` for parallax and `fx:` for atmosphere. Crops
+   get `· DETAIL` in the label tag; reveal each artwork whole once.
+2. **Code-drawn battle illustration** when no authentic image shows the
+   action: `kind: battle`, `template:` one of `line-advance`, `volley`,
+   `cavalry-charge`, `artillery`, `assault`, `aftermath`, `armies-facing`
+   (the period kit lists which exist), `left/right: {faction: <preset>}`,
+   `fireAt: [<times of narrated words>]`, `camera: {from, to, zoom}`.
+3. **Optional AI-assisted painting** of a battle plate (slow: ≈1.5 min each):
+   `generate_illustration.py paint --scene <battle id> --at <t> --id <asset>`,
+   **look at it**, then `review --approve|--reject --notes "<what you checked>"`;
+   use it as an `image` scene (label tag must say AI-ASSISTED). Reject anything
+   with wrong uniforms/weapons, anachronisms or malformed figures — measured
+   failure modes at strength ≥ 0.5: infantry repainted as riders, coat colours
+   lost. Defaults (strength 0.3 + colour lock 0.8) keep the plate's composition
+   and the kit's colours.
+4. **Map / tactical diagram** only for where/when/movement beats:
+   `kind: map` with `units` (moving blocks: `side`, `kind`, `keys`), `routes`
+   (`arrow`, `style: retreat`, `width`, `side`), `markers` (`style: fort|battle|city|capital`),
+   `terrain:` (build_terrain.py) for battlefield scale, `tilt:` 0-30.
+   Episode-level `sides: {name: "#hex"}` colours units/routes.
 
-Scene kinds:
-- `image` — `fit: cover` for photos that tolerate cropping, `fit: contain-blur`
-  for artworks, coins, documents (never crop art).
-- `map` — `camera` keyframes (lon/lat/span), `markers`, `routes`, `texts`,
-  optional `title`, `note`. Basemap: `build_basemap.py --bbox W S E N`.
-- `tactics` — double-envelopment schematic (Cannae-type). For a different
-  battle shape, add a new component in `remotion-composer/src/historical-short/`
-  following `TacticsSceneView.tsx`, keyed to narration times.
-- `illustration` — `variant: armies-facing` (two armies on a plain at dusk,
-  generic silhouettes). Add variants (fortress, fleet, city) the same way when
-  an episode needs them.
+Images: `fit`/`zoomFrom`/`zoomTo`/`panY` (legacy) still work; prefer `camera`.
+Transitions: `transition: crossfade|cut|dip|flash|smoke|whip` (flash on gunfire,
+smoke into battle scenes, whip for quick cuts, dip for time jumps).
 
-### 4. Assets and licences
+### 4. Assets (≈2-4 min)
 
 ```bash
-python scripts/historical_short/fetch_commons.py search "<query>" --limit 15
-python scripts/historical_short/fetch_commons.py info "File:<title>"
-python scripts/historical_short/fetch_commons.py fetch "File:<title>" --id <asset_id> --out projects/<id>/assets/images
+python scripts/historical_short/fetch_commons.py fetch-list --pack <period> --ids a,b,c --out projects/<id>/assets/images
+python scripts/historical_short/fetch_commons.py search "<query>" --limit 15        # only if the pack lacks a beat
+python scripts/historical_short/fetch_commons.py fetch-list --list ids.txt --out projects/<id>/assets/images
+python scripts/historical_short/build_terrain.py --bbox W S E N --out projects/<id>/assets/maps/terrain
 python scripts/historical_short/build_basemap.py --bbox W S E N --out projects/<id>/assets/maps/basemap.json
 ```
 
-- Prefer PD / CC0 museum releases (Met, Yale, BnF, Louvre via Commons) to
-  CC BY-SA user photos when quality is similar — fewer obligations.
-- Read each provenance `description` (what it really shows, date, museum) and
-  `restrictions`. **`ita-mibac`**: Italy's Cultural Heritage Code
-  (D.Lgs. 42/2004 arts. 107–108) may require permission/fees from the
-  institution for commercial reproduction of Italian state-held cultural
-  property, independent of the photo licence — note it in the delivery.
-- Look at every image (Read the file) before using it; reject anything that
-  doesn't match the label.
+Look at every image before use (Read the file); `reviewed: false` pack
+entries especially. Prefer 1920 px sources (default) for detail shots.
+After the episode, add new verified titles to the library/pack
+(`fetch_commons.py library-add`, edit `packs/<period>.yaml`) — text only.
+**`ita-mibac`** restrictions: note in the delivery (Italian cultural-heritage
+rules may need institutional permission for commercial use).
 
-### 5. Build, render, QC
+### 5. Build, preview, render once (≈10 min)
 
 ```bash
-python scripts/historical_short/build_props.py --episode scripts/historical_short/episodes/<id>.yaml --project projects/<id>
-python scripts/historical_short/render.py --project projects/<id> --draft   # 540x960, fast
-python scripts/historical_short/render.py --project projects/<id>           # 1080x1920 final
+python scripts/historical_short/build_props.py --episode projects/<id>/episode.yaml --project projects/<id>
+python scripts/historical_short/render.py --project projects/<id> --preview     # ≈30 s, 2 stills/scene
+python scripts/historical_short/render.py --project projects/<id>               # final, ≈6-8 min
 ```
 
-`render.py` checks 1080x1920, 30/1 fps, H.264, audio present, duration vs
-master (±0.1 s) and writes a contact sheet. Then also verify yourself:
-- Read the contact sheet and a few full-size frames: no blank or unrelated
-  scene, labels/captions don't collide, artworks uncropped and labelled.
-- Captions = transcript/script words (`captions.json` report: similarity 1.0,
-  no interpolated words, or explain).
-- Audio: `ffmpeg -i final.mp4 -af ebur128=peak=true -f null -` → integrated
-  ≈ -16 LUFS, true peak ≤ -1 dBTP.
+`build_props.py` fails on errors (v2) and prints warnings — fix layout
+warnings before previewing. Read `renders/preview_sheet.jpg`; fix and repeat
+build+preview (cheap). Render the final **once**. `render.py` checks
+1080x1920, 30 fps, H.264, audio, duration (±0.1 s), loudness, black frames and
+writes a contact sheet. Then verify yourself: contact sheet + a few full-size
+frames; captions = narration words; `ebur128` ≈ -16 LUFS.
 
 ### 6. Deliver
 
-Send the MP4 (`SendUserFile`, `display: "attach"`), then a short summary:
-scenes and what each shows, the licence/attribution table (from
-`CREDITS.txt`, ready to paste into the YouTube description), any flagged
-rights or accuracy caveats, and the list of uncommitted repo changes. Ask
-before committing.
+Send the MP4 (`SendUserFile`, `display: "attach"`), then: scenes and what
+each shows, the credits (from `CREDITS.txt`), flagged rights/accuracy caveats
+(including narration simplifications and any AI-assisted images and their
+review notes), and the list of uncommitted repo changes. Ask before committing.
+
+## Measured performance (4 vCPU, 15 GB RAM, no GPU; 2026-10-30)
+
+| Step | Time |
+|---|---|
+| Whisper transcription (58 s MP3) | 46 s |
+| `fetch-list`, pack/library metadata | ≈5-20 s per image (no API call) |
+| Depth layers per image | ≈8 s (first run + model download ≈ 1 min) |
+| Preview, 34 stills | 24 s |
+| Final render, per frame | painting camera/parallax/fx 0.13-0.15 s · battle 0.20-0.22 s · terrain map 0.18 s · legacy letterbox 0.20 s |
+| AI-assisted painting (LCM img2img 576x1024) | ≈90-110 s per image incl. plate + model load |
 
 ## Known Limits
 
-- Natural Earth shows modern coastlines; map notes say so; routes are "approximate".
-- Diagrams/illustrations are schematic and generic by design.
-- Caption timing comes from Whisper word timestamps (≈ ±0.1 s).
+- Code-drawn battle illustrations are stylised (graphic-novel silhouettes),
+  generic figures — not portraits or regiment-accurate uniforms. The AI pass
+  adds painterly texture but must be reviewed; it is not reliable for specific
+  insignia, faces or complex poses.
+- Better text-to-image models (e.g. FLUX.1-schnell int4) were OOM-killed on a
+  15 GB machine; only LCM-Dreamshaper-v7 is practical on CPU.
+- Natural Earth = modern coastlines; Copernicus DEM = modern, smoothed terrain
+  (map notes say so); unit positions and routes are schematic/approximate.
+- Caption timing from Whisper word timestamps (≈ ±0.1 s).

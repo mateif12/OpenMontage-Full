@@ -11,8 +11,13 @@ After rendering it checks resolution, frame rate, duration vs. the narration,
 audio presence, and writes a frame contact sheet for review.
 
 Usage:
-    python scripts/historical_short/render.py --project projects/<ep> [--draft]
-    --draft renders at half scale with a faster encode for review.
+    python scripts/historical_short/render.py --project projects/<ep> --preview   # review stills (fast)
+    python scripts/historical_short/render.py --project projects/<ep>             # final, once
+    --preview renders 2 stills per scene (one bundle, one browser) into
+              renders/preview/ plus renders/preview_sheet.jpg — review THIS,
+              fix, re-run; only render the final when the stills are right.
+    --times   explicit still times for --preview (comma separated seconds).
+    --draft   (legacy) half-scale video; slower than --preview for review.
 """
 
 from __future__ import annotations
@@ -48,10 +53,56 @@ def contact_sheet(video: Path, out: Path, every: float = 2.5) -> None:
     )
 
 
+def preview(project: Path, props_path: Path, times: list[float] | None, scale: float) -> int:
+    import os
+    import shutil
+    import time as _t
+    props = json.loads(props_path.read_text())
+    if not times:
+        times = []
+        for sc in props["scenes"]:
+            d = sc["end"] - sc["start"]
+            times += [round(sc["start"] + d * 0.35, 2), round(sc["start"] + d * 0.85, 2)]
+    out_dir = project / "renders" / "preview"
+    shutil.rmtree(out_dir, ignore_errors=True)
+    if CHROMIUM.exists():
+        os.environ.setdefault("REMOTION_BROWSER_EXECUTABLE", str(CHROMIUM))
+    t0 = _t.time()
+    subprocess.run(["node", str(Path(__file__).with_name("preview_stills.mjs")), str(props_path),
+                    str(project / "assets"), str(out_dir), str(scale), ",".join(map(str, times))],
+                   check=True, cwd=REPO / "remotion-composer")
+    sheet = project / "renders" / "preview_sheet.jpg"
+    _tile(sorted(out_dir.glob("t*.jpg")), props, sheet)
+    print(f"{len(times)} stills in {_t.time() - t0:.0f}s -> {sheet}")
+    return 0
+
+
+def _tile(paths: list[Path], props: dict, out: Path, cols: int = 8) -> None:
+    from PIL import Image, ImageDraw
+    if not paths:
+        return
+    w, h = 216, 384
+    rows = (len(paths) + cols - 1) // cols
+    sheet = Image.new("RGB", (cols * (w + 6), rows * (h + 26)), "black")
+    draw = ImageDraw.Draw(sheet)
+    for i, p in enumerate(paths):
+        t = float(p.stem[1:])
+        sid = next((s["id"] for s in props["scenes"] if s["start"] <= t < s["end"] + 1e-6), "")
+        im = Image.open(p).convert("RGB").resize((w, h))
+        x, y = (i % cols) * (w + 6), (i // cols) * (h + 26)
+        sheet.paste(im, (x, y + 22))
+        draw.text((x + 2, y + 4), f"{t:.1f}s {sid}"[:34], fill="white")
+    sheet.save(out, quality=88)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--project", required=True)
     ap.add_argument("--draft", action="store_true")
+    ap.add_argument("--preview", action="store_true")
+    ap.add_argument("--times", help="comma-separated seconds for --preview")
+    ap.add_argument("--scale", type=float, default=0.5, help="--preview still scale")
+    ap.add_argument("--concurrency", type=int, default=0, help="render workers (default: all CPUs)")
     ap.add_argument("--output")
     args = ap.parse_args()
 
@@ -59,6 +110,9 @@ def main() -> int:
     props = project / "artifacts" / "props.json"
     if not props.exists():
         sys.exit(f"missing {props} — run build_props.py first")
+    if args.preview:
+        times = [float(x) for x in args.times.split(",")] if args.times else None
+        return preview(project, props, times, args.scale)
     expected = json.loads(props.read_text())["durationSeconds"]
     out = Path(args.output) if args.output else project / "renders" / ("draft.mp4" if args.draft else "final.mp4")
 
@@ -76,6 +130,8 @@ def main() -> int:
                              "Playfair Display + Space Grotesk, slow camera-only moves on authentic stills, "
                              "original Natural Earth maps and schematic diagram",
             "crf": 23 if args.draft else 16,
+            # measured 2026-10-30 (4 vCPU): 4 workers ≈12% faster than Remotion's default 2
+            "concurrency": args.concurrency or (__import__("os").cpu_count() or 2),
             **({"scale": 0.5} if args.draft else {}),
         },
     }

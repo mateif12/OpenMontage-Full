@@ -1,0 +1,12 @@
+# Extra Python dependencies for the historical-short profile (all free, CPU-only).
+# Install with: pip install -r requirements.txt -r scripts/historical_short/requirements.txt
+faster-whisper            # transcription (new_episode.py)
+av>=14,<16                # faster-whisper 1.2.x breaks on PyAV >= 16
+pyshp                     # Natural Earth shapefiles (build_basemap.py)
+opencv-python-headless    # layer masks/inpainting (make_layers.py), colour lock (generate_illustration.py), DEM smoothing
+onnxruntime               # Depth-Anything-V2-Small depth model (make_layers.py)
+huggingface_hub           # model downloads (cached)
+tifffile                  # Copernicus DEM GeoTIFF reading (build_terrain.py)
+imagecodecs               # compressed GeoTIFF support
+openvino-genai            # OPTIONAL: local AI-assisted painting pass (generate_illustration.py)
+pytest                    # tests/historical_short

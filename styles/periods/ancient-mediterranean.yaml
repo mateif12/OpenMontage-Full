@@ -1,0 +1,29 @@
+id: ancient-mediterranean
+name: Ancient Mediterranean (Greek, Roman, Carthaginian)
+years: "1200 BC - AD 499"
+notes: >-
+  Close-order heavy infantry with large shields and thrusting spears or
+  javelins/short swords; bronze or iron helmets with crests; cavalry without
+  stirrups; no gunpowder. Generic figures, not reconstructions of specific units.
+palette: {sky_top: "#566a80", sky_bottom: "#e6c99a", light: "#f6dca8", haze: "#c9b996", ground_far: "#9a8a5a",
+          ground_near: "#6b5a36", smoke: "#c9bfae", shadow: "#2b241b"}
+environment: {terrain: plain, vegetation: [olive, scrub], buildings: [temple, town-wall]}
+artillery: {type: none}
+templates: [line-advance, cavalry-charge, assault, aftermath, armies-facing]
+factions:
+  roman-legion: {label: Roman legionaries, role: infantry, coat: "#9b2d20", facings: "#c9a24a", trousers: "#9b2d20",
+                 coat_style: tunic, headgear: galea, headgear_color: "#9a8a6a", plume: "#8e1f18", belts: none,
+                 weapon: spear, shield: scutum, shield_color: "#8e2a1f"}
+  greek-hoplite: {label: Greek hoplites, role: infantry, coat: "#e9e2cf", facings: "#8e2a1f", trousers: "#e9e2cf",
+                  coat_style: tunic, headgear: corinthian, headgear_color: "#b08d4a", plume: "#8e1f18", belts: none,
+                  weapon: spear, shield: aspis, shield_color: "#b08d4a"}
+  carthaginian: {label: Carthaginian army, role: infantry, coat: "#d9cfb8", facings: "#5b3a6e", trousers: "#d9cfb8",
+                 coat_style: tunic, headgear: montefortino, headgear_color: "#a58a55", plume: "#5b3a6e", belts: none,
+                 weapon: spear, shield: round, shield_color: "#c9a96a"}
+  ancient-cavalry: {label: Ancient cavalry, role: cavalry, coat: "#d9cfb8", facings: "#8e2a1f", trousers: "#d9cfb8",
+                    coat_style: tunic, headgear: montefortino, headgear_color: "#a58a55", plume: "#8e1f18", belts: none,
+                    weapon: spear, shield: round, shield_color: "#c9a96a", horse: "#5a3e28"}
+ai:
+  style: "classical history painting in oil, ancient Mediterranean battle, warm light, painterly"
+  positive: "bronze helmets with horsehair crests, large shields, thrusting spears, linen and wool tunics, dusty plain"
+  negative: "gunpowder, muskets, cannons, firearms, stirrups, plate armour, medieval castles, modern clothing, text, watermark, deformed hands, extra limbs"

@@ -1,0 +1,92 @@
+{
+ "pageid": 22488765,
+ "ns": 6,
+ "title": "File:Ferme de la Haie Sainte 01.JPG",
+ "imagerepository": "local",
+ "imageinfo": [
+  {
+   "size": 5483659,
+   "width": 3872,
+   "height": 2592,
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Ferme_de_la_Haie_Sainte_01.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "descriptionurl": "https://commons.wikimedia.org/wiki/File:Ferme_de_la_Haie_Sainte_01.JPG",
+   "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=22488765",
+   "extmetadata": {
+    "DateTime": {
+     "value": "2012-10-31 22:17:03",
+     "source": "mediawiki-metadata",
+     "hidden": ""
+    },
+    "ObjectName": {
+     "value": "Ferme de la Haie Sainte 01",
+     "source": "mediawiki-metadata"
+    },
+    "CommonsMetadataExtension": {
+     "value": 1.2,
+     "source": "extension",
+     "hidden": ""
+    },
+    "Categories": {
+     "value": "GFDL|Taken with Nikon D80|Ferme de la Haie Sainte|CC-BY-SA-3.0,2.5,2.0,1.0|License migration redundant|Self-published work|2012 photographs",
+     "source": "commons-categories",
+     "hidden": ""
+    },
+    "Assessments": {
+     "value": "",
+     "source": "commons-categories",
+     "hidden": ""
+    },
+    "ImageDescription": {
+     "value": "Belgique - Brabant wallon - Lasne - Plancenoit - Ferme de la Haie Sainte (bataille de Waterloo)",
+     "source": "commons-desc-page"
+    },
+    "DateTimeOriginal": {
+     "value": "Taken in 2012",
+     "source": "commons-desc-page"
+    },
+    "Credit": {
+     "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+     "source": "commons-desc-page"
+    },
+    "Artist": {
+     "value": "<a href=\"//commons.wikimedia.org/wiki/User:EmDee\" title=\"User:EmDee\">EmDee</a>",
+     "source": "commons-desc-page"
+    },
+    "LicenseShortName": {
+     "value": "CC BY-SA 3.0",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "UsageTerms": {
+     "value": "Creative Commons Attribution-Share Alike 3.0",
+     "source": "commons-desc-page"
+    },
+    "AttributionRequired": {
+     "value": "true",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "LicenseUrl": {
+     "value": "https://creativecommons.org/licenses/by-sa/3.0",
+     "source": "commons-desc-page"
+    },
+    "Copyrighted": {
+     "value": "True",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "Restrictions": {
+     "value": "",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "License": {
+     "value": "cc-by-sa-3.0",
+     "source": "commons-templates",
+     "hidden": ""
+    }
+   },
+   "mime": "image/jpeg"
+  }
+ ]
+}

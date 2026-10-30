@@ -1,0 +1,25 @@
+id: second-world-war
+name: Second World War
+years: "1920-1950"
+notes: >-
+  Steel helmets (US M1, British Brodie/Mk II, German Stahlhelm, Soviet SSh-40),
+  bolt-action and semi-automatic rifles, olive drab / khaki / field grey,
+  ruined towns, hedgerows. Vehicles are not drawn. Generic figures.
+palette: {sky_top: "#5a6370", sky_bottom: "#cfc6ae", light: "#e6d8b3", haze: "#aaa697", ground_far: "#666a4c",
+          ground_near: "#43412d", smoke: "#c6c1b2", shadow: "#23221d"}
+environment: {terrain: ruins, vegetation: [hedgerows, poplars], buildings: [ruined-church, farmhouse]}
+artillery: {type: modern, barrel: "#4a4d44", carriage: "#4a4d44", crew: us-infantry}
+templates: [line-advance, artillery, assault, aftermath, armies-facing]
+factions:
+  us-infantry: {label: US infantry, role: infantry, coat: "#6b6648", facings: "#6b6648", trousers: "#6b6648",
+                coat_style: jacket, headgear: m1, headgear_color: "#55543a", plume: "", belts: single, weapon: rifle}
+  british-1944: {label: British infantry, role: infantry, coat: "#7a6a46", facings: "#7a6a46", trousers: "#7a6a46",
+                 coat_style: jacket, headgear: brodie, headgear_color: "#5d5a44", plume: "", belts: single, weapon: rifle}
+  german-1944: {label: German infantry, role: infantry, coat: "#5d6253", facings: "#5d6253", trousers: "#5d6253",
+                coat_style: jacket, headgear: stahlhelm, headgear_color: "#4c5146", plume: "", belts: single, weapon: rifle}
+  soviet-1943: {label: Soviet infantry, role: infantry, coat: "#7a7350", facings: "#7a7350", trousers: "#7a7350",
+                coat_style: greatcoat, headgear: ssh40, headgear_color: "#4f5638", plume: "", belts: single, weapon: rifle}
+ai:
+  style: "Second World War scene, painterly war-artist illustration, oil and gouache, muted palette"
+  positive: "steel helmets, rifles, olive drab and field grey uniforms, ruined buildings, smoke, hedgerows"
+  negative: "modern camouflage, modern assault rifles, futuristic weapons, helicopters, Napoleonic uniforms, swords, armour plates, insignia symbols, swastika, text, watermark, deformed hands, extra limbs"

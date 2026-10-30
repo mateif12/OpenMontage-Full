@@ -1,0 +1,84 @@
+{
+ "pageid": 15176449,
+ "ns": 6,
+ "title": "File:Battle of Waterloo 1815.PNG",
+ "imagerepository": "local",
+ "imageinfo": [
+  {
+   "size": 3210589,
+   "width": 1854,
+   "height": 846,
+   "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/Battle_of_Waterloo_1815.PNG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "descriptionurl": "https://commons.wikimedia.org/wiki/File:Battle_of_Waterloo_1815.PNG",
+   "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=15176449",
+   "extmetadata": {
+    "DateTime": {
+     "value": "2015-05-13 18:50:01",
+     "source": "mediawiki-metadata",
+     "hidden": ""
+    },
+    "ObjectName": {
+     "value": "<div class=\"fn\">\n<div style=\"font-weight:bold;display:inline-block;\"><div style=\"display:inline-block\" dir=\"ltr\" lang=\"en\"><i><a href=\"https://en.wikipedia.org/wiki/Battle_of_Waterloo\" class=\"extiw\" title=\"en:Battle of Waterloo\">The Battle\n of Waterloo</a></i></div></div><div style=\"display: none;\">title QS:P1476,en:\"<a href=\"https://en.wikipedia.org/wiki/Battle_of_Waterloo\" class=\"extiw\" title=\"en:Battle of Waterloo\">The Battle\n of Waterloo</a>\"</div><div style=\"display: none;\">label QS:Len,\"<a href=\"https://en.wikipedia.org/wiki/Battle_of_Waterloo\" class=\"extiw\" title=\"en:Battle of Waterloo\">The Battle\n of Waterloo</a>\"</div><div style=\"display: none;\">label QS:Les,\"<a href=\"https://es.wikipedia.org/wiki/Batalla_de_Waterloo\" class=\"extiw\" title=\"es:Batalla de Waterloo\">Batalla de Waterloo</a>\"</div><div style=\"display: none;\">label QS:Lfr,\"<a href=\"https://fr.wikipedia.org/wiki/Bataille_de_Waterloo\" class=\"extiw\" title=\"fr:Bataille de Waterloo\">Bataille de Waterloo</a>\"</div><div style=\"display: none;\">label QS:Lno,\"<a href=\"https://no.wikipedia.org/wiki/Slaget_ved_Waterloo\" class=\"extiw\" title=\"no:Slaget ved Waterloo\">Slaget ved Waterloo</a>\"</div><div style=\"display: none;\">label QS:Lnl,\"<a href=\"https://nl.wikipedia.org/wiki/Slag_bij_Waterloo\" class=\"extiw\" title=\"nl:Slag bij Waterloo\">Slag bij Waterloo</a>\"</div><div style=\"display: none;\">label QS:Lru,\"<a href=\"https://ru.wikipedia.org/wiki/%D0%91%D0%B8%D1%82%D0%B2%D0%B0_%D0%BF%D1%80%D0%B8_%D0%92%D0%B0%D1%82%D0%B5%D1%80%D0%BB%D0%BE%D0%BE\" class=\"extiw\" title=\"ru:Битва при Ватерлоо\">Битва при Ватерлоо</a>\"</div><div style=\"display: none;\">label QS:Lde,\"<a href=\"https://de.wikipedia.org/wiki/Schlacht_bei_Waterloo\" class=\"extiw\" title=\"de:Schlacht bei Waterloo\">Schlacht bei Waterloo</a>\"</div><div style=\"display: none;\">label QS:Lhu,\"<a href=\"https://hu.wikipedia.org/wiki/Waterlooi_csata\" class=\"extiw\" title=\"hu:Waterlooi csata\">Waterlooi csata</a>\"</div><div style=\"display: none;\">label QS:Lca,\"<a href=\"https://ca.wikipedia.org/wiki/Batalla_de_Waterloo\" class=\"extiw\" title=\"ca:Batalla de Waterloo\">Batalla de Waterloo</a>\"</div></div>",
+     "source": "commons-desc-page"
+    },
+    "CommonsMetadataExtension": {
+     "value": 1.2,
+     "source": "extension",
+     "hidden": ""
+    },
+    "Categories": {
+     "value": "Regency era|William Sadler|PD-old-100-expired|PD-Art (PD-old-100-expired)|Artworks with Wikidata item|Images with extracted images|CC-PD-Mark|19th-century paintings of cavalry in battle|Battle of Waterloo in art|Artworks with Wikidata item missing genre|Cavalry in art|Artworks digital representation of 2D work|Artworks with digital representation of different depicts",
+     "source": "commons-categories",
+     "hidden": ""
+    },
+    "Assessments": {
+     "value": "",
+     "source": "commons-categories",
+     "hidden": ""
+    },
+    "Artist": {
+     "value": "<bdi><a href=\"https://en.wikipedia.org/wiki/en:William_Sadler_(painter)\" class=\"extiw\" title=\"w:en:William Sadler (painter)\"><span title=\"Irish artist (1782-1839)\">William Sadler</span></a></bdi>",
+     "source": "commons-desc-page"
+    },
+    "DateTimeOriginal": {
+     "value": "June 1815<div style=\"display: none;\">date QS:P571,+1815-06-00T00:00:00Z/10</div>",
+     "source": "commons-desc-page"
+    },
+    "Credit": {
+     "value": "<a rel=\"nofollow\" class=\"external text\" href=\"http://www.napoleon.org.pl/forum/download/file.php?id=2049&amp;mode=view\">Napoleon.org.pl</a>",
+     "source": "commons-desc-page"
+    },
+    "LicenseShortName": {
+     "value": "Public domain",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "UsageTerms": {
+     "value": "Public domain",
+     "source": "commons-desc-page"
+    },
+    "AttributionRequired": {
+     "value": "false",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "Copyrighted": {
+     "value": "False",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "Restrictions": {
+     "value": "",
+     "source": "commons-desc-page",
+     "hidden": ""
+    },
+    "License": {
+     "value": "pd",
+     "source": "commons-templates",
+     "hidden": ""
+    }
+   },
+   "mime": "image/png"
+  }
+ ]
+}

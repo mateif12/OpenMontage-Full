@@ -1,0 +1,30 @@
+id: early-modern
+name: Early modern (pike and shot, Ottoman wars)
+years: "1450-1699"
+notes: >-
+  Pike blocks with arquebusiers/musketeers, morion and burgonet helmets,
+  breastplates, early bronze siege and field guns; Ottoman janissaries with
+  tall white caps. Generic figures, colours simplified.
+palette: {sky_top: "#5b6575", sky_bottom: "#ddc9a3", light: "#f0d8a6", haze: "#bdb4a0", ground_far: "#6c7048",
+          ground_near: "#47442b", smoke: "#d3ccbb", shadow: "#29241d"}
+environment: {terrain: rolling, vegetation: [cypress, scrub], buildings: [town-wall, castle]}
+artillery: {type: smoothbore, barrel: "#8c6d3f", carriage: "#5a4630", crew: musketeer}
+templates: [line-advance, volley, cavalry-charge, artillery, assault, aftermath, armies-facing]
+factions:
+  pikeman: {label: Pikemen, role: pike, coat: "#7a2a22", facings: "#d8c9a0", trousers: "#4a3a2a",
+            coat_style: breastplate, headgear: morion, headgear_color: "#a7a9ad", plume: "#d8c9a0", belts: none, weapon: pike}
+  musketeer: {label: Musketeers, role: infantry, coat: "#5a4a3a", facings: "#b3261e", trousers: "#3a3026",
+              coat_style: jacket, headgear: wide-brim, headgear_color: "#2a2420", plume: "#d8c9a0", belts: single, weapon: musket}
+  janissary: {label: Ottoman janissaries, role: infantry, coat: "#8e2a1f", facings: "#1f3a7a", trousers: "#1f3a7a",
+              coat_style: long, headgear: bork, headgear_color: "#ece6d6", plume: "", belts: single, weapon: bow,
+              flag: ["#8e2a1f"], flag_orientation: horizontal}
+  byzantine-defender: {label: Byzantine defenders, role: infantry, coat: "#8d8f93", facings: "#5b3a6e", trousers: "#5b3a6e",
+                       coat_style: long, headgear: nasal-helmet, headgear_color: "#a7a9ad", plume: "", belts: none,
+                       weapon: spear, shield: round, shield_color: "#5b3a6e"}
+  cuirassier-1600: {label: Armoured cavalry, role: cavalry, coat: "#8d8f93", facings: "#7a2a22", trousers: "#4a3a2a",
+                    coat_style: breastplate, headgear: morion, headgear_color: "#a7a9ad", plume: "#7a2a22", belts: none,
+                    weapon: sabre, horse: "#3b2a1e"}
+ai:
+  style: "16th-17th century battle, oil painting, Old Master style, painterly, muted palette"
+  positive: "pike squares, morion helmets, breastplates, matchlock muskets, bronze cannons, banners, smoke"
+  negative: "modern rifles, steel helmets, khaki, camouflage, tanks, aircraft, fantasy armour, text, watermark, deformed hands, extra limbs"
