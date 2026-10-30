@@ -16,6 +16,8 @@ import { ProductReveal, ProductRevealProps } from "./components/ProductReveal";
 import { CaptionOverlay, WordCaption } from "./components/CaptionOverlay";
 import { CollageBurst, CollageBurstProps } from "./CollageBurst";
 import { LyricOverlay, LyricOverlayProps } from "./LyricOverlay";
+import { HistoricalShort, calculateHistoricalShortMetadata } from "./historical-short/HistoricalShort";
+import { HistoricalShortProps } from "./historical-short/types";
 
 // ---------------------------------------------------------------------------
 // Theme System — prevents every video from looking like dark fintech
@@ -295,6 +297,23 @@ export const Root: React.FC = () => {
           lyrics: [],
           bottomY: 0.88,
         } as LyricOverlayProps}
+      />
+      <Composition
+        id="HistoricalShort"
+        component={HistoricalShort}
+        // Narrated vertical history Short; duration comes from the narration
+        // (props.durationSeconds). See skills/pipelines/documentary-montage/historical-short.md
+        durationInFrames={300}
+        fps={30}
+        width={1080}
+        height={1920}
+        calculateMetadata={calculateHistoricalShortMetadata}
+        defaultProps={{
+          durationSeconds: 10,
+          narrationSrc: "",
+          scenes: [],
+          captions: [],
+        } as HistoricalShortProps}
       />
       <Composition
         id="EndTag"

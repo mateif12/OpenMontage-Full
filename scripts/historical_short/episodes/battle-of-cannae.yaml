@@ -1,0 +1,292 @@
+# Historical Short episode — The Battle of Cannae (216 BC)
+# Workflow: skills/pipelines/documentary-montage/historical-short.md
+# All times are absolute seconds in audio/narration_master.wav (the master clock:
+# normalised MP3 + 0.5 s lead-in + 1.2 s tail, made by new_episode.py).
+# Paths are relative to projects/<id>/assets (the Remotion public dir).
+
+id: battle-of-cannae
+title: The Battle of Cannae (216 BC)
+narration: audio/narration_master.wav
+ambience:
+  src: audio/ambience.wav
+  volume: 0.08
+images_dir: images
+caption_style:
+  fontSize: 60
+  wordsPerPage: 5
+  bottomOffset: 470
+decisions:
+  render_runtime: remotion
+  music: none
+  end_tag: none
+  generated_media: none
+fact_check:
+- claim: In 216 BC ... near the town of Cannae in southern Italy
+  support: Polybius 3.107-117; Livy 22.44-52. Cannae lies on the Aufidus (Ofanto) in Apulia.
+- claim: a much larger Roman force
+  support: 'Polybius 3.113-114: ~80,000 Roman/allied infantry vs ~40,000 Carthaginian infantry and ~10,000 cavalry.'
+- claim: strongest troops on the flanks; centre fell back
+  support: 'Polybius 3.113-115: Libyan (African) heavy infantry on the wings; Gauls and Iberians in a forward-bowed
+    centre that gave ground.'
+- claim: cavalry attacked from behind
+  support: 'Polybius 3.116: Hasdrubal''s cavalry, after routing the Roman horse, fell on the Roman rear.'
+- claim: Tens of thousands ... killed or captured
+  support: Polybius 3.117 gives ~70,000 killed; Livy 22.49 gives 45,500 infantry and 2,700 cavalry killed, plus
+    thousands taken prisoner. Exact figures disputed; the script stays deliberately general and no number is shown
+    on screen.
+- claim: Rome refused to surrender ... war far from over
+  support: Livy 22.58-61 (Rome refused to ransom prisoners / negotiate); the Second Punic War ended in 201 BC.
+- claim: 'On-screen: "The war went on until 201 BC"'
+  support: The Second Punic War (218-201 BC) ended with the peace after Scipio's victory at Zama (202 BC); Livy
+    30.37-43, Polybius 15.18.
+scenes:
+- id: s01_map_mediterranean
+  kind: map
+  start: 0.0
+  end: 7.34
+  basemap: maps/basemap.json
+  note: 'ORIGINAL MAP · modern coastlines: Natural Earth (public domain) · route approximate'
+  camera:
+  - t: 0.0
+    lon: 6.5
+    lat: 39.5
+    span: 27
+  - t: 7.34
+    lon: 7.6
+    lat: 40.4
+    span: 24
+  title:
+    text: THE BATTLE OF CANNAE
+    sub: 216 BC
+    at: 0.74
+    until: 4.89
+  markers:
+  - lon: 12.5
+    lat: 41.9
+    label: Rome
+    at: 6.09
+    style: capital-rome
+    labelSide: left
+  - lon: 10.32
+    lat: 36.86
+    label: Carthage
+    at: 1.49
+    style: capital-carthage
+    labelSide: right
+  - lon: -0.98
+    lat: 37.6
+    label: New Carthage
+    at: 2.09
+    style: city
+    labelSide: below
+  routes:
+  - label: Hannibal's march, 218 BC
+    from: 2.49
+    to: 7.09
+    points:
+    - - -0.98
+      - 37.6
+    - - -0.27
+      - 39.68
+    - - 0.87
+      - 40.72
+    - - 2.9
+      - 42.4
+    - - 4.65
+      - 43.95
+    - - 6.0
+      - 44.7
+    - - 6.9
+      - 45.2
+    - - 7.68
+      - 45.07
+    - - 9.7
+      - 45.05
+  texts:
+  - lon: 4.0
+    lat: 35.2
+    text: AFRICA
+    at: 1.09
+    size: 30
+  - lon: -4.0
+    lat: 40.0
+    text: IBERIA
+    at: 1.09
+    size: 30
+  - lon: 13.6
+    lat: 43.6
+    text: ITALY
+    at: 1.09
+    size: 30
+- id: s02_hannibal_bust
+  kind: image
+  start: 7.34
+  end: 10.09
+  asset: s02_bust
+  fit: contain-blur
+  zoomFrom: 1.0
+  zoomTo: 1.08
+  label:
+    tag: ROMAN-ERA MARBLE BUST · PHOTO c. 1900
+    title: Bust traditionally identified as Hannibal
+    detail: Found at Capua · National Archaeological Museum, Naples · identification uncertain
+- id: s03_map_cannae
+  kind: map
+  start: 10.09
+  end: 13.84
+  basemap: maps/basemap.json
+  note: 'ORIGINAL MAP · modern coastlines: Natural Earth (public domain)'
+  camera:
+  - t: 10.09
+    lon: 12.8
+    lat: 41.8
+    span: 13
+  - t: 13.39
+    lon: 15.9
+    lat: 41.2
+    span: 4.2
+  markers:
+  - lon: 12.5
+    lat: 41.9
+    label: Rome
+    at: 10.09
+    style: capital-rome
+    labelSide: left
+  - lon: 16.13
+    lat: 41.3
+    label: Cannae
+    at: 11.04
+    style: battle
+    labelSide: right
+  texts:
+  - lon: 15.6
+    lat: 40.55
+    text: APULIA
+    at: 11.79
+    size: 28
+  - lon: 16.9
+    lat: 42.2
+    text: ADRIATIC SEA
+    at: 11.79
+    size: 22
+    color: '#8fb3c7'
+- id: s04_armies_illustration
+  kind: illustration
+  variant: armies-facing
+  start: 13.84
+  end: 16.04
+  leftLabel: ROMANS
+  rightLabel: HANNIBAL'S ARMY
+  leftRows: 10
+  leftPerRow: 15
+  rightRows: 6
+  rightPerRow: 9
+  label:
+    tag: ORIGINAL ILLUSTRATION
+    title: Two armies on the plain of Cannae
+    detail: Generic silhouettes · not a reconstruction of equipment
+- id: s05_tactics
+  kind: tactics
+  start: 16.04
+  end: 35.59
+  label:
+    tag: ORIGINAL DIAGRAM
+    title: Hannibal's plan at Cannae
+    detail: Simplified schematic · not to scale
+  times:
+    flankHighlight:
+    - 18.99
+    - 20.79
+    centreBack:
+    - 21.09
+    - 23.39
+    advance:
+    - 23.99
+    - 26.79
+    wheel:
+    - 27.39
+    - 30.39
+    cavalry:
+    - 31.15
+    - 32.99
+    trapped: 33.59
+- id: s06_aftermath_illustration
+  kind: illustration
+  variant: aftermath
+  start: 35.59
+  end: 39.64
+  label:
+    tag: ORIGINAL ILLUSTRATION
+    title: The plain of Cannae after the battle
+    detail: Abandoned shields and spears · generic, not a reconstruction
+- id: s07_cannae_site
+  kind: image
+  start: 39.64
+  end: 43.49
+  asset: s07_site
+  fit: cover
+  focusX: 0.55
+  zoomFrom: 1.04
+  zoomTo: 1.14
+  label:
+    tag: ARCHAEOLOGICAL SITE · PHOTO
+    title: Canne della Battaglia, Apulia
+    detail: Ruins of the town of Cannae · the battle was fought on the nearby Aufidus plain
+- id: s08_hannibal_close
+  kind: image
+  start: 43.49
+  end: 46.69
+  asset: s02_bust
+  fit: cover
+  focusX: 0.42
+  focusY: 0.22
+  zoomFrom: 1.12
+  zoomTo: 1.28
+  label:
+    tag: ROMAN-ERA MARBLE BUST · PHOTO c. 1900
+    title: Hannibal Barca
+    detail: Portrait identification uncertain
+- id: s09_map_rome
+  kind: map
+  start: 46.69
+  end: 52.848
+  basemap: maps/basemap.json
+  note: 'ORIGINAL MAP · modern coastlines: Natural Earth (public domain)'
+  camera:
+  - t: 46.69
+    lon: 16.0
+    lat: 41.25
+    span: 4.6
+  - t: 50.5
+    lon: 14.2
+    lat: 41.6
+    span: 9.5
+  - t: 52.848
+    lon: 14.0
+    lat: 41.6
+    span: 10.5
+  markers:
+  - lon: 16.13
+    lat: 41.3
+    label: Cannae
+    at: 46.69
+    style: battle
+    labelSide: right
+  - lon: 12.5
+    lat: 41.9
+    label: Rome
+    at: 47.1
+    style: capital-rome
+    labelSide: left
+  title:
+    text: THE WAR WENT ON
+    sub: UNTIL 201 BC
+    at: 49.4
+source_mp3: audio/narration_source.mp3 (ElevenLabs, user-supplied)
+audio_master:
+  lead_seconds: 0.5
+  tail_seconds: 1.2
+  loudness: two-pass EBU R128, -16 LUFS / -1.5 dBTP
+unavailable_assets_note: Wikimedia rate-limited this session; the coin, Montefortino helmet (Met CC0), Trumbull
+  painting (Yale, PD), Slodtz statue (Louvre, PD) and Pogliaghi painting were verified but could not be downloaded,
+  so those beats use original illustrations/maps and the verified bust and site photos.

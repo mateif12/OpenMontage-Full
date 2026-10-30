@@ -1,0 +1,57 @@
+# Historical Short episode template — copy to scripts/historical_short/episodes/<id>.yaml
+# Workflow: skills/pipelines/documentary-montage/historical-short.md
+# All times are absolute seconds in the narration MP3 (the master clock).
+# Paths are relative to projects/<id>/assets (the Remotion public dir).
+
+id: <kebab-case-id>
+title: "<Title (date)>"
+narration: audio/narration.mp3          # user's MP3 — the ONLY voice
+ambience: { src: audio/ambience.wav, volume: 0.08 }   # optional; delete for silence
+images_dir: images
+caption_style: { fontSize: 60, wordsPerPage: 5, bottomOffset: 470 }
+
+decisions:
+  render_runtime: remotion
+  music: none                         # or user-supplied track (record source + licence)
+  end_tag: none
+  generated_media: none
+
+fact_check:
+  - claim: "<sentence from the script>"
+    support: "<ancient/primary source + modern reference; note disputes>"
+
+# extra_credits: ["<any non-Commons credit line>"]
+
+scenes:
+  # Original map (Natural Earth basemap from build_basemap.py)
+  - id: s01_map
+    kind: map
+    start: 0.0
+    end: 6.0
+    basemap: maps/basemap.json
+    note: "ORIGINAL MAP · modern coastlines: Natural Earth (public domain)"
+    camera:
+      - { t: 0.0, lon: 12.5, lat: 41.9, span: 20 }
+      - { t: 6.0, lon: 12.5, lat: 41.9, span: 8 }
+    title: { text: "<TITLE>", sub: "<DATE>", at: 0.25, until: 4.0 }
+    markers:
+      - { lon: 12.50, lat: 41.90, label: "Rome", at: 1.0, style: capital-rome, labelSide: left }
+    routes: []
+    texts: []
+
+  # Authentic still (fetched with fetch_commons.py --id s02_example)
+  - id: s02_example
+    kind: image
+    start: 6.0
+    end: 9.0
+    asset: s02_example
+    fit: contain-blur          # artworks/coins: contain-blur; photos: cover
+    zoomFrom: 1.0
+    zoomTo: 1.08
+    label:
+      tag: "MUSEUM ARTIFACT"   # or ARCHAEOLOGICAL SITE · PHOTO / PAINTING, <year> · ARTISTIC INTERPRETATION
+      title: "<what it is>"
+      detail: "<date · place · museum>"
+      # credit: auto-filled from provenance (author · licence · Wikimedia Commons)
+
+  # Last scene must end at the MP3 duration (build_props.py checks it)
