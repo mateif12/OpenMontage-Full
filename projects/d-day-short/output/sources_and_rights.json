@@ -1,0 +1,439 @@
+{
+  "video": "d-day-short_final.mp4",
+  "footage": [
+    {
+      "record_id": "428-NPC-10782",
+      "naid": "78975",
+      "title": "Invasion of Europe (Normandy)",
+      "catalog_url": "https://catalog.archives.gov/id/78975",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10782.mp4",
+      "series": [
+        "General Records of the Department of the Navy",
+        "Moving Images Relating to Military Activities"
+      ],
+      "production_dates": [
+        "1944-06-01"
+      ],
+      "use_restriction": {
+        "status": "Unrestricted"
+      },
+      "access_restriction": {
+        "status": "Unrestricted"
+      },
+      "sound_type": "Silent",
+      "attribution": "National Archives and Records Administration, 428-NPC-10782"
+    },
+    {
+      "record_id": "428-NPC-10770",
+      "naid": "78972",
+      "title": "Invasion of Europe (Normandy)",
+      "catalog_url": "https://catalog.archives.gov/id/78972",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10770.mp4",
+      "series": [
+        "General Records of the Department of the Navy",
+        "Moving Images Relating to Military Activities"
+      ],
+      "production_dates": [
+        "1944-06-01"
+      ],
+      "use_restriction": {
+        "status": "Unrestricted"
+      },
+      "access_restriction": {
+        "status": "Unrestricted"
+      },
+      "sound_type": "Silent",
+      "attribution": "National Archives and Records Administration, 428-NPC-10770"
+    },
+    {
+      "record_id": "428-NPC-10785",
+      "naid": "78976",
+      "title": "Invasion of Europe (Normandy)",
+      "catalog_url": "https://catalog.archives.gov/id/78976",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10785.mp4",
+      "series": [
+        "General Records of the Department of the Navy",
+        "Moving Images Relating to Military Activities"
+      ],
+      "production_dates": [
+        "1944-06-01"
+      ],
+      "use_restriction": {
+        "status": "Unrestricted"
+      },
+      "access_restriction": {
+        "status": "Unrestricted"
+      },
+      "sound_type": "Silent",
+      "attribution": "National Archives and Records Administration, 428-NPC-10785"
+    },
+    {
+      "record_id": "428-NPC-10769",
+      "naid": "78971",
+      "title": "Invasion of Europe",
+      "catalog_url": "https://catalog.archives.gov/id/78971",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10769.mp4",
+      "series": [
+        "General Records of the Department of the Navy",
+        "Moving Images Relating to Military Activities"
+      ],
+      "production_dates": [
+        "1944-01-01"
+      ],
+      "use_restriction": {
+        "status": "Unrestricted"
+      },
+      "access_restriction": {
+        "status": "Unrestricted"
+      },
+      "sound_type": "Silent",
+      "attribution": "National Archives and Records Administration, 428-NPC-10769"
+    },
+    {
+      "record_id": "428-NPC-10742",
+      "naid": "78961",
+      "title": "Invasion of Europe (Normandy)",
+      "catalog_url": "https://catalog.archives.gov/id/78961",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10742.mp4",
+      "series": [
+        "General Records of the Department of the Navy",
+        "Moving Images Relating to Military Activities"
+      ],
+      "production_dates": [
+        "1944-06-01"
+      ],
+      "use_restriction": {
+        "status": "Unrestricted"
+      },
+      "access_restriction": {
+        "status": "Unrestricted"
+      },
+      "sound_type": "Silent",
+      "attribution": "National Archives and Records Administration, 428-NPC-10742"
+    },
+    {
+      "record_id": "428-NPC-10744",
+      "naid": "78962",
+      "title": "Invasion of Europe (Normandy)",
+      "catalog_url": "https://catalog.archives.gov/id/78962",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10744.mp4",
+      "series": [
+        "General Records of the Department of the Navy",
+        "Moving Images Relating to Military Activities"
+      ],
+      "production_dates": [
+        "1944-06-01"
+      ],
+      "use_restriction": {
+        "status": "Unrestricted"
+      },
+      "access_restriction": {
+        "status": "Unrestricted"
+      },
+      "sound_type": "Silent",
+      "attribution": "National Archives and Records Administration, 428-NPC-10744"
+    }
+  ],
+  "shots": [
+    {
+      "shot": "h1",
+      "scene": "hook",
+      "timeline_in": "0.000",
+      "timeline_out": "2.800",
+      "record_id": "428-NPC-10782",
+      "naid": "78975",
+      "source_in": "72.600",
+      "source_out": "75.400",
+      "crop_focus_x": 0.5,
+      "rights_status": "Unrestricted",
+      "narration": "June sixth, 1944.",
+      "shows": "Column of troops crossing a beach from a beached landing craft; smoke drifting.",
+      "record_support": "428-NPC-10782 shot list #3-4: 'LCU and other equipment up to beach; troops' / 'Column of troops going down beach', following #2 'LCI, beaching at Normandy'. Record dates the reel to June 1944 (month only); the shot is NOT claimed to be 6 June or a named beach.",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10782.mp4"
+    },
+    {
+      "shot": "h2",
+      "scene": "hook",
+      "timeline_in": "2.800",
+      "timeline_out": "5.700",
+      "record_id": "428-NPC-10770",
+      "naid": "78972",
+      "source_in": "16.000",
+      "source_out": "18.900",
+      "crop_focus_x": 0.5,
+      "rights_status": "Unrestricted",
+      "narration": "The largest seaborne invasion in history began.",
+      "shows": "Landing craft flying the U.S. flag under way toward the beach, many ships behind.",
+      "record_support": "428-NPC-10770 #3 'CU LCM coming up toward beach'; reel titled 'Invasion of Europe (Normandy)', June 1944.",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10770.mp4"
+    },
+    {
+      "shot": "h3",
+      "scene": "hook",
+      "timeline_in": "5.700",
+      "timeline_out": "8.067",
+      "record_id": "428-NPC-10785",
+      "naid": "78976",
+      "source_in": "241.300",
+      "source_out": "243.667",
+      "crop_focus_x": 0.2,
+      "rights_status": "Unrestricted",
+      "narration": "Thousands of men would never come home.",
+      "shows": "Soldier on a shingle beach littered with debris and wrecked craft.",
+      "record_support": "428-NPC-10785 #22 'CU Army sargeant walking guard on beach; lot of debris in background'. The man shown is not claimed to be a casualty.",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10785.mp4"
+    },
+    {
+      "shot": "s1a",
+      "scene": "1_embarkation",
+      "timeline_in": "8.067",
+      "timeline_out": "10.900",
+      "record_id": "428-NPC-10769",
+      "naid": "78971",
+      "source_in": "124.600",
+      "source_out": "127.433",
+      "crop_focus_x": 0.5,
+      "rights_status": "Unrestricted",
+      "narration": "In English harbors, soldiers",
+      "shows": "Soldiers in helmets and life belts lined up on a quay.",
+      "record_support": "428-NPC-10769 #7 'Soldiers in ranks waiting to board landing craft'; subject heading 'England'; title 'Invasion of Europe'.",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10769.mp4"
+    },
+    {
+      "shot": "s1b",
+      "scene": "1_embarkation",
+      "timeline_in": "10.900",
+      "timeline_out": "14.533",
+      "record_id": "428-NPC-10769",
+      "naid": "78971",
+      "source_in": "96.000",
+      "source_out": "99.633",
+      "crop_focus_x": 0.5,
+      "rights_status": "Unrestricted",
+      "narration": "crowded aboard landing craft, bound for Nazi-occupied France.",
+      "shows": "Harbor packed with landing craft full of troops.",
+      "record_support": "428-NPC-10769 #3-6 'LCMs and LCVPs tied up to docking area in British town' / 'Soldiers boarding LCVPs'.",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10769.mp4"
+    },
+    {
+      "shot": "s2a",
+      "scene": "2_crossing",
+      "timeline_in": "14.533",
+      "timeline_out": "16.267",
+      "record_id": "428-NPC-10742",
+      "naid": "78961",
+      "source_in": "33.100",
+      "source_out": "34.833",
+      "crop_focus_x": 0.5,
+      "rights_status": "Unrestricted",
+      "narration": "Then the armada sailed.",
+      "shows": "Column of landing craft at sea under barrage balloons.",
+      "record_support": "428-NPC-10742 #4-6 'British LCTs underway at sea' / 'Column of British LCTs'; reel 'Invasion of Europe (Normandy)'.",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10742.mp4"
+    },
+    {
+      "shot": "s2b",
+      "scene": "2_crossing",
+      "timeline_in": "16.267",
+      "timeline_out": "20.467",
+      "record_id": "428-NPC-10742",
+      "naid": "78961",
+      "source_in": "48.600",
+      "source_out": "52.800",
+      "crop_focus_x": 0.8,
+      "rights_status": "Unrestricted",
+      "narration": "Thousands of ships and landing craft crossed the English Channel.",
+      "shows": "Landing craft under way at sea; barrage balloons overhead.",
+      "record_support": "428-NPC-10742 #6-7 'Column of British LCTs; American flag flying in left foreground' / 'Patrol craft passing'.",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10742.mp4"
+    },
+    {
+      "shot": "s3a",
+      "scene": "3_bombardment",
+      "timeline_in": "20.467",
+      "timeline_out": "22.100",
+      "record_id": "428-NPC-10785",
+      "naid": "78976",
+      "source_in": "18.200",
+      "source_out": "19.833",
+      "crop_focus_x": 0.5,
+      "rights_status": "Unrestricted",
+      "narration": "Off the Normandy coast,",
+      "shows": "Battleship firing; landing craft passing in foreground.",
+      "record_support": "428-NPC-10785 #1 'LS Battleship bombarding beach; LCM passing in foreground'.",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10785.mp4"
+    },
+    {
+      "shot": "s3b",
+      "scene": "3_bombardment",
+      "timeline_in": "22.100",
+      "timeline_out": "25.333",
+      "record_id": "428-NPC-10785",
+      "naid": "78976",
+      "source_in": "33.500",
+      "source_out": "36.733",
+      "crop_focus_x": 0.5,
+      "rights_status": "Unrestricted",
+      "narration": "battleships opened fire on the German defenses.",
+      "shows": "Battleship fires a salvo.",
+      "record_support": "428-NPC-10785 #2 'USS Texas (BB-35) fires a salvo' (ship not named on screen: frame-to-shot mapping not verified).",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10785.mp4"
+    },
+    {
+      "shot": "s4a",
+      "scene": "4_landing",
+      "timeline_in": "25.333",
+      "timeline_out": "27.600",
+      "record_id": "428-NPC-10744",
+      "naid": "78962",
+      "source_in": "50.000",
+      "source_out": "52.267",
+      "crop_focus_x": 0.8,
+      "rights_status": "Unrestricted",
+      "narration": "Landing craft ran onto the beaches,",
+      "shows": "Normandy beach: beached landing craft, ships offshore, men walking on the sand.",
+      "record_support": "428-NPC-10744 #4 'LCT and LCM near Normandy beachhead'.",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10744.mp4"
+    },
+    {
+      "shot": "s4b",
+      "scene": "4_landing",
+      "timeline_in": "27.600",
+      "timeline_out": "30.133",
+      "record_id": "428-NPC-10782",
+      "naid": "78975",
+      "source_in": "54.000",
+      "source_out": "56.533",
+      "crop_focus_x": 0.5,
+      "rights_status": "Unrestricted",
+      "narration": "and men stepped down onto the sand.",
+      "shows": "From the deck of the LCI: men moving down the ramps onto the beach in faint light.",
+      "record_support": "428-NPC-10782 #2 'side ramps are dropped on LCI and men are seen moving down ramps and onto beach area', 'faint morning light'.",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10782.mp4"
+    },
+    {
+      "shot": "s5a",
+      "scene": "5_cost",
+      "timeline_in": "30.133",
+      "timeline_out": "31.900",
+      "record_id": "428-NPC-10782",
+      "naid": "78975",
+      "source_in": "347.500",
+      "source_out": "349.267",
+      "crop_focus_x": 0.1,
+      "rights_status": "Unrestricted",
+      "narration": "The cost was terrible.",
+      "shows": "Wounded man lying under a blanket on a landing craft; face visible, no injuries visible.",
+      "record_support": "428-NPC-10782 #30 'HA MS Looking down over a wounded man, lying on deck, covered over with a blanket; only his face is seen.'",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10782.mp4"
+    },
+    {
+      "shot": "s5b",
+      "scene": "5_cost",
+      "timeline_in": "31.900",
+      "timeline_out": "33.767",
+      "record_id": "428-NPC-10785",
+      "naid": "78976",
+      "source_in": "230.300",
+      "source_out": "232.167",
+      "crop_focus_x": 0.8,
+      "rights_status": "Unrestricted",
+      "narration": "Wrecked boats littered the shore.",
+      "shows": "Wrecked landing craft on the beach.",
+      "record_support": "428-NPC-10785 #20-23 'LCVP broken in two; LCT beached' / 'Wrecked landing craft'.",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10785.mp4"
+    },
+    {
+      "shot": "s5c",
+      "scene": "5_cost",
+      "timeline_in": "33.767",
+      "timeline_out": "36.967",
+      "record_id": "428-NPC-10782",
+      "naid": "78975",
+      "source_in": "351.600",
+      "source_out": "354.800",
+      "crop_focus_x": 0.5,
+      "rights_status": "Unrestricted",
+      "narration": "The wounded were carried back out to the ships.",
+      "shows": "Wounded man under a blanket being transferred from a landing craft to a ship in rough sea. No injuries visible.",
+      "record_support": "428-NPC-10782 #31-36 'preparing to lift another wounded man from landing craft' / 'Wounded man on a stretcher'. Graphic shots #37-38 (after 390s) are excluded; the window ends at 385s.",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10782.mp4"
+    },
+    {
+      "shot": "s6a",
+      "scene": "6_foothold",
+      "timeline_in": "36.967",
+      "timeline_out": "38.967",
+      "record_id": "428-NPC-10770",
+      "naid": "78972",
+      "source_in": "19.500",
+      "source_out": "21.500",
+      "crop_focus_x": 0.2,
+      "rights_status": "Unrestricted",
+      "narration": "But the Allies held on.",
+      "shows": "Amphibious tractor (LVT) on the shingle beach; tank and barrage balloon behind.",
+      "record_support": "428-NPC-10770 #2 'MLS LVT underway on Normandy beach; tank in background'.",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10770.mp4"
+    },
+    {
+      "shot": "s6b",
+      "scene": "6_foothold",
+      "timeline_in": "38.967",
+      "timeline_out": "40.767",
+      "record_id": "428-NPC-10744",
+      "naid": "78962",
+      "source_in": "57.000",
+      "source_out": "58.800",
+      "crop_focus_x": 0.8,
+      "rights_status": "Unrestricted",
+      "narration": "More ships poured men and supplies",
+      "shows": "Tank landing ship (LST) on the beach unloading vehicles.",
+      "record_support": "428-NPC-10744 #5 'LST on beach unloading heavy equipment'.",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10744.mp4"
+    },
+    {
+      "shot": "s6c",
+      "scene": "6_foothold",
+      "timeline_in": "40.767",
+      "timeline_out": "42.567",
+      "record_id": "428-NPC-10744",
+      "naid": "78962",
+      "source_in": "170.000",
+      "source_out": "171.800",
+      "crop_focus_x": 0.5,
+      "rights_status": "Unrestricted",
+      "narration": "onto the beachhead.",
+      "shows": "Steel pierheads of an artificial harbor off the coast.",
+      "record_support": "428-NPC-10744 #16 'Steel pier built out in water'.",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10744.mp4"
+    },
+    {
+      "shot": "s7",
+      "scene": "6_foothold",
+      "timeline_in": "42.567",
+      "timeline_out": "47.767",
+      "record_id": "428-NPC-10770",
+      "naid": "78972",
+      "source_in": "253.400",
+      "source_out": "258.600",
+      "crop_focus_x": 0.2,
+      "rights_status": "Unrestricted",
+      "narration": "The liberation of Western Europe had begun.",
+      "shows": "U.S. flag over Coast Guard craft in the crowded Normandy anchorage.",
+      "record_support": "428-NPC-10770 #25-32 Coast Guard patrol boats among sunken ships off Normandy.",
+      "media_url": "https://catalog.archives.gov/medialz/mopix/428/NPC/428-npc-10770.mp4"
+    }
+  ],
+  "narration": {
+    "engine": "Piper TTS (local)",
+    "voice": "en_US-joe-medium",
+    "voice_model_card": "Dataset: OHF-Voice/voice-datasets, License: CC0. Training: fine-tuned from U.S. English lessac voice (medium).",
+    "open_question": "The lessac base voice's dataset licence (cstr.ed.ac.uk/projects/blizzard/2013/lessac_blizzard2013/license.html) could not be opened from this environment (blocked)."
+  },
+  "music": {
+    "source": "none",
+    "note": "User opted out: narration only, no music, no artificial sound effects."
+  },
+  "sound_effects": "None. The six reels are catalogued as silent; no ambience or battle sound was added.",
+  "stills": "None."
+}
