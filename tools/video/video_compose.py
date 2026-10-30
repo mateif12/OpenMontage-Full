@@ -34,6 +34,7 @@ import contextlib
 import json
 import hashlib
 import logging
+import os
 import secrets
 import shutil
 import subprocess
@@ -2070,6 +2071,12 @@ class VideoCompose(BaseTool):
                     cmd.extend(["--width", str(p.width), "--height", str(p.height)])
                 except (ImportError, ValueError):
                     pass
+
+            # Use an already-installed Chrome/Chromium instead of letting Remotion
+            # download its own headless shell (blocked on restricted networks).
+            browser_executable = os.environ.get("REMOTION_BROWSER_EXECUTABLE")
+            if browser_executable:
+                cmd.append(f"--browser-executable={browser_executable}")
 
             # Optional creator-facing render timeout. Remotion's `--timeout` (ms)
             # governs headless-browser setup and delayRender(); on slow machines or

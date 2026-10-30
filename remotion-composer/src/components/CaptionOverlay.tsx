@@ -27,6 +27,9 @@ type CaptionOverlayProps = {
   highlightColor?: string;
   backgroundColor?: string;
   fontFamily?: string;
+  // Distance of the caption box from the bottom edge, in px. Vertical
+  // platforms (Shorts/Reels/TikTok) cover the bottom ~300px with UI.
+  bottomOffset?: number;
   // Separator rendered between words. Space-delimited languages want the
   // default " "; CJK languages (no inter-word spacing) should pass "".
   wordSeparator?: string;
@@ -88,7 +91,8 @@ const PageRenderer: React.FC<{
   fontFamily: string;
   wordSeparator: string;
   direction: "ltr" | "rtl";
-}> = ({ page, fontSize, color, highlightColor, backgroundColor, fontFamily, wordSeparator, direction }) => {
+  bottomOffset: number;
+}> = ({ page, fontSize, color, highlightColor, backgroundColor, fontFamily, wordSeparator, direction, bottomOffset }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -106,7 +110,7 @@ const PageRenderer: React.FC<{
       style={{
         justifyContent: "flex-end",
         alignItems: "center",
-        paddingBottom: 80,
+        paddingBottom: bottomOffset,
       }}
     >
       <div
@@ -172,6 +176,7 @@ export const CaptionOverlay: React.FC<CaptionOverlayProps> = ({
   fontFamily = "Space Grotesk, Inter, system-ui, sans-serif",
   wordSeparator = " ",
   direction = "auto",
+  bottomOffset = 80,
 }) => {
   const { fps } = useVideoConfig();
   const pages = buildPages(words, wordsPerPage);
@@ -199,6 +204,7 @@ export const CaptionOverlay: React.FC<CaptionOverlayProps> = ({
               fontFamily={fontFamily}
               wordSeparator={wordSeparator}
               direction={resolvedDirection}
+              bottomOffset={bottomOffset}
             />
           </Sequence>
         );

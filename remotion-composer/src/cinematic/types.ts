@@ -53,6 +53,7 @@ export interface CinematicCaptionConfig {
   color?: string;
   highlightColor?: string;
   backgroundColor?: string;
+  bottomOffset?: number;
 }
 
 export interface CinematicRendererProps {

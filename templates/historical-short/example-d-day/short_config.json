@@ -1,0 +1,122 @@
+{
+ "title": "D-Day: The Crossing",
+ "hook": "June 6th, 1944. The largest seaborne invasion in history began. Thousands of men would never come home.",
+ "tone": "reverent",
+ "style": "Cinematic historical documentary; authentic 1944 U.S. Coast Guard colour film only",
+ "target_duration_seconds": 50,
+ "thematic_question": "What did it take to open the door to Western Europe in June 1944?",
+ "footage_policy": "Only NARA records with use status 'Unrestricted'. No AI visuals, reenactments, movie footage or stills. No shot labelled as Omaha Beach or 6 June.",
+ "music": {
+  "source": "none",
+  "note": "User opted out: narration only, no music, no artificial sound effects."
+ },
+ "voice": {
+  "name": "en_US-joe-medium",
+  "model": "~/.piper/models/en_US-joe-medium.onnx",
+  "model_card": "Dataset: OHF-Voice/voice-datasets, License: CC0. Training: fine-tuned from U.S. English lessac voice (medium).",
+  "open_question": "The lessac base voice's dataset licence (cstr.ed.ac.uk/projects/blizzard/2013/lessac_blizzard2013/license.html) could not be opened from this environment (blocked).",
+  "length_scale": 1.08,
+  "sentence_silence": 0.35
+ },
+ "narration_timing": {
+  "lead_in_seconds": 0.15,
+  "tail_seconds": 2.6,
+  "default_gap_seconds": 0.7,
+  "gap_after": {
+   "s0a": 0.12,
+   "s0b": 0.25,
+   "s0c": 0.75,
+   "s1": 0.7,
+   "s2": 0.7,
+   "s3": 0.6,
+   "s4": 0.85,
+   "s5": 0.85,
+   "s6": 0.6
+  },
+  "target_lufs": -15,
+  "limiter_ceiling": 0.84
+ },
+ "whisper_model": "small.en",
+ "scenes": [
+  {
+   "id": "hook",
+   "title": "Hook: June 6th, 1944",
+   "segments": [
+    "s0a",
+    "s0b",
+    "s0c"
+   ]
+  },
+  {
+   "id": "1_embarkation",
+   "title": "Preparations and embarkation",
+   "segments": [
+    "s1"
+   ]
+  },
+  {
+   "id": "2_crossing",
+   "title": "The fleet crosses the Channel",
+   "segments": [
+    "s2"
+   ]
+  },
+  {
+   "id": "3_bombardment",
+   "title": "Naval bombardment and approach",
+   "segments": [
+    "s3"
+   ]
+  },
+  {
+   "id": "4_landing",
+   "title": "Troops land on the beaches",
+   "segments": [
+    "s4"
+   ]
+  },
+  {
+   "id": "5_cost",
+   "title": "Destruction, casualties, conditions",
+   "segments": [
+    "s5"
+   ]
+  },
+  {
+   "id": "6_foothold",
+   "title": "The foothold and the beginning of liberation",
+   "segments": [
+    "s6",
+    "s7"
+   ]
+  }
+ ],
+ "caption_display_replacements": {
+  "sixth,": "6,"
+ },
+ "captions": {
+  "wordsPerPage": 3,
+  "fontSize": 88,
+  "color": "#FFFFFF",
+  "highlightColor": "#FFD54A",
+  "backgroundColor": "rgba(0, 0, 0, 0.62)",
+  "bottomOffset": 430
+ },
+ "css_grades": {
+  "faded_16mm": "brightness(1.06) contrast(1.04) saturate(0.97)",
+  "dark_teal_16mm": "brightness(1.22) contrast(1.03) saturate(1.0)",
+  "sd_tape": "brightness(1.08) contrast(1.03) saturate(0.97)",
+  "sd_tape_dark": "brightness(1.30) contrast(1.0) saturate(0.95)"
+ },
+ "overlays": {
+  "source_line": "U.S. COAST GUARD FILM  |  NORMANDY, JUNE 1944",
+  "credits": [
+   "ARCHIVAL FILM: U.S. NATIONAL ARCHIVES",
+   "U.S. Coast Guard footage, 1944  |  Record Group 428",
+   "428-NPC-10742, 10744, 10769, 10770, 10782, 10785"
+  ]
+ },
+ "intro": "All picture comes from six U.S. Coast Guard 16 mm colour reels held by the U.S. National Archives (Record Group 428, Moving Images Relating to Military Activities).",
+ "approval_note": "User approved concept, hook, six-scene map, Remotion, Piper en_US-joe-medium, narration-only audio",
+ "sound_effects": "None. The six reels are catalogued as silent; no ambience or battle sound was added."
+}
