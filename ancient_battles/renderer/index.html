@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: 'Space Grotesk'; src: url('/remotion-composer/src/fonts/SpaceGrotesk-latin.woff2') format('woff2'); font-weight: 300 700; }
+  @font-face { font-family: 'Playfair'; src: url('/remotion-composer/src/fonts/PlayfairDisplay-latin.woff2') format('woff2'); font-weight: 400 900; }
+  html,body { margin:0; background:#000; overflow:hidden; }
+  #wrap { position:relative; width:1080px; height:1920px; }
+  canvas { display:block; }
+  .ov { position:absolute; font-family:'Space Grotesk',sans-serif; color:#f4ead6; }
+  #chip { left:54px; top:120px; }
+  #chip .k { font-size:25px; letter-spacing:0.16em; font-weight:600; background:rgba(14,11,8,0.62); padding:10px 16px; border-left:4px solid #c9a24a; display:inline-block; }
+  #chip .t { font-family:'Playfair',serif; font-size:44px; margin-top:16px; text-shadow:0 2px 12px rgba(0,0,0,0.7); }
+  #notes { left:54px; top:262px; font-size:23px; letter-spacing:0.04em; color:#efe2c4; background:rgba(14,11,8,0.5); padding:7px 14px; max-width:880px; }
+  #notes:empty { display:none; }
+  #cap { left:70px; right:70px; bottom:555px; text-align:center; font-size:62px; font-weight:700; line-height:1.15; text-shadow:0 3px 14px rgba(0,0,0,0.85), 0 0 3px rgba(0,0,0,0.9); }
+  #cap span.on { color:#f2c46a; }
+  .plate { position:absolute; transform:translateX(-50%); text-align:center; font-family:'Space Grotesk',sans-serif; color:#2a2118; }
+  .plate .n { font-size:30px; font-weight:700; letter-spacing:0.02em; }
+  .plate .d { font-size:20px; color:#5a4a36; margin-top:6px; line-height:1.35; }
+  .plate .r { color:#9b2e22; }
+</style>
+<script type="importmap">{"imports":{"three":"/ancient_battles/renderer/node_modules/three/build/three.module.js","three/addons/":"/ancient_battles/renderer/node_modules/three/examples/jsm/"}}</script>
+</head><body><div id="wrap"><div class="ov" id="chip"></div><div class="ov" id="notes"></div><div class="ov" id="cap"></div></div>
+<script type="module" src="./src/main.js"></script></body></html>

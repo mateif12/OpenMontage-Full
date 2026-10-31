@@ -1,0 +1,22 @@
+civilization: greek
+name: Greek city-states
+# Unit designs are tied to a date range; a later episode (e.g. 4th c. BC)
+# needs its own design (Thracian/pilos helmets, etc.) instead of reusing these.
+designs:
+  hoplite-late-archaic:
+    label: Hoplite (late archaic, c. 520-470 BC)
+    dates: [-520, -470]
+    role: [infantry, spearman]
+    formation: phalanx
+    body: {skin: ["#c4936a", "#b98760", "#cf9f77", "#a97a54"]}
+    kit:
+      - {item: chiton, colors: ["#b8432f", "#e3d9c2", "#c9873b", "#8c2f25", "#d8c9a6"]}
+      - {choice: [{item: linothorax, weight: 0.6, colors: ["#ece3cc", "#e2d6b8"], trim: ["#9b2e22", "#2f3b5a", "#1d1a17"]},
+                  {item: bronze-cuirass, weight: 0.4}]}
+      - {item: greaves}
+      - {item: corinthian-helmet, crest_colors: ["#1c1714", "#8e1f18", "#d9cfb6", "#5a3a22"]}
+      - {item: aspis, faces: [bronze, bronze, "#b23a26", "#1d1a17", "#e6dcc4"],
+         devices: [wheel, club, crescent, snake, none]}
+      - {item: dory}
+      - {item: xiphos}
+    behaviours: [stand, march, run, level-spears, fight, fall, rout, wheel, command]

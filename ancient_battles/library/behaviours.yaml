@@ -1,0 +1,14 @@
+# Animation behaviours implemented in renderer/src/behaviours.js.
+# A unit lists which behaviours it may use; episode phases pick among them.
+behaviours:
+  stand:      {roles: [any], description: "Idle, weight shifts, small head turns"}
+  march:      {roles: [infantry], description: "Ordered walk, spears upright, shields on arm"}
+  run:        {roles: [infantry], description: "Running advance, shield raised, spear levelled"}
+  level-spears: {roles: [spearman], description: "Spears move from upright to overhand attack position"}
+  fight:      {roles: [infantry], description: "Front ranks thrust overhand; rear ranks lean in and push"}
+  shoot:      {roles: [archer], description: "Nock, draw, release cycle; arrows fly on ballistic arcs"}
+  hold-wall:  {roles: [shield-bearer], description: "Brace behind a planted shield, spear over the top"}
+  fall:       {roles: [any], description: "Casualty topples and stays down"}
+  rout:       {roles: [any], description: "Turn, drop large shields, run in a spreading crowd"}
+  wheel:      {roles: [infantry], description: "Formation pivots on its inner corner and advances"}
+  command:    {roles: [commander], description: "Turns to his men and signals the advance"}

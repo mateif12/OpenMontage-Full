@@ -1,0 +1,32 @@
+civilization: persian
+name: Achaemenid Persian Empire
+designs:
+  persian-shield-bearer:
+    label: Persian infantryman with wicker shield (front rank)
+    dates: [-520, -470]
+    role: [infantry, spearman, shield-bearer]
+    formation: spara-wall
+    body: {skin: ["#b07a52", "#a06d48", "#bd8960"], beard: ["#1b1512", "#2a1d15"]}
+    kit:
+      - {item: persian-sleeved-tunic, colors: ["#3f5a7a", "#7a2f3a", "#c7a24a", "#4f6b3a", "#8a5a2b", "#d8cfb8"]}
+      - {item: trousers, colors: ["#5b4a3a", "#2f3b4a", "#7a6a4a", "#8a3a2a"]}
+      - {item: iron-scale-corslet}
+      - {item: persian-felt-cap, colors: ["#d8cfb8", "#c7b48a", "#7a6a50", "#a8442f"]}
+      - {item: spara}
+      - {item: persian-short-spear}
+      - {item: akinakes}
+    behaviours: [stand, hold-wall, fight, fall, rout]
+  persian-archer:
+    label: Persian archer
+    dates: [-520, -470]
+    role: [infantry, archer]
+    formation: spara-wall
+    body: {skin: ["#b07a52", "#a06d48", "#bd8960"], beard: ["#1b1512", "#2a1d15"]}
+    kit:
+      - {item: persian-sleeved-tunic, colors: ["#3f5a7a", "#7a2f3a", "#c7a24a", "#4f6b3a", "#8a5a2b", "#d8cfb8", "#5a3f6e"]}
+      - {item: trousers, colors: ["#5b4a3a", "#2f3b4a", "#7a6a4a", "#8a3a2a"]}
+      - {item: persian-felt-cap, colors: ["#d8cfb8", "#c7b48a", "#7a6a50", "#a8442f"]}
+      - {item: composite-bow}
+      - {item: quiver}
+      - {item: akinakes}
+    behaviours: [stand, shoot, fall, rout]

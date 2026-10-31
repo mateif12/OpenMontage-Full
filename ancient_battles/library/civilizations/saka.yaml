@@ -1,0 +1,17 @@
+civilization: saka
+name: Saka (Scythian peoples of the Achaemenid empire)
+designs:
+  saka-archer:
+    label: Saka archer (pointed-cap Saka)
+    dates: [-550, -400]
+    role: [infantry, archer]
+    formation: spara-wall
+    body: {skin: ["#b8835a", "#a8764f"], beard: ["#2a1d15", "#4a3322"]}
+    kit:
+      - {item: trousers, colors: ["#6b4a2e", "#8a6a3a", "#4a3a2a"]}
+      - {item: persian-sleeved-tunic, colors: ["#8a6a3a", "#6b4a2e", "#a8442f", "#5b5a3a"]}
+      - {item: saka-pointed-cap, colors: ["#6b5a44", "#7a6248", "#5b4a3a", "#8a7356", "#7a4a36"]}
+      - {item: composite-bow}
+      - {item: quiver}
+      - {item: sagaris}
+    behaviours: [stand, shoot, fall, rout]

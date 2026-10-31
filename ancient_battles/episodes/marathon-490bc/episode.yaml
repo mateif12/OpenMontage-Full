@@ -1,0 +1,140 @@
+# Battle of Marathon - VISUAL PROOF OF CONCEPT configuration.
+# Times are seconds on the authoritative narration MP3 (51.72 s).
+battle:
+  id: marathon-490bc
+  name: Battle of Marathon
+  year: -490
+  date_note: "Late summer (August or September) 490 BC; the exact day is debated."
+  place: "Plain of Marathon, north-east Attica, Greece"
+
+audio:
+  narration: ../../../projects/marathon-poc/assets/audio/narration_original.mp3   # never modified
+  transcript: ../../../projects/marathon-poc/assets/audio/transcript.json
+  # Whisper (base) mis-heard two words; captions are corrected, the audio is not touched.
+  caption_fixes: {Plataan: Plataean, gleaned: gleamed}
+
+sides:
+  greeks:  {name: "Athenians and Plataeans", civilizations: [greek], color: "#b8432f"}
+  persians: {name: "Achaemenid Persian expeditionary force", civilizations: [persian, saka], color: "#3f5a7a"}
+
+# ---------------------------------------------------------------- research
+research:
+  sources:
+    - "Herodotus, Histories 6.94-6.117 (main ancient account, written c. 430s-420s BC)"
+    - "Herodotus 7.61, 7.64 (equipment of Persian and Saka contingents in 480 BC)"
+    - "Herodotus 9.61-62, 9.99 (Persian wicker-shield walls at Plataea and Mycale, 479 BC)"
+  claims:
+    - {claim: "Athenians and Plataeans faced the Persian landing force at Marathon in 490 BC", status: attested, ref: "Hdt 6.102-6.108"}
+    - {claim: "Miltiades was one of the ten Athenian generals and urged battle", status: attested, ref: "Hdt 6.109-6.110"}
+    - {claim: "Greek centre few ranks deep, wings strong; Plataeans on the left, polemarch Callimachus on the right", status: attested, ref: "Hdt 6.111"}
+    - {claim: "The Athenians advanced against the Persians at a run", status: attested, ref: "Hdt 6.112", note: "Herodotus says 8 stades (c. 1.4 km); many historians think only the last stretch was run. The test shows a shortened run."}
+    - {claim: "Persians and Sakai in the Persian centre broke the Greek centre", status: attested, ref: "Hdt 6.113"}
+    - {claim: "Greek wings won, then drew together against the Persian centre; Persians fled to the ships", status: attested, ref: "Hdt 6.113-6.115"}
+    - {claim: "Persian cavalry took part in the battle", status: uncertain, ref: "Hdt 6.102 (Marathon chosen as good cavalry ground) vs no cavalry in Hdt 6.111-6.113; Suda 'choris hippeis'", decision: "No cavalry shown in the proof of concept."}
+    - {claim: "Military standards or flags carried at Marathon", status: unattested, decision: "No flags or standards shown. Inventing them would present a fiction as fact."}
+    - {claim: "Persian infantry formed a wicker-shield wall with archers behind", status: reconstruction, ref: "Hdt 9.61-62, 9.99 (479 BC)", decision: "Shown, with an on-screen reconstruction note."}
+  numbers_note: "Herodotus gives no army sizes for Marathon. Later sources give c. 9,000-10,000 Athenians and c. 1,000 Plataeans; Persian numbers are unknown. Figure counts in the render are illustrative, not to scale."
+
+# ---------------------------------------------------------------- forces
+# x = centre of the block along the battle line, z = front rank (Greeks face -z, Persians +z)
+units:
+  greek-left:   {side: greeks, label: "Plataeans (left wing)", design: hoplite-late-archaic, width: 18, depth: 8, x: -25, z: 30}
+  greek-centre: {side: greeks, label: "Athenian centre (thin)", design: hoplite-late-archaic, width: 32, depth: 4, x: 0, z: 30}
+  greek-right:  {side: greeks, label: "Athenian right wing", design: hoplite-late-archaic, width: 18, depth: 8, x: 25, z: 30}
+  persian-right:  {side: persians, label: "Persian wing", formation: spara-wall, front: persian-shield-bearer, rear: persian-archer, width: 20, depth: 8, x: -26, z: 0}
+  persian-centre: {side: persians, label: "Persians and Sakai (centre)", formation: spara-wall, front: persian-shield-bearer,
+                   rear: persian-archer, rear_mix: {design: saka-archer, from: 0.38, to: 0.62}, width: 32, depth: 8, x: 0, z: 0}
+  persian-left:   {side: persians, label: "Persian wing", formation: spara-wall, front: persian-shield-bearer, rear: persian-archer, width: 20, depth: 8, x: 26, z: 0}
+
+commanders:
+  - {id: miltiades, label: "Greek commander (illustrative)", design: hoplite-late-archaic, unit: greek-centre, u: 6, v: -3.2, crest_color: "#efe8d6", crest_scale: 1.3,
+     command: [13.2, 16.6]}
+
+# ---------------------------------------------------------------- timeline (narration seconds)
+timeline:
+  greek-left:
+    path:  [{t: 13.2, z: 30}, {t: 22.4, z: 17.1}, {t: 25.6, z: 0.6, ease: in}, {t: 28.6, z: -2.0}, {t: 30.8, z: -5.0},
+            {t: 34.6, heading: 90, wheel: inner}, {t: 37.6, dx: 3.0}, {t: 40.0, heading: 180}, {t: 48.0, dz: -12}]
+    modes: [{t: 0, mode: march}, {t: 22.4, mode: run}, {t: 25.6, mode: fight}, {t: 30.9, mode: march}, {t: 34.6, mode: fight}, {t: 37.8, mode: march}]
+    spears_level: 21.8
+    casualties: {fraction: 0.06, window: [26.0, 30.5]}
+  greek-centre:
+    path:  [{t: 13.2, z: 30}, {t: 22.4, z: 17.1}, {t: 25.6, z: 0.6, ease: in}, {t: 28.6, z: 3.5}, {t: 31.7, z: 7.5}, {t: 34.6, z: 8.5}, {t: 37.6, z: 5.5}, {t: 48.0, z: -6.0}]
+    modes: [{t: 0, mode: march}, {t: 22.4, mode: run}, {t: 25.6, mode: fight}, {t: 34.8, mode: march}]
+    spears_level: 21.8
+    casualties: {fraction: 0.12, window: [26.0, 33.5]}
+  greek-right:
+    path:  [{t: 13.2, z: 30}, {t: 22.4, z: 17.1}, {t: 25.6, z: 0.6, ease: in}, {t: 28.6, z: -2.0}, {t: 30.8, z: -5.0},
+            {t: 34.6, heading: 270, wheel: inner}, {t: 37.6, dx: -3.0}, {t: 40.0, heading: 180}, {t: 48.0, dz: -12}]
+    modes: [{t: 0, mode: march}, {t: 22.4, mode: run}, {t: 25.6, mode: fight}, {t: 30.9, mode: march}, {t: 34.6, mode: fight}, {t: 37.8, mode: march}]
+    spears_level: 21.8
+    casualties: {fraction: 0.06, window: [26.0, 30.5]}
+  persian-right:
+    follow: {unit: greek-left, gap: 1.1, from: 25.6}
+    path:  [{t: 13.2, z: 0}, {t: 25.5, z: 0}]
+    modes: [{t: 0, mode: stand}, {t: 20.6, mode: shoot}, {t: 25.6, mode: fight}]
+    rout: {start: 30.4, spread: 0.9, target: ships}
+    casualties: {fraction: 0.14, window: [26.0, 30.4]}
+  persian-centre:
+    follow: {unit: greek-centre, gap: 1.1, from: 25.6}
+    path:  [{t: 13.2, z: 0}, {t: 25.5, z: 0}]
+    modes: [{t: 0, mode: stand}, {t: 20.6, mode: shoot}, {t: 25.6, mode: fight}]
+    rout: {start: 34.4, spread: 1.4, target: ships}
+    casualties: {fraction: 0.08, window: [26.0, 35.0]}
+  persian-left:
+    follow: {unit: greek-right, gap: 1.1, from: 25.6}
+    path:  [{t: 13.2, z: 0}, {t: 25.5, z: 0}]
+    modes: [{t: 0, mode: stand}, {t: 20.6, mode: shoot}, {t: 25.6, mode: fight}]
+    rout: {start: 30.4, spread: 0.9, target: ships}
+    casualties: {fraction: 0.14, window: [26.0, 30.4]}
+
+world:
+  terrain: coastal-plain
+  sun: {azimuth: 120, elevation: 24}
+  shore_z: -62
+  ships: {count: 11, z: -66, x: [-60, 60], note: "generic ancient warships, not a reconstruction of specific vessels"}
+  hills_z: 95
+
+# ---------------------------------------------------------------- proof-of-concept outputs
+poc:
+  animation: {start: 13.2, end: 37.6}
+  # complete episode: full narration (51.72 s) + short tail; the MP3 is muxed whole, never trimmed
+  final: {start: 0.0, end: 52.4}
+  shots:
+    - {id: ships, start: 0.0, end: 3.8, anchor: world, cam_from: {x: 14, y: 19, z: -104}, cam_to: {x: 9, y: 16, z: -95},
+       look_from: {x: 0, y: 0, z: -52}, look_to: {x: 0, y: 0, z: -36}, fov: 44, focus: 0.5, blur: 0.6}
+    - {id: persian-line, start: 3.8, end: 7.6, anchor: persian-centre, cam_from: {u: -9, v: -5, y: 1.5}, cam_to: {u: -6, v: -4.2, y: 1.6},
+       look_from: {u: -2, v: 2.5, y: 1.4}, look_to: {u: -1.5, v: 2.5, y: 1.4}, fov: 36, focus: 0.52, blur: 1.0}
+    - {id: greek-line, start: 7.6, end: 10.6, anchor: greek-centre, cam_from: {u: 4, v: 16, y: 7.5}, cam_to: {u: 2, v: 13, y: 6.5},
+       look_from: {u: 0, v: -10, y: 0.5}, look_to: {u: 0, v: -12, y: 0.5}, fov: 46, focus: 0.55, blur: 0.7}
+    - {id: plataeans, start: 10.6, end: 13.2, anchor: greek-left, cam_from: {u: 6, v: -4.5, y: 1.2}, cam_to: {u: 4.5, v: -3.8, y: 1.3},
+       look_from: {u: 1, v: 1, y: 1.5}, look_to: {u: 0.5, v: 1, y: 1.5}, fov: 34, focus: 0.5, blur: 1.1}
+    - {id: advance, start: 13.2, end: 18.7, anchor: greek-centre, cam_from: {u: 10.8, v: -7.6, y: 1.45}, cam_to: {u: 9.4, v: -6.9, y: 1.6},
+       look_from: {u: 5.2, v: -1.4, y: 1.45}, look_to: {u: 4.4, v: -0.6, y: 1.45}, fov: 36, focus: 0.5, blur: 1.0}
+    - {id: helmets, start: 18.7, end: 21.6, anchor: greek-centre, cam_from: {u: -7.5, v: -2.4, y: 1.55}, cam_to: {u: -4.0, v: -2.5, y: 1.6},
+       look_from: {u: -4.5, v: 0.3, y: 1.5}, look_to: {u: -1.0, v: 0.3, y: 1.5}, fov: 30, focus: 0.5, blur: 1.4}
+    - {id: spears, start: 21.6, end: 23.7, anchor: greek-centre, cam_from: {u: -6.2, v: -4.4, y: 0.85}, cam_to: {u: -5.0, v: -3.8, y: 0.95},
+       look_from: {u: -1.0, v: 0.6, y: 1.75}, look_to: {u: -0.6, v: 0.6, y: 1.7}, fov: 42, focus: 0.55, blur: 1.1}
+    - {id: archers, start: 23.7, end: 25.5, anchor: persian-centre, cam_from: {u: 5.5, v: 9.5, y: 2.6}, cam_to: {u: 4.5, v: 8.8, y: 2.4},
+       look_from: {u: 1.0, v: -14, y: 2.4}, look_to: {u: 1.0, v: -12, y: 1.8}, fov: 44, focus: 0.5, blur: 0.8}
+    - {id: clash, start: 25.5, end: 28.6, anchor: world, cam_from: {x: -40.5, y: 1.9, z: -0.6}, cam_to: {x: -39.0, y: 1.8, z: -2.2},
+       look_from: {x: -31, y: 1.15, z: -0.2}, look_to: {x: -31, y: 1.1, z: -2.0}, fov: 46, focus: 0.52, blur: 1.0}
+    - {id: wings, start: 28.6, end: 31.7, anchor: world, cam_from: {x: -72, y: 34, z: 6}, cam_to: {x: -66, y: 38, z: 3},
+       look_from: {x: -6, y: 0, z: 1}, look_to: {x: 0, y: 0, z: 0}, fov: 38, focus: 0.5, blur: 0.5}
+    - {id: rout, start: 31.7, end: 37.6, anchor: world, cam_from: {x: 32, y: 34, z: 52}, cam_to: {x: 26, y: 46, z: 46},
+       look_from: {x: -2, y: 0, z: -6}, look_to: {x: -2, y: 0, z: -22}, fov: 44, focus: 0.5, blur: 0.5}
+    - {id: victory, start: 37.6, end: 42.2, anchor: greek-centre, cam_from: {u: -5, v: -7, y: 1.5}, cam_to: {u: -4, v: -5.8, y: 1.55},
+       look_from: {u: -1, v: 0.5, y: 1.5}, look_to: {u: -0.8, v: 0.5, y: 1.5}, fov: 36, focus: 0.5, blur: 1.0}
+    - {id: aftermath-wide, start: 42.2, end: 47.2, anchor: world, cam_from: {x: 10, y: 24, z: 40}, cam_to: {x: 6, y: 42, z: 58},
+       look_from: {x: 0, y: 0, z: -20}, look_to: {x: 0, y: 0, z: -30}, fov: 46, focus: 0.5, blur: 0.5}
+    - {id: hero, start: 47.2, end: 52.4, anchor: greek-centre, cam_from: {u: -2.8, v: -3.6, y: 1.6}, cam_to: {u: -1.0, v: -3.9, y: 1.65},
+       look_from: {u: -1.2, v: 0.2, y: 1.45}, look_to: {u: -0.4, v: 0.2, y: 1.45}, fov: 32, focus: 0.5, blur: 1.3}
+  stills:
+    - {id: style_03_greek_phalanx, t: 17.0, anchor: greek-centre, cam: {u: 9, v: -11, y: 4.2}, look: {u: 2, v: 2.5, y: 1.0}, fov: 40, focus: 0.55, blur: 0.9}
+    - {id: style_04_persian_formation, t: 21.9, anchor: persian-centre, cam: {u: -8, v: -10, y: 3.8}, look: {u: -1, v: 3, y: 1.2}, fov: 40, focus: 0.55, blur: 0.9}
+  showcase:
+    - {id: style_01_hoplite, figures: [{design: hoplite-late-archaic, seed: 3, pose: march, u: -0.75, heading: 25, variant: {cuirass: linothorax}},
+                                     {design: hoplite-late-archaic, seed: 11, pose: fight, u: 0.75, heading: -20, variant: {cuirass: bronze-cuirass}}]}
+    - {id: style_02_persian_infantry, figures: [{design: persian-shield-bearer, seed: 4, pose: hold-wall, u: -1.0, heading: 20},
+                                               {design: persian-archer, seed: 7, pose: draw, u: 0.1, heading: -75},
+                                               {design: saka-archer, seed: 2, pose: draw, u: 1.25, heading: -60}]}

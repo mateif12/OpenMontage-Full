@@ -1,0 +1,175 @@
+# Equipment library. Every item carries a date range (negative = BC), the
+# cultures that used it, an evidence level and sources. compile.py refuses any
+# unit whose equipment is outside the battle year, and turns every
+# non-"attested" item into an on-screen "reconstruction" note.
+#
+# evidence:
+#   attested        - described in a near-contemporary text or known from finds/art of the period
+#   reconstruction  - plausible, based on adjacent evidence (different decade, region or medium)
+#   uncertain       - scholars disagree; show only with a label
+# render.part names a geometry factory in renderer/src/parts.js.
+
+items:
+  # ---------------------------------------------------------------- Greek
+  corinthian-helmet:
+    name: Corinthian helmet
+    category: helmet
+    cultures: [greek]
+    dates: [-700, -400]
+    evidence: attested
+    sources:
+      - "Bronze Corinthian helmet inscribed as dedicated by Miltiades at Olympia (Olympia Archaeological Museum)"
+      - "Attic red- and black-figure vase painting, late 6th - early 5th c. BC"
+    render: {part: helmet.corinthian, crest: fore-aft}
+  linothorax:
+    name: Composite linen/leather corslet (linothorax)
+    category: body-armour
+    cultures: [greek]
+    dates: [-550, -300]
+    evidence: attested
+    sources: ["Attic vase painting, c. 525-475 BC (shoulder-piece corslets with pteruges)"]
+    render: {part: cuirass.linothorax}
+  bronze-cuirass:
+    name: Bronze cuirass (late archaic)
+    category: body-armour
+    cultures: [greek]
+    dates: [-650, -450]
+    evidence: attested
+    sources: ["Bronze bell/early muscle cuirasses from Greek sanctuaries and graves; vase painting"]
+    render: {part: cuirass.bronze}
+  greaves:
+    name: Bronze greaves
+    category: leg-armour
+    cultures: [greek]
+    dates: [-700, -300]
+    evidence: attested
+    sources: ["Finds from Olympia and other sanctuaries; vase painting"]
+    render: {part: greaves.bronze}
+  chiton:
+    name: Short wool/linen tunic (chiton)
+    category: clothing
+    cultures: [greek]
+    dates: [-800, -100]
+    evidence: attested
+    sources: ["Vase painting"]
+    render: {part: garment.short-tunic}
+  aspis:
+    name: Aspis (round, dished hoplite shield, c. 0.9 m)
+    category: shield
+    cultures: [greek]
+    dates: [-700, -300]
+    evidence: attested
+    sources: ["Argive-type shield remains (e.g. Olympia); vase painting"]
+    render: {part: shield.aspis}
+    notes: >-
+      Shield devices were chosen individually in this period (vase evidence);
+      uniform city emblems are later. Devices drawn here are simplified generic
+      motifs, not reconstructions of specific Marathon shields.
+  dory:
+    name: Dory (thrusting spear, c. 2-2.5 m, with butt-spike)
+    category: weapon
+    cultures: [greek]
+    dates: [-700, -300]
+    evidence: attested
+    sources: ["Spearheads and sauroters from sanctuaries; vase painting"]
+    render: {part: weapon.spear, length: 2.4}
+  xiphos:
+    name: Short sword (xiphos) in scabbard
+    category: weapon
+    cultures: [greek]
+    dates: [-700, -300]
+    evidence: attested
+    sources: ["Vase painting; finds"]
+    render: {part: weapon.scabbard-left}
+
+  # ---------------------------------------------------------------- Persian / Saka
+  persian-felt-cap:
+    name: Soft felt cap with cheek and neck flaps (tiara)
+    category: headgear
+    cultures: [persian]
+    dates: [-550, -330]
+    evidence: attested
+    sources: ["Herodotus 7.61 (Persian contingent, 480 BC)", "Achaemenid reliefs"]
+    render: {part: cap.felt-tiara}
+  persian-sleeved-tunic:
+    name: Sleeved, coloured tunic
+    category: clothing
+    cultures: [persian, saka]
+    dates: [-550, -330]
+    evidence: attested
+    sources: ["Herodotus 7.61", "Behistun relief (Saka king Skunkha shown in a short belted tunic, c. 520 BC)"]
+    render: {part: garment.sleeved-tunic}
+  trousers:
+    name: Trousers (anaxyrides)
+    category: clothing
+    cultures: [persian, saka]
+    dates: [-600, -300]
+    evidence: attested
+    sources: ["Herodotus 7.61, 7.64"]
+    render: {part: garment.trousers}
+  iron-scale-corslet:
+    name: Iron scale corslet
+    category: body-armour
+    cultures: [persian]
+    dates: [-550, -330]
+    evidence: reconstruction
+    sources: ["Herodotus 7.61 mentions iron scale 'like fish scales' (480 BC); how visibly it was worn, and by whom, is uncertain"]
+    render: {part: cuirass.scale}
+    label: scale armour worn visibly
+  spara:
+    name: Large rectangular wicker shield (spara / gerron)
+    category: shield
+    cultures: [persian]
+    dates: [-550, -400]
+    evidence: reconstruction
+    sources: ["Herodotus 7.61 (wicker shields, gerra)", "Herodotus 9.61-62, 9.99 (Persians fighting behind a fence of planted wicker shields, 479 BC)"]
+    render: {part: shield.spara}
+    label: wicker shield wall
+  persian-short-spear:
+    name: Short spear
+    category: weapon
+    cultures: [persian]
+    dates: [-550, -330]
+    evidence: attested
+    sources: ["Herodotus 7.61"]
+    render: {part: weapon.spear, length: 1.8}
+  composite-bow:
+    name: Large composite bow with reed arrows
+    category: weapon
+    cultures: [persian, saka]
+    dates: [-600, -300]
+    evidence: attested
+    sources: ["Herodotus 7.61, 7.64"]
+    render: {part: weapon.bow}
+  quiver:
+    name: Quiver / gorytos
+    category: equipment
+    cultures: [persian, saka]
+    dates: [-600, -300]
+    evidence: attested
+    sources: ["Herodotus 7.61; Achaemenid reliefs"]
+    render: {part: gear.quiver}
+  akinakes:
+    name: Short sword/dagger (akinakes) on right thigh
+    category: weapon
+    cultures: [persian, saka]
+    dates: [-600, -300]
+    evidence: attested
+    sources: ["Herodotus 7.61 ('daggers hanging from the belt along the right thigh')"]
+    render: {part: weapon.dagger-right}
+  saka-pointed-cap:
+    name: Tall stiff pointed cap (kyrbasia)
+    category: headgear
+    cultures: [saka]
+    dates: [-600, -300]
+    evidence: attested
+    sources: ["Herodotus 7.64", "Behistun relief: Skunkha the Saka (c. 520 BC)"]
+    render: {part: cap.saka-pointed}
+  sagaris:
+    name: Battle-axe (sagaris)
+    category: weapon
+    cultures: [saka]
+    dates: [-600, -300]
+    evidence: attested
+    sources: ["Herodotus 7.64"]
+    render: {part: weapon.axe-belt}

@@ -1,0 +1,7 @@
+{
+  "name": "ancient-battles-renderer",
+  "private": true,
+  "type": "module",
+  "description": "Procedural 3D miniature-figurine renderer for the ancient-battles system",
+  "dependencies": { "three": "0.187.0" }
+}

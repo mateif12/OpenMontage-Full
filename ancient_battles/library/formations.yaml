@@ -1,0 +1,21 @@
+# Formation templates. Episodes may override depth/spacing per unit.
+formations:
+  phalanx:
+    name: Hoplite phalanx (close order)
+    file_spacing: 0.95     # metres between files (shields overlapping)
+    rank_spacing: 1.05
+    default_depth: 8
+    evidence: attested
+    notes: "Depth varied; 8 ranks is a common later figure. Episodes set depth from sources."
+  spara-wall:
+    name: Wicker-shield wall with archers behind (sparabara-style)
+    file_spacing: 0.85
+    rank_spacing: 1.0
+    default_depth: 10
+    front_rank_design: shield-bearer
+    rear_rank_design: archer
+    evidence: reconstruction
+    label: front rank of shield-bearers, archers behind
+    notes: >-
+      Modern reconstruction from Herodotus 9.61-62/9.99 (Plataea, Mycale, 479 BC)
+      and the Achaemenid decimal organisation; not described for Marathon itself.
