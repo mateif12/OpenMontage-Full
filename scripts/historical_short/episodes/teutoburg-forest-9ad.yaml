@@ -1,0 +1,465 @@
+# The Battle of the Teutoburg Forest (AD 9) — landscape documentary (1920x1080)
+# documentary-montage pipeline, historical profile, HistoricalDocumentary composition
+# (remotion-composer/src/historical-documentary/). All times = seconds on the
+# narration master (projects/teutoburg-forest-9ad/assets/audio/narration_master.wav:
+# user's ElevenLabs MP3, 49.554 s, +5.0 dB constant gain (build_master_linear.py), +3.0 s lead-in, +7.0 s tail
+# = 59.554 s). Scene cuts sit in the measured pauses between sentences.
+#
+# Narration sentences (speech onset from silencedetect on the master):
+#   3.04  9 A.D.
+#   4.80  Three Roman legions marched into Germania, believing Rome could conquer the lands beyond the Rhine.
+#  11.11  Their commander, Varus, trusted Arminius, a Germanic leader trained by Rome.
+#  16.88  But Arminius was secretly preparing an ambush.
+#  20.28  He led the Romans into the Teutoburg Forest.
+#  23.29  Narrow tracks, dense woods, and heavy rain stretched their columns and made it hard to defend themselves.
+#  29.99  Then, Germanic warriors attacked from the trees.
+#  33.63  Roman units struggled to form ranks as the ambush spread along the route.
+#  38.05  For days, the legions fought to survive.
+#  41.04  Their formations collapsed, and all three were destroyed.
+#  45.04  The defeat halted Rome's expansion east of the Rhine.
+#  48.71  One forest, one ambush, three legions lost.   (speech ends 52.41)
+
+id: teutoburg-forest-9ad
+title: "The Battle of the Teutoburg Forest (AD 9)"
+layout: landscape
+narration: audio/narration_master.wav
+images_dir: images
+ambience:
+  src: audio/ambience.wav
+  volume: 0.04
+
+# shared phase times for every tactical-reconstruction scene (one continuous model)
+battle_times: &bt
+  wardsIn: 16.9
+  sightlines: [17.5, 20.3]
+  wall: 18.2
+  columnEnter: 18.4
+  marchUntil: 29.9
+  rain: [23.0, 33.4]
+  callouts: [23.5, 28.0]
+  stretched: 27.4
+  attack: 30.3
+  missiles: [30.1, 38.0]
+  spread: [33.9, 37.0]
+  regroup: [34.0, 37.4]
+  inset: [34.4, 37.95]
+  collapse: [41.1, 43.6]
+  eagles: [43.05, 43.4, 43.75]
+  aftermath: 48.0
+
+battle_tag: &tag "TACTICAL RECONSTRUCTION · SCHEMATIC"
+battle_foot: &foot "Original schematic reconstruction · terrain modelled on the Kalkriese pass (a proposed, debated site) · unit numbers, order of march and positions are illustrative, not recorded"
+basemap: &bm maps/basemap.json
+
+scenes:
+  # ---------------------------------------------------------------- opening
+  - id: s01_open
+    kind: image
+    start: 0.0
+    end: 4.8
+    asset: landscape_view
+    fit: cover
+    zoomFrom: 1.03
+    zoomTo: 1.14
+    panX: [30, -30]
+    title: { text: "The Battle of the Teutoburg Forest", sub: "GERMANIA · AD 9", at: 0.5, until: 4.75 }
+    labelAt: 99   # no label card under the title; identified in s14 and CREDITS
+    label:
+      tag: "SITE PHOTO"
+      title: "Kalkriese, near Osnabrück"
+    fallback:   # used only if the photo cannot be obtained
+      kind: battle
+      times: *bt
+      hideHeading: true
+      headings: []
+      camera:
+        - { t: 0.0, x: 1600, y: 960, zoom: 0.5 }
+        - { t: 4.8, x: 1700, y: 1000, zoom: 0.62 }
+      title: { text: "The Battle of the Teutoburg Forest", sub: "GERMANIA · AD 9", at: 0.5, until: 4.75 }
+
+  # ---------------------------------------------------------------- Scene A: Rome and Germania
+  - id: s02_map_frontier
+    kind: map
+    start: 4.8
+    end: 10.85
+    basemap: *bm
+    camera:
+      - { t: 4.8, lon: 8.9, lat: 51.3, span: 13.5 }
+      - { t: 7.2, lon: 8.7, lat: 51.4, span: 12.2 }
+      - { t: 10.85, lon: 9.0, lat: 51.45, span: 11.6 }
+    heading: { tag: "ORIGINAL MAP · MODERN RIVERS AND COASTLINES", text: "Rome and Germania, AD 9", at: 5.0 }
+    riverHighlights:
+      - { names: [Rhein, Rhine, Rhin, Nederrijn, Waal], at: 5.2, color: "#d9b25f", width: 6 }
+    texts:
+      - { lon: 4.4, lat: 50.85, text: "GAUL", at: 5.4, size: 30, spacing: 10, color: "#e8b3a8" }
+      - { lon: 4.45, lat: 50.55, text: "Roman provinces", at: 5.5, size: 20, italic: true, color: "#e8b3a8" }
+      - { lon: 4.3, lat: 54.0, text: "NORTH SEA", at: 5.4, size: 22, spacing: 8, color: "#9fc0cc" }
+      - { lon: 7.75, lat: 50.75, text: "RHINE", at: 5.6, size: 24, spacing: 6, color: "#d9b25f" }
+      - { lon: 10.4, lat: 52.15, text: "GERMANIA", at: 7.6, size: 40, spacing: 14 }
+      - { lon: 9.55, lat: 52.85, text: "Weser", at: 7.8, size: 20, italic: true, color: "#9fc0cc" }
+      - { lon: 12.1, lat: 52.95, text: "Elbe", at: 8.6, size: 22, italic: true, color: "#9fc0cc" }
+      - { lon: 7.75, lat: 51.88, text: "Lippe", at: 6.4, size: 18, italic: true, color: "#9fc0cc" }
+    markers:
+      - { lon: 6.45, lat: 51.66, label: "Vetera (Xanten)", sub: "legionary base", at: 5.9, style: base, labelSide: left }
+      - { lon: 8.27, lat: 50.0, label: "Mogontiacum (Mainz)", sub: "legionary base", at: 6.1, style: base, labelSide: right }
+      - { lon: 7.18, lat: 51.74, label: "Haltern", sub: "Roman base east of the Rhine", at: 6.6, style: base, labelSide: below }
+      - { lon: 8.58, lat: 51.70, label: "Anreppen", sub: "Roman base east of the Rhine", at: 7.1, style: base, labelSide: right }
+    routes:
+      - points: [[6.5, 51.68], [7.2, 51.72], [7.9, 51.68], [8.58, 51.72], [9.0, 51.95], [9.05, 52.2]]
+        from: 6.3
+        to: 8.3
+        color: "#c8372d"
+        width: 7
+        label: "LEGIONS XVII · XVIII · XIX"
+    areas:
+      - points: [[7.0, 53.5], [9.6, 53.95], [11.0, 53.5], [12.4, 52.6], [12.4, 51.3], [10.6, 50.55], [8.9, 50.35], [7.7, 50.6], [7.15, 51.2], [6.85, 51.85], [7.0, 53.5]]
+        at: 9.5
+        hatch: true
+        color: "#d9b25f"
+    notes:
+      - { text: "Roman armies had campaigned between the Rhine and the Elbe since 12 BC.", at: 8.9, until: 10.85 }
+    footnote: "Original map · rivers and coastlines: Natural Earth (public domain), modern geography · positions approximate"
+
+  # ---------------------------------------------------------------- Varus
+  - id: s03_varus
+    kind: image
+    start: 10.85
+    end: 13.2
+    asset: varus_coin
+    fit: contain-blur
+    zoomFrom: 1.0
+    zoomTo: 1.06
+    label:
+      tag: "MUSEUM ARTIFACT · COIN, c. 7–6 BC"
+      title: "Publius Quinctilius Varus"
+      detail: "Coin of Achulla (Africa): Augustus and, on the reverse, Varus as governor"
+    fallback:
+      kind: profiles
+      left:
+        name: "Publius Quinctilius Varus"
+        role: "ROMAN COMMANDER IN GERMANIA"
+        emblem: roman-standard
+        at: 11.0
+        factsAt: 11.6
+        facts:
+          - "Consul in 13 BC; married into Augustus' family"
+          - "Former governor of Africa and Syria"
+          - "Commanded legions XVII, XVIII and XIX"
+        source: "Velleius Paterculus 2.117; Cassius Dio 56.18"
+      right:
+        name: "Arminius"
+        role: "CHERUSCAN LEADER"
+        emblem: germanic-shield
+        at: 13.25
+        factsAt: 14.3
+        facts:
+          - "Son of the Cheruscan noble Segimer"
+          - "Served with the Roman army"
+          - "Held Roman citizenship and equestrian rank"
+        source: "Velleius Paterculus 2.118"
+      link: { text: "TRUSTED", at: 12.95 }
+      footnote: "Original graphic · symbols are generic emblems, not portraits · no authentic portrait of Arminius survives"
+
+  # ---------------------------------------------------------------- Arminius
+  - id: s04_arminius
+    kind: image
+    start: 13.2
+    end: 16.6
+    asset: hermann
+    fit: cover
+    focusY: 0.3
+    zoomFrom: 1.02
+    zoomTo: 1.12
+    label:
+      tag: "MONUMENT, 1838–1875 · 19TH-CENTURY INTERPRETATION"
+      title: "Arminius (\"Hermann\")"
+      detail: "Cheruscan noble, served with Roman auxiliaries, Roman citizen (Velleius Paterculus). No authentic portrait survives — this is the Hermannsdenkmal, Detmold."
+    fallback:
+      fadeIn: 0
+      kind: profiles
+      left:
+        name: "Publius Quinctilius Varus"
+        role: "ROMAN COMMANDER IN GERMANIA"
+        emblem: roman-standard
+        at: 11.0
+        factsAt: 11.6
+        facts:
+          - "Consul in 13 BC; married into Augustus' family"
+          - "Former governor of Africa and Syria"
+          - "Commanded legions XVII, XVIII and XIX"
+        source: "Velleius Paterculus 2.117; Cassius Dio 56.18"
+      right:
+        name: "Arminius"
+        role: "CHERUSCAN LEADER"
+        emblem: germanic-shield
+        at: 13.25
+        factsAt: 14.3
+        facts:
+          - "Son of the Cheruscan noble Segimer"
+          - "Served with the Roman army"
+          - "Held Roman citizenship and equestrian rank"
+        source: "Velleius Paterculus 2.118"
+      link: { text: "TRUSTED", at: 12.95 }
+      footnote: "Original graphic · symbols are generic emblems, not portraits · no authentic portrait of Arminius survives"
+
+  # ---------------------------------------------------------------- Scene C: the trap
+  - id: s05_trap
+    kind: battle
+    start: 16.6
+    end: 20.0
+    times: *bt
+    camera:
+      - { t: 16.6, x: 1650, y: 1000, zoom: 0.6 }
+      - { t: 20.0, x: 1900, y: 1010, zoom: 0.68 }
+    headings:
+      - { at: 16.6, tag: *tag, text: "The trap", sub: "Warbands wait in the woods beside the route" }
+    footnote: *foot
+
+  # ---------------------------------------------------------------- route into the forest
+  - id: s06_map_route
+    kind: map
+    start: 20.0
+    end: 23.1
+    basemap: *bm
+    camera:
+      - { t: 20.0, lon: 8.75, lat: 52.05, span: 3.6 }
+      - { t: 23.1, lon: 8.55, lat: 52.2, span: 2.5 }
+    heading: { tag: "ORIGINAL MAP · ROUTE APPROXIMATE", text: "Into the Teutoburg Forest", at: 20.1 }
+    riverHighlights:
+      - { names: [Weser], at: 20.1, color: "#7fb0c8", width: 4 }
+    texts:
+      - { lon: 9.32, lat: 52.42, text: "Weser", at: 20.2, size: 20, italic: true, color: "#9fc0cc" }
+      - { lon: 8.6, lat: 51.93, text: "Teutoburger Wald (modern range)", at: 21.5, size: 20, italic: true, color: "#c9d4b0" }
+    markers:
+      - { lon: 8.05, lat: 52.28, label: "Osnabrück", at: 20.2, style: city, labelSide: left }
+      - { lon: 9.05, lat: 52.2, label: "Varus' summer camp", sub: "near the Weser · exact site unknown", at: 20.3, style: uncertain, labelSide: right }
+      - { lon: 8.13, lat: 52.41, label: "Kalkriese", sub: "proposed battlefield · debated", at: 21.7, style: battle, labelSide: left }
+    routes:
+      - points: [[9.0, 52.22], [8.75, 52.3], [8.45, 52.36], [8.17, 52.4]]
+        from: 20.5
+        to: 22.3
+        color: "#c8372d"
+        dashed: true
+        width: 6
+    notes:
+      - { text: "Tacitus calls it the saltus Teutoburgiensis. Where exactly the fighting took place is still debated.", at: 21.4, until: 23.1 }
+    footnote: "Original map · Natural Earth (public domain), modern rivers · route approximate"
+
+  # ---------------------------------------------------------------- Scenes B, D, E: march, ambush, response
+  - id: s07_march_ambush
+    kind: battle
+    start: 23.1
+    end: 37.85
+    times: *bt
+    camera:
+      - { t: 23.1, x: 2330, y: 985, zoom: 1.35 }
+      - { t: 25.0, x: 2520, y: 980, zoom: 1.3 }
+      - { t: 26.9, x: 2820, y: 985, zoom: 1.2 }
+      - { t: 28.6, x: 1700, y: 1000, zoom: 0.6 }
+      - { t: 30.1, x: 1700, y: 1000, zoom: 0.6 }
+      - { t: 31.8, x: 1760, y: 1030, zoom: 0.9 }
+      - { t: 33.5, x: 1720, y: 1030, zoom: 0.92 }
+      - { t: 34.8, x: 1650, y: 1000, zoom: 0.62 }
+      - { t: 37.85, x: 1650, y: 1000, zoom: 0.64 }
+    headings:
+      - { at: 23.1, tag: *tag, text: "The march", sub: "Legions, auxiliaries, cavalry and baggage on a narrow, muddy track" }
+      - { at: 29.8, tag: *tag, text: "The ambush", sub: "Attacks from the wooded slopes — and possibly from the wetland side" }
+      - { at: 33.6, tag: *tag, text: "The Roman response", sub: "Units try to close up and face outward — the column cannot deploy" }
+    footnote: *foot
+
+  # ---------------------------------------------------------------- "for days"
+  - id: s08_finds
+    kind: image
+    start: 37.85
+    end: 40.75
+    asset: militaria
+    fit: cover
+    zoomFrom: 1.04
+    zoomTo: 1.13
+    panX: [-20, 20]
+    label:
+      tag: "ARCHAEOLOGICAL FINDS"
+      title: "Roman military equipment from Kalkriese"
+      detail: "Ancient accounts (Cassius Dio) describe fighting over several days"
+    fallback:
+      kind: battle
+      fadeIn: 0.3
+      times: *bt
+      camera:
+        - { t: 37.85, x: 1650, y: 1000, zoom: 0.64 }
+        - { t: 40.75, x: 1650, y: 1000, zoom: 0.64 }
+      headings:
+        - { at: 37.85, tag: *tag, text: "Several days of fighting", sub: "As described by Cassius Dio — the exact sequence and places are uncertain" }
+      days:
+        - { at: 38.15, label: "DAY 1" }
+        - { at: 38.75, label: "DAY 2" }
+        - { at: 39.35, label: "DAY 3 …" }
+      footnote: *foot
+
+  # ---------------------------------------------------------------- Scene F: collapse
+  - id: s09_collapse
+    kind: battle
+    start: 40.75
+    end: 44.6
+    times: *bt
+    camera:
+      - { t: 40.75, x: 1650, y: 1000, zoom: 0.64 }
+      - { t: 44.6, x: 1650, y: 1000, zoom: 0.72 }
+    headings:
+      - { at: 40.75, tag: *tag, text: "Collapse", sub: "Repeated attacks, mud and congestion break the column apart" }
+    footnote: *foot
+
+  # ---------------------------------------------------------------- Scene H: consequences
+  - id: s10_map_aftermath
+    kind: map
+    start: 44.6
+    end: 48.45
+    basemap: *bm
+    camera:
+      - { t: 44.6, lon: 8.3, lat: 51.75, span: 6.5 }
+      - { t: 48.45, lon: 8.6, lat: 51.6, span: 9.2 }
+    heading: { tag: "ORIGINAL MAP · MODERN RIVERS AND COASTLINES", text: "After AD 9: the Rhine frontier", at: 44.7 }
+    riverHighlights:
+      - { names: [Rhein, Rhine, Rhin, Nederrijn, Waal], at: 45.3, color: "#d9b25f", width: 9 }
+    texts:
+      - { lon: 6.0, lat: 51.05, text: "RHINE FRONTIER", at: 46.0, size: 26, spacing: 6, color: "#d9b25f" }
+      - { lon: 10.6, lat: 52.2, text: "GERMANIA", at: 44.8, size: 36, spacing: 14 }
+    markers:
+      - { lon: 6.45, lat: 51.66, label: "Vetera (Xanten)", at: 44.8, style: base, labelSide: left }
+      - { lon: 8.27, lat: 50.0, label: "Mogontiacum (Mainz)", at: 44.8, style: base, labelSide: right }
+      - { lon: 7.18, lat: 51.74, label: "Haltern", sub: "abandoned c. AD 9", at: 44.9, style: base, labelSide: below, abandonedAt: 45.6 }
+      - { lon: 8.58, lat: 51.70, label: "Anreppen", sub: "abandoned c. AD 9", at: 44.9, style: base, labelSide: below, abandonedAt: 45.9 }
+      - { lon: 8.13, lat: 52.41, label: "Kalkriese", at: 44.8, style: battle, labelSide: right }
+    routes:
+      - points: [[6.5, 51.75], [7.0, 52.3], [7.4, 52.75]]
+        from: 46.6
+        to: 47.6
+        color: "#e8a07a"
+        dashed: true
+        width: 5
+      - points: [[6.5, 51.6], [7.3, 51.7], [8.2, 51.85], [8.8, 52.1]]
+        from: 46.8
+        to: 47.9
+        color: "#e8a07a"
+        dashed: true
+        width: 5
+        label: "Germanicus, AD 14–16"
+    notes:
+      - { text: "Rome returned: Germanicus led major campaigns east of the Rhine in AD 14–16. But no lasting province followed — the Rhine remained the frontier.", at: 46.5, until: 48.45 }
+    footnote: "Original map · Natural Earth (public domain) · campaign routes schematic"
+
+  # ---------------------------------------------------------------- finale
+  - id: s11_forest
+    kind: image
+    start: 48.45
+    end: 49.85
+    asset: site_field
+    fit: cover
+    zoomFrom: 1.05
+    zoomTo: 1.12
+    label:
+      tag: "SITE PHOTO"
+      title: "Kalkriese — proposed battlefield"
+    fallback: &aftermath
+      kind: battle
+      times: *bt
+      camera:
+        - { t: 48.45, x: 1650, y: 1000, zoom: 0.7 }
+        - { t: 51.0, x: 1650, y: 1000, zoom: 0.8 }
+      headings:
+        - { at: 48.45, tag: *tag, text: "Aftermath", sub: "What the ground keeps" }
+      notes:
+        - tag: "ARCHAEOLOGY · KALKRIESE"
+          text: "Excavations since 1989 have found Roman weapons, equipment fragments and coins countermarked VAR. Most scholars link the site to Varus' defeat — but this remains debated."
+          at: 48.7
+      footnote: *foot
+
+  - id: s12_mask
+    kind: image
+    start: 49.85
+    end: 51.0
+    asset: face_mask
+    fit: contain-blur
+    zoomFrom: 1.02
+    zoomTo: 1.08
+    label:
+      tag: "MUSEUM ARTIFACT · FOUND AT KALKRIESE"
+      title: "Face mask of a Roman cavalry helmet"
+    fallback:
+      <<: *aftermath
+      fadeIn: 0
+
+  - id: s13_caelius
+    kind: image
+    start: 51.0
+    end: 55.2
+    asset: caelius
+    fit: contain-blur
+    zoomFrom: 1.0
+    zoomTo: 1.07
+    label:
+      tag: "MUSEUM ARTIFACT · INSCRIPTION"
+      title: "Cenotaph of Marcus Caelius, Legio XVIII"
+      detail: "\"He fell in the Varian war\" (bello Variano) · LVR-LandesMuseum Bonn"
+    fallback:
+      kind: legions
+      heading: "Three legions lost"
+      legions:
+        - { name: "LEGIO XVII", at: 51.15 }
+        - { name: "LEGIO XVIII", at: 51.45 }
+        - { name: "LEGIO XIX", at: 51.75 }
+      struckAt: 52.0
+      note: { text: "None of the three legions was ever re-formed. Their eagle standards were recovered later — in AD 15, 16 and 41.", at: 52.5 }
+      footnote: "Original graphic · generic legionary-standard emblems · sources: Tacitus, Annals 1.60, 2.25; Cassius Dio 60.8"
+
+  - id: s14_end
+    kind: endcard
+    start: 55.2
+    end: 59.554
+    background_asset: excavation
+    background_optional: true
+    sub: "GERMANIA · AD 9"
+    heading: "The Battle of the Teutoburg Forest"
+    lines:
+      - "Ancient sources: Velleius Paterculus 2.117–120 · Tacitus, Annals 1.60–62 · Cassius Dio 56.18–24"
+      - "Archaeology: Kalkriese excavations (since 1989) · Museum und Park Kalkriese"
+      - "Credits and licences: CREDITS.txt"
+      - "Maps and battle reconstructions are original schematics, not records of exact positions"
+
+extra_credits:
+  - "Narration: user-supplied MP3 (ElevenLabs voice), used complete and unedited; only a constant +5 dB gain (peak limiter on 0.04% of samples) and 3 s of silence before / 7 s after were added."
+  - "Ambience: original wind/room-tone bed synthesised locally for this video (make_ambience.py). No music."
+  - "Fonts: Playfair Display and Space Grotesk (SIL Open Font License), bundled with OpenMontage."
+  - "Rivers and coastlines: Natural Earth 1:10m (public domain), https://www.naturalearthdata.com/"
+
+fact_check:
+  - claim: "9 A.D."
+    status: correct
+    sources: ["Velleius Paterculus 2.117", "Cassius Dio 56.18-24 (events of AD 9)"]
+  - claim: "Three Roman legions marched into Germania"
+    status: correct, simplified
+    note: "Legions XVII, XVIII and XIX with auxiliaries and cavalry (Velleius 2.117; Tacitus Ann. 1.60-62 names the lost eagles). Varus was already operating east of the Rhine (summer quarters near the Weser, Dio 56.18-19); the ambush came on the march back toward winter quarters / a reported uprising."
+  - claim: "believing Rome could conquer the lands beyond the Rhine"
+    status: interpretation
+    note: "Rome had campaigned between Rhine and Elbe since Drusus (12-9 BC) and was organising the region as a province (Dio 56.18). Wording on screen: 'campaigned ... since 12 BC'."
+  - claim: "Their commander, Varus"
+    status: correct
+    sources: ["Velleius 2.117", "Dio 56.18"]
+  - claim: "trusted Arminius, a Germanic leader trained by Rome"
+    status: correct
+    note: "Arminius, Cheruscan noble, served with Roman forces, held Roman citizenship and equestrian rank (Velleius 2.118). Segestes warned Varus (Velleius 2.118; Tacitus Ann. 1.55) - not in narration."
+  - claim: "Arminius was secretly preparing an ambush. He led the Romans into the Teutoburg Forest."
+    status: correct per ancient accounts
+    note: "Dio 56.19: conspirators escorted Varus then reported a distant uprising to lure him; Tacitus Ann. 1.60 'saltus Teutoburgiensis'. Location debated; Kalkriese is the leading proposed site (finds since 1987; excavations since 1989)."
+  - claim: "Narrow tracks, dense woods, and heavy rain"
+    status: correct per Cassius Dio 56.20-21
+  - claim: "Germanic warriors attacked from the trees"
+    status: correct per Cassius Dio 56.20
+  - claim: "For days, the legions fought to survive."
+    status: correct per Cassius Dio 56.21-22 (several days)
+  - claim: "all three were destroyed"
+    status: correct
+    note: "Legions XVII-XIX never reconstituted. Casualty figures are modern estimates only (often c. 15,000-20,000) - not stated in the video."
+  - claim: "The defeat halted Rome's expansion east of the Rhine."
+    status: mainstream interpretation, simplified
+    note: "Rome returned under Germanicus AD 14-16 (Tacitus Ann. 1-2) and recovered two eagles; the third was recovered AD 41 (Dio 60.8). No lasting province east of the Rhine followed. The video says so on screen."

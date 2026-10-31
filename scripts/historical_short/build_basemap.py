@@ -84,11 +84,41 @@ def ring_paths(reader: shapefile.Reader, bbox: tuple[float, float, float, float]
     return out
 
 
+def river_paths(reader: shapefile.Reader, bbox: tuple[float, float, float, float], k: float,
+                min_step: float, names: set[str] | None) -> list[dict]:
+    """Open polylines (rivers) inside bbox, optionally filtered by Natural Earth `name`."""
+    w, s, e, n = bbox
+    fields = [f[0] for f in reader.fields[1:]]
+    out = []
+    for rec, shp in zip(reader.iterRecords(), reader.iterShapes()):
+        name = str(dict(zip(fields, rec)).get("name") or "")
+        if names is not None and name not in names:
+            continue
+        bw, bs, be, bn = shp.bbox
+        if be < w or bw > e or bn < s or bs > n:
+            continue
+        parts = list(shp.parts) + [len(shp.points)]
+        for a, b in zip(parts[:-1], parts[1:]):
+            cmds, last = [], None
+            for lon, lat in shp.points[a:b]:
+                x, y = lon * k, -lat
+                if last and math.hypot(x - last[0], y - last[1]) < min_step:
+                    continue
+                cmds.append(f"{x:.3f} {y:.3f}")
+                last = (x, y)
+            if len(cmds) >= 2:
+                out.append({"name": name, "d": "M" + "L".join(cmds)})
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--bbox", nargs=4, type=float, required=True, metavar=("W", "S", "E", "N"))
     ap.add_argument("--res", default="10m", choices=["10m", "50m", "110m"])
     ap.add_argument("--min-step", type=float, default=0.02, help="drop vertices closer than this (degrees)")
+    ap.add_argument("--rivers", nargs="*", metavar="NAME",
+                    help="also include Natural Earth river centrelines (10m rivers_lake_centerlines + "
+                         "rivers_europe); optionally only the named rivers, e.g. --rivers Rhine Weser")
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
     w, s, e, n = args.bbox
@@ -105,10 +135,16 @@ def main() -> int:
         "land": land,
         "lakes": lakes,
     }
+    if args.rivers is not None:
+        names = set(args.rivers) or None
+        rivers = []
+        for layer in ("rivers_lake_centerlines", "rivers_europe"):
+            rivers += river_paths(load_layer("10m", layer), (w, s, e, n), k, args.min_step / 2, names)
+        data["rivers"] = rivers
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(data))
-    print(f"wrote {out}: {len(land)} land rings, {len(lakes)} lake rings, {out.stat().st_size // 1024} KB")
+    print(f"wrote {out}: {len(land)} land rings, {len(lakes)} lake rings, {len(data.get('rivers', []))} river lines, {out.stat().st_size // 1024} KB")
     return 0
 
 

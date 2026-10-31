@@ -27,13 +27,15 @@ REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO))
 
 ENTRY = REPO / "remotion-composer" / "src" / "historical-short" / "entry.tsx"
+# --landscape: 1920x1080 documentary (HistoricalDocumentary composition)
+ENTRY_LANDSCAPE = REPO / "remotion-composer" / "src" / "historical-documentary" / "entry.tsx"
 CHROMIUM = Path("/opt/pw-browsers/chromium")
 
 
 def ffprobe(path: Path) -> dict:
     out = subprocess.run(
         ["ffprobe", "-v", "error", "-show_entries",
-         "stream=codec_type,codec_name,width,height,r_frame_rate,sample_rate,channels:format=duration",
+         "stream=codec_type,codec_name,width,height,r_frame_rate,pix_fmt,sample_rate,channels:format=duration",
          "-of", "json", str(path)],
         capture_output=True, text=True, check=True,
     )
@@ -53,6 +55,8 @@ def main() -> int:
     ap.add_argument("--project", required=True)
     ap.add_argument("--draft", action="store_true")
     ap.add_argument("--output")
+    ap.add_argument("--landscape", action="store_true", help="1920x1080 HistoricalDocumentary composition")
+    ap.add_argument("--concurrency", type=int)
     args = ap.parse_args()
 
     project = Path(args.project).resolve()
@@ -68,8 +72,8 @@ def main() -> int:
         "render_runtime": "remotion",
         "composition_mode": "atelier",  # = custom composition entry (see historical-short.md)
         "bespoke": {
-            "entry": str(ENTRY),
-            "composition_id": "HistoricalShort",
+            "entry": str(ENTRY_LANDSCAPE if args.landscape else ENTRY),
+            "composition_id": "HistoricalDocumentary" if args.landscape else "HistoricalShort",
             "props_path": str(props),
             "public_dir": str(project / "assets"),
             "art_direction": "historical-short profile: dark parchment/gold documentary palette, "
@@ -77,11 +81,14 @@ def main() -> int:
                              "original Natural Earth maps and schematic diagram",
             "crf": 23 if args.draft else 16,
             **({"scale": 0.5} if args.draft else {}),
+            **({"concurrency": args.concurrency} if args.concurrency else {}),
         },
     }
+    import os
     if CHROMIUM.exists():
-        import os
         os.environ.setdefault("REMOTION_BROWSER_EXECUTABLE", str(CHROMIUM))
+    if args.landscape:
+        os.environ["REMOTION_BROADCAST_COLOR"] = "1"  # yuv420p / BT.709 (remotion.config.ts)
 
     result = VideoCompose().execute({"operation": "render", "edit_decisions": edit_decisions,
                                      "output_path": str(out)})
@@ -94,6 +101,8 @@ def main() -> int:
     a = [s for s in info["streams"] if s["codec_type"] == "audio"]
     dur = float(info["format"]["duration"])
     want_w, want_h = (540, 960) if args.draft else (1080, 1920)
+    if args.landscape:
+        want_w, want_h = (960, 540) if args.draft else (1920, 1080)
     checks = {
         "resolution": f"{v['width']}x{v['height']}",
         "resolution_ok": (v["width"], v["height"]) == (want_w, want_h),
@@ -104,6 +113,7 @@ def main() -> int:
         "duration_ok": abs(dur - expected) <= 0.1,
         "audio_ok": bool(a),
         "video_codec": v["codec_name"],
+        "pix_fmt": v.get("pix_fmt"),
         "final_review_status": (result.data or {}).get("final_review_status"),
     }
     # loudness / clipping and blank-frame checks

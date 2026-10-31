@@ -6,3 +6,13 @@ import { Config } from "@remotion/cli/config";
 if (process.env.REMOTION_BROWSER_EXECUTABLE) {
   Config.setBrowserExecutable(process.env.REMOTION_BROWSER_EXECUTABLE);
 }
+
+// Opt-in broadcast-safe output (limited-range yuv420p, BT.709 tags) for
+// renders that will be delivered as standard H.264 files. PNG frame capture
+// avoids the full-range yuvj420p output of the default JPEG pipeline.
+// Set by scripts/historical_short/render.py --landscape.
+if (process.env.REMOTION_BROADCAST_COLOR === "1") {
+  Config.setVideoImageFormat("png");
+  Config.setPixelFormat("yuv420p");
+  Config.setColorSpace("bt709");
+}

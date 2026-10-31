@@ -73,6 +73,7 @@ def main() -> int:
     captions = json.loads((project / "artifacts" / "captions.json").read_text())
 
     errors: list[str] = []
+    substitutions: list[str] = []
     scenes_out = []
     credits = []
     prev_end = 0.0
@@ -83,6 +84,13 @@ def main() -> int:
         if sc["end"] <= sc["start"]:
             errors.append(f"scene {sc['id']}: end <= start")
         prev_end = sc["end"]
+        fallback = sc.pop("fallback", None)
+        if sc["kind"] == "image" and fallback is not None and \
+                not (images_dir / f"{sc['asset']}.provenance.json").exists():
+            # authentic still not available (e.g. download blocked): use the declared
+            # original-graphics fallback for the same time slot, and say so
+            substitutions.append(f"{sc['id']}: image '{sc['asset']}' unavailable -> {fallback['kind']} fallback")
+            sc = {"id": sc["id"], "start": sc["start"], "end": sc["end"], **fallback}
         if sc["kind"] == "image":
             asset_id = sc.pop("asset")
             img, prov = find_asset(images_dir, asset_id)
@@ -97,6 +105,17 @@ def main() -> int:
                 label["credit"] = default_credit({**prov, "credit_override": sc.pop("credit_author", None)})
             sc.pop("credit_author", None)
             credits.append((sc["id"], prov, label.get("credit") if label else ""))
+        elif sc.get("background_asset") and not (images_dir / f"{sc['background_asset']}.provenance.json").exists() \
+                and sc.get("background_optional"):
+            substitutions.append(f"{sc['id']}: background '{sc.pop('background_asset')}' unavailable -> plain background")
+        elif sc.get("background_asset"):  # end card / title background still
+            img, prov = find_asset(images_dir, sc.pop("background_asset"))
+            if not prov.get("commercial_ok"):
+                errors.append(f"scene {sc['id']}: background licence not commercial-safe")
+            sc["background"] = str(img.relative_to(assets.resolve()) if img.is_absolute() and str(img).startswith(str(assets.resolve()))
+                                   else img.relative_to(assets))
+            credits.append((sc["id"], prov, default_credit(prov)))
+        sc.pop("background_optional", None)
         scenes_out.append(sc)
     if abs(prev_end - duration) > 0.5:
         errors.append(f"last scene ends at {prev_end} but narration is {duration:.2f}s")
@@ -117,11 +136,22 @@ def main() -> int:
         props["ambienceVolume"] = amb.get("volume", 0.05)
     if ep.get("caption_style"):
         props["captionStyle"] = ep["caption_style"]
+    cues = project / "artifacts" / "subtitle_cues.json"  # build_subtitles.py (landscape documentaries)
+    if cues.exists():
+        props["subtitleCues"] = json.loads(cues.read_text())
 
+    if substitutions:
+        props["substitutions"] = substitutions
+        print("SUBSTITUTIONS (authentic asset unavailable):\n  " + "\n  ".join(substitutions))
     out = project / "artifacts" / "props.json"
     out.write_text(json.dumps(props, indent=1, ensure_ascii=False))
 
     lines = [f"{ep.get('title', '')} — image and data credits", ""]
+    if not credits:
+        lines += ["No third-party photographs or footage appear in this render.", ""]
+    if substitutions:
+        lines += ["Planned authentic images that could not be used in this render (replaced by original graphics):"]
+        lines += [f"  {x}" for x in substitutions] + [""]
     seen: dict[str, list[str]] = {}
     for sid, prov, shown in credits:
         seen.setdefault(prov["title"], []).append(sid)
@@ -143,12 +173,12 @@ def main() -> int:
                          " cultural property may need the managing institution's permission)")
             lines.append(f"    Restrictions noted on Commons: {note}")
         lines.append("")
-    illus = [s["id"] for s in scenes_out if s["kind"] in ("illustration", "tactics", "map")]
+    illus = [s["id"] for s in scenes_out if s["kind"] in ("illustration", "tactics", "map", "battle", "profiles", "legions")]
     for extra in ep.get("extra_credits", []):
         lines.append(extra)
     lines += ["", f"Original maps, diagram and illustrations ({', '.join(illus)}): created for this video;"
               " coastlines from Natural Earth (public domain).",
-              "Narration: supplied by the channel (ElevenLabs)."]
+              ] + ([] if ep.get("extra_credits") else ["Narration: supplied by the channel (ElevenLabs)."])
     (project / "CREDITS.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"wrote {out} ({len(scenes_out)} scenes, {duration:.2f}s) and {project / 'CREDITS.txt'}")
     return 0
